@@ -3,10 +3,10 @@ digraph G1 {
   AccountManager -> Context;
   ApiKeyProvider -> AccountManager;
   ApplicationInfo -> Context;
-  BootstrapAuthenticatorActivity -> BootstrapService;
   BootstrapAuthenticatorActivity -> Bus;
   n2 [label="za.co.vehmon.application.core.VehmonService"];
   BootstrapAuthenticatorActivity -> n2;
+  BootstrapAuthenticatorActivity -> BootstrapService;
   BootstrapFragmentActivity -> Bus;
   BootstrapService -> RestAdapter;
   BootstrapServiceProvider -> RestAdapter;
@@ -16,8 +16,8 @@ digraph G1 {
   CheckInsListFragment -> BootstrapServiceProvider;
   ClassLoader -> Context;
   InputMethodManager -> Context;
-  LogoutService -> AccountManager;
   LogoutService -> Context;
+  LogoutService -> AccountManager;
   MainActivity -> BootstrapServiceProvider;
   NavigationDrawerFragment -> Bus;
   NavigationDrawerFragment -> SharedPreferences;
@@ -26,19 +26,23 @@ digraph G1 {
   NotificationManager -> Context;
   PackageInfo -> Context;
   RestAdapter -> RestAdapterRequestInterceptor;
-  RestAdapter -> Gson;
   RestAdapter -> RestErrorHandler;
+  RestAdapter -> Gson;
   RestAdapterRequestInterceptor -> UserAgentProvider;
   RestErrorHandler -> Bus;
   SharedPreferences -> Context;
   TelephonyManager -> Context;
+  TimeManagementFragment -> LogoutService;
+  TimeManagementFragment -> VehmonServiceProvider;
   TimerService -> Bus;
   TimerService -> NotificationManager;
+  UserAgentProvider -> ClassLoader;
   UserAgentProvider -> TelephonyManager;
   UserAgentProvider -> PackageInfo;
-  UserAgentProvider -> ClassLoader;
   UserAgentProvider -> ApplicationInfo;
   UserListFragment -> LogoutService;
   UserListFragment -> BootstrapServiceProvider;
+  VehmonServiceProvider -> RestAdapter;
+  VehmonServiceProvider -> ApiKeyProvider;
   n2 -> RestAdapter;
 }

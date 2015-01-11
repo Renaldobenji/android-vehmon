@@ -14,7 +14,7 @@ import javax.inject.Provider;
  * instance provision of types served by {@code @Provides} methods.
  */
 public final class BootstrapModule$$ModuleAdapter extends ModuleAdapter<BootstrapModule> {
-  private static final String[] INJECTS = { "members/za.co.vehmon.application.BootstrapApplication", "members/za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity", "members/za.co.vehmon.application.ui.MainActivity", "members/za.co.vehmon.application.ui.BootstrapTimerActivity", "members/za.co.vehmon.application.ui.CheckInsListFragment", "members/za.co.vehmon.application.ui.NavigationDrawerFragment", "members/za.co.vehmon.application.ui.NewsActivity", "members/za.co.vehmon.application.ui.NewsListFragment", "members/za.co.vehmon.application.ui.UserActivity", "members/za.co.vehmon.application.ui.UserListFragment", "members/za.co.vehmon.application.core.TimerService", "members/za.co.vehmon.application.core.VehmonService", };
+  private static final String[] INJECTS = { "members/za.co.vehmon.application.BootstrapApplication", "members/za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity", "members/za.co.vehmon.application.ui.MainActivity", "members/za.co.vehmon.application.ui.BootstrapTimerActivity", "members/za.co.vehmon.application.ui.CheckInsListFragment", "members/za.co.vehmon.application.ui.NavigationDrawerFragment", "members/za.co.vehmon.application.ui.NewsActivity", "members/za.co.vehmon.application.ui.NewsListFragment", "members/za.co.vehmon.application.ui.UserActivity", "members/za.co.vehmon.application.ui.UserListFragment", "members/za.co.vehmon.application.core.TimerService", "members/za.co.vehmon.application.core.VehmonService", "members/za.co.vehmon.application.ui.TimeManagementFragment", };
   private static final Class<?>[] STATIC_INJECTIONS = { };
   private static final Class<?>[] INCLUDES = { };
 
@@ -38,6 +38,7 @@ public final class BootstrapModule$$ModuleAdapter extends ModuleAdapter<Bootstra
     map.put("za.co.vehmon.application.core.BootstrapService", new ProvideBootstrapServiceProvidesAdapter(module));
     map.put("za.co.vehmon.application.core.VehmonService", new ProvideVehmonServiceProvidesAdapter(module));
     map.put("za.co.vehmon.application.BootstrapServiceProvider", new ProvideBootstrapServiceProviderProvidesAdapter(module));
+    map.put("za.co.vehmon.application.VehmonServiceProvider", new ProvideVehmonServiceProviderProvidesAdapter(module));
     map.put("za.co.vehmon.application.authenticator.ApiKeyProvider", new ProvideApiKeyProviderProvidesAdapter(module));
     map.put("com.google.gson.Gson", new ProvideGsonProvidesAdapter(module));
     map.put("za.co.vehmon.application.core.RestErrorHandler", new ProvideRestErrorHandlerProvidesAdapter(module));
@@ -275,6 +276,59 @@ public final class BootstrapModule$$ModuleAdapter extends ModuleAdapter<Bootstra
     @Override
     public BootstrapServiceProvider get() {
       return module.provideBootstrapServiceProvider(restAdapter.get(), apiKeyProvider.get());
+    }
+  }
+
+  /**
+   * A {@code Binder<za.co.vehmon.application.VehmonServiceProvider>} implementation which satisfies
+   * Dagger's infrastructure requirements including:
+   * 
+   * Owning the dependency links between {@code za.co.vehmon.application.VehmonServiceProvider} and its
+   * dependencies.
+   * 
+   * Being a {@code Provider<za.co.vehmon.application.VehmonServiceProvider>} and handling creation and
+   * preparation of object instances.
+   */
+  public static final class ProvideVehmonServiceProviderProvidesAdapter extends Binding<VehmonServiceProvider>
+      implements Provider<VehmonServiceProvider> {
+    private final BootstrapModule module;
+    private Binding<retrofit.RestAdapter> restAdapter;
+    private Binding<za.co.vehmon.application.authenticator.ApiKeyProvider> apiKeyProvider;
+
+    public ProvideVehmonServiceProviderProvidesAdapter(BootstrapModule module) {
+      super("za.co.vehmon.application.VehmonServiceProvider", null, NOT_SINGLETON, "za.co.vehmon.application.BootstrapModule.provideVehmonServiceProvider()");
+      this.module = module;
+      setLibrary(false);
+    }
+
+    /**
+     * Used internally to link bindings/providers together at run time
+     * according to their dependency graph.
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public void attach(Linker linker) {
+      restAdapter = (Binding<retrofit.RestAdapter>) linker.requestBinding("retrofit.RestAdapter", BootstrapModule.class);
+      apiKeyProvider = (Binding<za.co.vehmon.application.authenticator.ApiKeyProvider>) linker.requestBinding("za.co.vehmon.application.authenticator.ApiKeyProvider", BootstrapModule.class);
+    }
+
+    /**
+     * Used internally obtain dependency information, such as for cyclical
+     * graph detection.
+     */
+    @Override
+    public void getDependencies(Set<Binding<?>> getBindings, Set<Binding<?>> injectMembersBindings) {
+      getBindings.add(restAdapter);
+      getBindings.add(apiKeyProvider);
+    }
+
+    /**
+     * Returns the fully provisioned instance satisfying the contract for
+     * {@code Provider<za.co.vehmon.application.VehmonServiceProvider>}.
+     */
+    @Override
+    public VehmonServiceProvider get() {
+      return module.provideVehmonServiceProvider(restAdapter.get(), apiKeyProvider.get());
     }
   }
 

@@ -20,6 +20,7 @@ import za.co.vehmon.application.ui.MainActivity;
 import za.co.vehmon.application.ui.NavigationDrawerFragment;
 import za.co.vehmon.application.ui.NewsActivity;
 import za.co.vehmon.application.ui.NewsListFragment;
+import za.co.vehmon.application.ui.TimeManagementFragment;
 import za.co.vehmon.application.ui.UserActivity;
 import za.co.vehmon.application.ui.UserListFragment;
 import com.google.gson.Gson;
@@ -52,7 +53,8 @@ import retrofit.converter.GsonConverter;
                 UserActivity.class,
                 UserListFragment.class,
                 TimerService.class,
-                VehmonService.class
+                VehmonService.class,
+                TimeManagementFragment.class
         }
 )
 public class BootstrapModule {
@@ -82,6 +84,11 @@ public class BootstrapModule {
     @Provides
     BootstrapServiceProvider provideBootstrapServiceProvider(RestAdapter restAdapter, ApiKeyProvider apiKeyProvider) {
         return new BootstrapServiceProvider(restAdapter, apiKeyProvider);
+    }
+
+    @Provides
+    VehmonServiceProvider provideVehmonServiceProvider(RestAdapter restAdapter, ApiKeyProvider apiKeyProvider) {
+        return new VehmonServiceProvider(restAdapter, apiKeyProvider);
     }
 
     @Provides
