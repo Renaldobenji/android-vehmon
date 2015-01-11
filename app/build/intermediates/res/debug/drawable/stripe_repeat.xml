@@ -3,4 +3,4 @@
 <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
     android:src="@drawable/stripe"
     android:tileMode="repeat" />
-<!-- From: file:/C:/Users/Renaldo/AndroidStudioProjects/android-vehmon/app/src/main/res/drawable/stripe_repeat.xml -->
+<!-- From: file:/C:/Users/Renaldo/Documents/GitHub/android-vehmon/app/src/main/res/drawable/stripe_repeat.xml -->

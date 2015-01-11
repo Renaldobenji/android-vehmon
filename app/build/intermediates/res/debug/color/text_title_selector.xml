@@ -5,4 +5,4 @@
     <item android:state_pressed="true" android:color="@color/text_inverted"/>
     <item android:color="@color/text_title"/>
 
-</selector><!-- From: file:/C:/Users/Renaldo/AndroidStudioProjects/android-vehmon/app/src/main/res/color/text_title_selector.xml -->
+</selector><!-- From: file:/C:/Users/Renaldo/Documents/GitHub/android-vehmon/app/src/main/res/color/text_title_selector.xml -->

@@ -5,4 +5,4 @@
     <item android:state_pressed="true" android:color="@color/table_text_inverted"/>
     <item android:color="@color/table_text"/>
 
-</selector><!-- From: file:/C:/Users/Renaldo/AndroidStudioProjects/android-vehmon/app/src/main/res/color/table_text_selector.xml -->
+</selector><!-- From: file:/C:/Users/Renaldo/Documents/GitHub/android-vehmon/app/src/main/res/color/table_text_selector.xml -->

@@ -2,6 +2,20 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-6b12bb7da66f960521c00803c60427207880a085.jar" />
+    </item>
+    <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.actionbarsherlock\viewpagerindicator\2.4.1\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="6f859c56f21c2976bdc8dc8da6185df0cda6b8ad">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-48c7db2c98a4cac644b22317b8083b2c2e9d35c1.jar" />
+    </item>
+    <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
         jumboMode="false"
         revision="19.1.0"
@@ -16,11 +30,11 @@
         <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-af72fd6d9d203d9cc3e4652785ea125d89a1579e.jar" />
     </item>
     <item
-        jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.github.kevinsawicki\android-pusher\0.6\ea53585070abe6e74f7cfeb175def92b12530be8\android-pusher-0.6.jar"
+        jar="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="ea53585070abe6e74f7cfeb175def92b12530be8">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\android-pusher-0.6-18dab28dbb30aed18616a684ec585fa489320b66.jar" />
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-8066856e82b298173c37a451d5b4f18f20aaa528.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup.dagger\dagger\1.0.1\ec469f2b494fed2aec5af606b61e66ab5ac451cd\dagger-1.0.1.jar"
@@ -30,11 +44,11 @@
         <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\dagger-1.0.1-0a3559d8a0fc16d67907c614fecc947580d294a0.jar" />
     </item>
     <item
-        jar="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.github.kevinsawicki\android-pusher\0.6\ea53585070abe6e74f7cfeb175def92b12530be8\android-pusher-0.6.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-8066856e82b298173c37a451d5b4f18f20aaa528.jar" />
+        sha1="ea53585070abe6e74f7cfeb175def92b12530be8">
+        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\android-pusher-0.6-18dab28dbb30aed18616a684ec585fa489320b66.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup\otto\1.3.4\4d72fb811c7b3c0e7f412112020d4430f044e510\otto-1.3.4.jar"
@@ -70,6 +84,13 @@
         revision="19.1.0"
         sha1="061a856888185f11271372c0508bad85e905617f">
         <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\butterknife-1.3.2-0f4ef58ff5070a896a9ca52c3098592127a502d1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.github.kevinsawicki\wishlist\0.9\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="7c1fee313f20e5f6f32a69a4555a7ae1f9558f35">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-13674e6af7bc22274fd7bf2661e255ed15e2784b.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\1.1.1\c62362968b40fc5fdb6715945fc7876a7516a846\picasso-1.1.1.jar"
