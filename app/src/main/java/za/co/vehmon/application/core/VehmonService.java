@@ -1,6 +1,7 @@
 
 package za.co.vehmon.application.core;
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit.RestAdapter;
@@ -51,5 +52,15 @@ public class VehmonService {
         user.setUsername("Renaldob");
         user.setSessionToken("#SessionToken");
         return user;
+    }
+
+    public boolean clockIn(Date date)
+    {
+        return true;
+    }
+
+    public boolean clockOut(Date date)
+    {
+        return true;
     }
 }

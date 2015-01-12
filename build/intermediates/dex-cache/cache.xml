@@ -9,6 +9,13 @@
         <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-6b12bb7da66f960521c00803c60427207880a085.jar" />
     </item>
     <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\src\main\libs\butterknife-6.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3a10b25b6820e19102e118711afe6a66c0bae123">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\butterknife-6.0.0-2380bdeb271e1af41bdb0d8db7f99d1d754232ee.jar" />
+    </item>
+    <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.actionbarsherlock\viewpagerindicator\2.4.1\classes.jar"
         jumboMode="false"
         revision="19.1.0"
@@ -20,70 +27,49 @@
         jumboMode="false"
         revision="19.1.0"
         sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\gson-2.2.4-780e722dbf198bbd1932b8f7df61872202accb9a.jar" />
-    </item>
-    <item
-        jar="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\exploded-aar\com.github.kevinsawicki\wishlist\0.9\classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="7c1fee313f20e5f6f32a69a4555a7ae1f9558f35">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-af72fd6d9d203d9cc3e4652785ea125d89a1579e.jar" />
-    </item>
-    <item
-        jar="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-8066856e82b298173c37a451d5b4f18f20aaa528.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\gson-2.2.4-780e722dbf198bbd1932b8f7df61872202accb9a.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup.dagger\dagger\1.0.1\ec469f2b494fed2aec5af606b61e66ab5ac451cd\dagger-1.0.1.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="ec469f2b494fed2aec5af606b61e66ab5ac451cd">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\dagger-1.0.1-0a3559d8a0fc16d67907c614fecc947580d294a0.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\dagger-1.0.1-0a3559d8a0fc16d67907c614fecc947580d294a0.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.github.kevinsawicki\android-pusher\0.6\ea53585070abe6e74f7cfeb175def92b12530be8\android-pusher-0.6.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="ea53585070abe6e74f7cfeb175def92b12530be8">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\android-pusher-0.6-18dab28dbb30aed18616a684ec585fa489320b66.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\android-pusher-0.6-18dab28dbb30aed18616a684ec585fa489320b66.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup\otto\1.3.4\4d72fb811c7b3c0e7f412112020d4430f044e510\otto-1.3.4.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="4d72fb811c7b3c0e7f412112020d4430f044e510">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\otto-1.3.4-58f4d105913ff6ae8cfe2f02445ef2502431e628.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\otto-1.3.4-58f4d105913ff6ae8cfe2f02445ef2502431e628.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup\javawriter\1.0.5\d4576fdb2fb07cd80ab10c0651c5dbf4de28475c\javawriter-1.0.5.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="d4576fdb2fb07cd80ab10c0651c5dbf4de28475c">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\javawriter-1.0.5-0692f6809460ffcf81d9c91cb450d9c577573f03.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\javawriter-1.0.5-0692f6809460ffcf81d9c91cb450d9c577573f03.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup.dagger\dagger-compiler\1.0.1\c879320dc5c3cfd5cd069899a75c2a5bce8375b5\dagger-compiler-1.0.1.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="c879320dc5c3cfd5cd069899a75c2a5bce8375b5">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\dagger-compiler-1.0.1-efe161c93c0525eb6c4ae57be9eb886372989ff5.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\dagger-compiler-1.0.1-efe161c93c0525eb6c4ae57be9eb886372989ff5.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit\retrofit\1.5.1\266695d62b6df0e1176af2be3634bcd0837d4fbd\retrofit-1.5.1.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="266695d62b6df0e1176af2be3634bcd0837d4fbd">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\retrofit-1.5.1-12cf41737df1aae142c99237994fc8160d561f42.jar" />
-    </item>
-    <item
-        jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife\1.3.2\61a856888185f11271372c0508bad85e905617f\butterknife-1.3.2.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="061a856888185f11271372c0508bad85e905617f">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\butterknife-1.3.2-0f4ef58ff5070a896a9ca52c3098592127a502d1.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\retrofit-1.5.1-12cf41737df1aae142c99237994fc8160d561f42.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.github.kevinsawicki\wishlist\0.9\classes.jar"
@@ -97,35 +83,28 @@
         jumboMode="false"
         revision="19.1.0"
         sha1="c62362968b40fc5fdb6715945fc7876a7516a846">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\picasso-1.1.1-d1d64b6b4dd0cbe79ba2793565d3f8a594e42092.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\picasso-1.1.1-d1d64b6b4dd0cbe79ba2793565d3f8a594e42092.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-317cdc76cda9b9134320d4a54e393d312bce3e0e.jar" />
-    </item>
-    <item
-        jar="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\exploded-aar\com.actionbarsherlock\viewpagerindicator\2.4.1\classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="6f859c56f21c2976bdc8dc8da6185df0cda6b8ad">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-4c9babc994c50d5a2529cfe820639e2115d842bc.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-317cdc76cda9b9134320d4a54e393d312bce3e0e.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\library-2.4.0-42143514f7e1c2e9204c8b5a93385444bb479c31.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\library-2.4.0-42143514f7e1c2e9204c8b5a93385444bb479c31.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="C:\Users\Renaldo\AndroidStudioProjects\android-vehmon\app\build\intermediates\pre-dexed\debug\javax.inject-1-5d6d20c6107a703fb4435f88c9d66ef40d23979d.jar" />
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\javax.inject-1-5d6d20c6107a703fb4435f88c9d66ef40d23979d.jar" />
     </item>
 
 </items>

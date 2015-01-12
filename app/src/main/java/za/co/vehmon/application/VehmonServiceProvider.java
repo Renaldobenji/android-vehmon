@@ -36,7 +36,7 @@ public class VehmonServiceProvider {
     public VehmonService getService(final Activity activity)
             throws IOException, AccountsException {
         // The call to keyProvider.getAuthKey(...) is what initiates the login screen. Call that now.
-        keyProvider.getAuthKey(activity);
+        String AuthKey = keyProvider.getAuthKey(activity);
 
         // TODO: See how that affects the bootstrap service.
         return new VehmonService(restAdapter);

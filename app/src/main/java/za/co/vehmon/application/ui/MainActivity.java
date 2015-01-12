@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
+import butterknife.ButterKnife;
 import za.co.vehmon.application.BootstrapServiceProvider;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.core.BootstrapService;
@@ -24,7 +25,7 @@ import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
-import butterknife.Views;
+
 
 
 /**
@@ -59,7 +60,7 @@ public class MainActivity extends BootstrapFragmentActivity {
         }
 
         // View injection with Butterknife
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         // Set up navigation drawer
         title = drawerTitle = getTitle();

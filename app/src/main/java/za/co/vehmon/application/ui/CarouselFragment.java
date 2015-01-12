@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
 import za.co.vehmon.application.R;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import butterknife.InjectView;
-import butterknife.Views;
 
 /**
  * Fragment which houses the View pager.
@@ -33,7 +33,7 @@ public class CarouselFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Views.inject(this, getView());
+        ButterKnife.inject(this, getView());
 
         pager.setAdapter(new BootstrapPagerAdapter(getResources(), getChildFragmentManager()));
         indicator.setViewPager(pager);

@@ -2,16 +2,22 @@
 package za.co.vehmon.application.authenticator;
 
 import android.view.View;
-import butterknife.Views.Finder;
+import butterknife.ButterKnife.Finder;
 
 public class BootstrapAuthenticatorActivity$$ViewInjector {
-  public static void inject(Finder finder, za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity target, Object source) {
+  public static void inject(Finder finder, final za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity target, Object source) {
     View view;
-    view = finder.findById(source, 2131230795);
+    view = finder.findRequiredView(source, 2131230795, "field 'emailText'");
     target.emailText = (android.widget.AutoCompleteTextView) view;
-    view = finder.findById(source, 2131230796);
+    view = finder.findRequiredView(source, 2131230796, "field 'passwordText'");
     target.passwordText = (android.widget.EditText) view;
-    view = finder.findById(source, 2131230797);
+    view = finder.findRequiredView(source, 2131230797, "field 'signInButton'");
     target.signInButton = (android.widget.Button) view;
+  }
+
+  public static void reset(za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity target) {
+    target.emailText = null;
+    target.passwordText = null;
+    target.signInButton = null;
   }
 }

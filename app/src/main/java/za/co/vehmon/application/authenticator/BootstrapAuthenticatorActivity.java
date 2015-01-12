@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import butterknife.ButterKnife;
 import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.R.id;
@@ -51,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
-import butterknife.Views;
+
 import retrofit.RetrofitError;
 
 /**
@@ -136,7 +137,7 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
 
         setContentView(layout.login_activity);
 
-        Views.inject(this);
+        ButterKnife.inject(this);
 
         emailText.setAdapter(new ArrayAdapter<String>(this,
                 simple_dropdown_item_1line, userEmailAccounts()));
