@@ -7,8 +7,12 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.BoringLayout;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -52,11 +56,82 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
     @InjectView(R.id.clockout) protected Button buttonClockOut;
     @InjectView(R.id.timetrackingchronometer) protected TextView timetrackingchronometer;
 
+    private static final String FORCE_REFRESH = "forceRefresh";
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Injector.inject(this);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final Menu optionsMenu, final MenuInflater inflater) {
+        inflater.inflate(R.menu.bootstrap, optionsMenu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (!isUsable()) {
+            return false;
+        }
+        switch (item.getItemId()) {
+            case R.id.refresh:
+                forceRefresh();
+                return true;
+            case R.id.logout:
+                logout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Force a refresh of the items displayed ignoring any cached items
+     */
+    protected void forceRefresh() {
+        final Bundle bundle = new Bundle();
+        bundle.putBoolean(FORCE_REFRESH, true);
+        refresh(bundle);
+    }
+    private ActionBarActivity getActionBarActivity() {
+        return ((ActionBarActivity) getActivity());
+    }
+    /**
+     * Refresh the fragment's list
+     */
+    public void refresh() {
+        refresh(null);
+    }
+
+    private void refresh(final Bundle args) {
+        if (!isUsable()) {
+            return;
+        }
+
+        getActionBarActivity().setSupportProgressBarIndeterminateVisibility(true);
+    }
+
+    /**
+     * Is this fragment still part of an activity and usable from the UI-thread?
+     *
+     * @return true if usable on the UI-thread, false otherwise
+     */
+    protected boolean isUsable() {
+        return getActivity() != null;
+    }
+
+    private void logout() {
+        logoutService.logout(new Runnable() {
+            @Override
+            public void run() {
+                // Calling a refresh will force the service to look for a logged in user
+                // and when it finds none the user will be requested to log in again.
+                forceRefresh();
+            }
+        });
     }
 
     @Override
@@ -65,8 +140,27 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.time_management, container, false);
         ButterKnife.inject(this, view);
-        eventBus.register(this);
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //Display clock out information
+        if (isTimerServiceRunning()) {
+            buttonClockIn.setVisibility(View.GONE);
+            buttonClockOut.setVisibility(View.VISIBLE);
+        }
+
+        eventBus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        eventBus.unregister(this);
     }
 
     @OnClick(R.id.clockIn)
