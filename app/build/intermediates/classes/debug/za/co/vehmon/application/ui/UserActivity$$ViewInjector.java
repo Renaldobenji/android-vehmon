@@ -7,7 +7,7 @@ import butterknife.ButterKnife.Finder;
 public class UserActivity$$ViewInjector {
   public static void inject(Finder finder, final za.co.vehmon.application.ui.UserActivity target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131230806, "field 'avatar'");
+    view = finder.findRequiredView(source, 2131230807, "field 'avatar'");
     target.avatar = (android.widget.ImageView) view;
     view = finder.findRequiredView(source, 2131230789, "field 'name'");
     target.name = (android.widget.TextView) view;

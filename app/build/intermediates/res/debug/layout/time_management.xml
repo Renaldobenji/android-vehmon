@@ -12,7 +12,7 @@
         >
 
     <TextView
-        android:id="@+id/chronometer"
+        android:id="@+id/timetrackingchronometer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="00:00:00"
@@ -34,12 +34,11 @@
 
     <Button
         android:id="@+id/clockout"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
         android:text="@string/clockout"
         android:visibility="gone"
-        style="@style/BootstrapButton"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/button_round_states"
         android:layout_gravity="center"
         android:textColor="@color/text"
         android:textSize="50sp"

@@ -1216,8 +1216,8 @@ containing a value of this type.
         public static final int bottom=0x7f080016;
         public static final int checkbox=0x7f080031;
         public static final int chronometer=0x7f080040;
-        public static final int clockIn=0x7f080054;
-        public static final int clockout=0x7f080055;
+        public static final int clockIn=0x7f080055;
+        public static final int clockout=0x7f080056;
         public static final int collapseActionView=0x7f080011;
         public static final int container=0x7f08004f;
         public static final int default_activity_button=0x7f08002c;
@@ -1237,10 +1237,10 @@ containing a value of this type.
         public static final int ifRoom=0x7f08000e;
         public static final int image=0x7f08002b;
         public static final int imageViewLogo=0x7f08004a;
-        public static final int iv_avatar=0x7f080056;
+        public static final int iv_avatar=0x7f080057;
         public static final int listMode=0x7f080001;
         public static final int list_item=0x7f08002d;
-        public static final int logout=0x7f080059;
+        public static final int logout=0x7f08005a;
         public static final int middle=0x7f08000b;
         public static final int navigation_drawer=0x7f080050;
         public static final int never=0x7f08000d;
@@ -1251,7 +1251,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f08001c;
         public static final int progress_horizontal=0x7f08001d;
         public static final int radio=0x7f080033;
-        public static final int refresh=0x7f080057;
+        public static final int refresh=0x7f080058;
         public static final int resume=0x7f080044;
         public static final int search_badge=0x7f080036;
         public static final int search_bar=0x7f080035;
@@ -1272,7 +1272,8 @@ containing a value of this type.
         public static final int stop=0x7f080042;
         public static final int submit_area=0x7f08003d;
         public static final int tabMode=0x7f080002;
-        public static final int timer=0x7f080058;
+        public static final int timer=0x7f080059;
+        public static final int timetrackingchronometer=0x7f080054;
         public static final int title=0x7f08002f;
         public static final int top=0x7f080017;
         public static final int top_action_bar=0x7f080024;
