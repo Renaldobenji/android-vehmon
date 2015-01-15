@@ -7,9 +7,9 @@ import butterknife.ButterKnife.Finder;
 public class CarouselFragment$$ViewInjector {
   public static void inject(Finder finder, final za.co.vehmon.application.ui.CarouselFragment target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131230791, "field 'indicator'");
+    view = finder.findRequiredView(source, 2131230797, "field 'indicator'");
     target.indicator = (com.viewpagerindicator.TitlePageIndicator) view;
-    view = finder.findRequiredView(source, 2131230792, "field 'pager'");
+    view = finder.findRequiredView(source, 2131230798, "field 'pager'");
     target.pager = (android.support.v4.view.ViewPager) view;
   }
 

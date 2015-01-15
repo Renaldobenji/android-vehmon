@@ -63,4 +63,9 @@ public class VehmonService {
     {
         return true;
     }
+
+    public String[] FetchAbsenceTypes()
+    {
+        return new AbsenceRequestWrapper().FetchAbsenceTypes();
+    }
 }

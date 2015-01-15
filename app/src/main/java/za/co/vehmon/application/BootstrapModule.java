@@ -14,6 +14,7 @@ import za.co.vehmon.application.core.RestErrorHandler;
 import za.co.vehmon.application.core.TimerService;
 import za.co.vehmon.application.core.UserAgentProvider;
 import za.co.vehmon.application.core.VehmonService;
+import za.co.vehmon.application.ui.AbsenceRequestActivity;
 import za.co.vehmon.application.ui.BootstrapTimerActivity;
 import za.co.vehmon.application.ui.CheckInsListFragment;
 import za.co.vehmon.application.ui.MainActivity;
@@ -54,7 +55,8 @@ import retrofit.converter.GsonConverter;
                 UserListFragment.class,
                 TimerService.class,
                 VehmonService.class,
-                TimeManagementFragment.class
+                TimeManagementFragment.class,
+                AbsenceRequestActivity.class
         }
 )
 public class BootstrapModule {

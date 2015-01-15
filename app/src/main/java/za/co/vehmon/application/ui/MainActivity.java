@@ -196,6 +196,12 @@ public class MainActivity extends BootstrapFragmentActivity {
         startActivity(i);
     }
 
+    private void navigateToAbsenceRequest()
+    {
+        final Intent i = new Intent(this,AbsenceRequestActivity.class);
+        startActivity(i);
+    }
+
     @Subscribe
     public void onNavigationItemSelected(NavItemSelectedEvent event) {
 
@@ -209,6 +215,9 @@ public class MainActivity extends BootstrapFragmentActivity {
             case 1:
                 // Timer
                 navigateToTimer();
+                break;
+            case 2:
+                navigateToAbsenceRequest();
                 break;
         }
     }
