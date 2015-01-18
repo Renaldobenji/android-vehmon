@@ -119,7 +119,7 @@ public class AbsenceRequestActivity extends BootstrapActivity {
     private ArrayAdapter<String> createAbsenceTypeAdapter(String[] items)
     {
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, items);
+                this, R.layout.spinner_item, items);
         spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return spinnerArrayAdapter;
     }

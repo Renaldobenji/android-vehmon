@@ -533,11 +533,12 @@ int layout main_activity_tablet 0x7f030021
 int layout news 0x7f030022
 int layout news_list_item 0x7f030023
 int layout news_list_item_labels 0x7f030024
-int layout support_simple_spinner_dropdown_item 0x7f030025
-int layout time_management 0x7f030026
-int layout user_list_item 0x7f030027
-int layout user_list_item_labels 0x7f030028
-int layout user_view 0x7f030029
+int layout spinner_item 0x7f030025
+int layout support_simple_spinner_dropdown_item 0x7f030026
+int layout time_management 0x7f030027
+int layout user_list_item 0x7f030028
+int layout user_list_item_labels 0x7f030029
+int layout user_view 0x7f03002a
 int menu bootstrap 0x7f0d0000
 int menu global 0x7f0d0001
 int string abc_action_bar_home_description 0x7f0b0000
