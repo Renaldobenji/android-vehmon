@@ -43,7 +43,7 @@ public class VehmonService {
      * @param password
      * @return
      */
-    public User authenticate(String email, String password) {
+    public User Authenticate(String email, String password) {
         User user = new User();
         user.setFirstName("Renaldo");
         user.setLastName("Benjamin");
@@ -54,12 +54,12 @@ public class VehmonService {
         return user;
     }
 
-    public boolean clockIn(Date date)
+    public boolean ClockIn(Date date)
     {
         return true;
     }
 
-    public boolean clockOut(Date date)
+    public boolean ClockOut(Date date)
     {
         return true;
     }
@@ -67,5 +67,10 @@ public class VehmonService {
     public String[] FetchAbsenceTypes()
     {
         return new AbsenceRequestWrapper().FetchAbsenceTypes();
+    }
+
+    public AbsenceRequestWrapper.AbsenceRequestResult SubmitAbsenceRequest(int absenceRequestTypeID, Date fromDate, Date toDate)
+    {
+        return new AbsenceRequestWrapper().SubmitAbsenceRequestToServer(absenceRequestTypeID,fromDate,toDate);
     }
 }

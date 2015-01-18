@@ -170,7 +170,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
             new SafeAsyncTask<Boolean>() {
                 @Override
                 public Boolean call() throws Exception {
-                    final Boolean svc = serviceProvider.getService(getActivity()).clockIn(new Date());
+                    final Boolean svc = serviceProvider.getService(getActivity()).ClockIn(new Date());
                     return svc;
                 }
 
@@ -276,7 +276,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
             new SafeAsyncTask<Boolean>() {
                 @Override
                 public Boolean call() throws Exception {
-                    final Boolean svc = serviceProvider.getService(getActivity()).clockOut(new Date());
+                    final Boolean svc = serviceProvider.getService(getActivity()).ClockOut(new Date());
                     return svc;
                 }
 

@@ -263,7 +263,7 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
                 final String query = String.format("%s=%s&%s=%s",
                         PARAM_USERNAME, email, PARAM_PASSWORD, password);
 
-                User loginResponse = vehmonService.authenticate(email, password);
+                User loginResponse = vehmonService.Authenticate(email, password);
                 token = loginResponse.getSessionToken();
 
                 return true;
