@@ -18,6 +18,7 @@ import za.co.vehmon.application.ui.AbsenceRequestActivity;
 import za.co.vehmon.application.ui.BootstrapTimerActivity;
 import za.co.vehmon.application.ui.CheckInsListFragment;
 import za.co.vehmon.application.ui.MainActivity;
+import za.co.vehmon.application.ui.MessageListFragment;
 import za.co.vehmon.application.ui.NavigationDrawerFragment;
 import za.co.vehmon.application.ui.NewsActivity;
 import za.co.vehmon.application.ui.NewsListFragment;
@@ -56,7 +57,8 @@ import retrofit.converter.GsonConverter;
                 TimerService.class,
                 VehmonService.class,
                 TimeManagementFragment.class,
-                AbsenceRequestActivity.class
+                AbsenceRequestActivity.class,
+                MessageListFragment.class
         }
 )
 public class BootstrapModule {
