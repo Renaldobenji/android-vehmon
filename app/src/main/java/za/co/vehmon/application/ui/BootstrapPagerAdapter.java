@@ -30,7 +30,7 @@ public class BootstrapPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -48,6 +48,9 @@ public class BootstrapPagerAdapter extends FragmentPagerAdapter {
                 break;
             case 3:
                 result = new CheckInsListFragment();
+                break;
+            case 4:
+                result = new MessageListFragment();
                 break;
             default:
                 result = null;
@@ -70,6 +73,8 @@ public class BootstrapPagerAdapter extends FragmentPagerAdapter {
                 return resources.getString(R.string.page_users);
             case 3:
                 return resources.getString(R.string.page_checkins);
+            case 4:
+                return "Messages";
             default:
                 return null;
         }

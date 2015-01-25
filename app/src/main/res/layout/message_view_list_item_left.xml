@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    style="@style/ListItem"
+    android:layout_weight="1"
+    >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:weightSum="0.2"
+        android:id="@+id/ll_messageIndicator"
+        android:layout_marginTop="10dp"
+        android:background="@color/default_circle_indicator_stroke_color">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_layout"
+        android:padding="5dp"
+        android:weightSum="0.8"
+        android:id="@+id/ll_message"
+        >
+
+        <TextView
+            android:id="@+id/tv_messageText"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/table_text_selector"
+            android:padding="3dp"
+            android:text="This This This This ThisThisThisThisThisThisThisThisThisThisThisThisThis"/>
+    </LinearLayout>
+
+</LinearLayout>
+

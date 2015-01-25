@@ -3,15 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingBottom="5dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="5dp"
     style="@style/ListItem">
 
     <ImageView
-        android:id="@+id/iv_avatar"
+        android:id="@+id/iv_Messageavatar"
         style="@style/AvatarLarge"
+        android:layout_height="45dp"
+        android:layout_width="45dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="10dp"
@@ -27,15 +25,14 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/table_text_selector"
         android:text="Username"
-        android:layout_toRightOf="@+id/iv_avatar"/>
+        android:layout_toRightOf="@+id/iv_Messageavatar"/>
 
     <TextView
-        android:id="@+id/tv_date"
+        android:id="@+id/tv_messagedate"
         android:layout_width="fill_parent"
-        android:layout_centerVertical="true"
         android:gravity="right"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/table_text_selector"
         android:text="Date"
         android:layout_toRightOf="@+id/tv_messageusername"/>

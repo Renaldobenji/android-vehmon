@@ -37,6 +37,10 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name="za.co.vehmon.application.ui.MessageViewActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="za.co.vehmon.application.ui.BootstrapTimerActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
