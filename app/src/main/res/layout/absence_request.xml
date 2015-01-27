@@ -2,97 +2,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Absence Type"
+        android:text="Absence Request"
         android:id="@+id/textViewAbsenceType"
         android:paddingTop="5dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/table_text_selector"/>
+        android:textColor="@color/table_text_selector"
+        android:layout_gravity="center"/>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/table_text_selector"/>
 
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerAbsenceType"
-        style="@style/Spinner"
+        style="@style/ListSpinner"
        />
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="From Date"
-        android:id="@+id/textViewAbsenceFromDate"
-        android:paddingTop="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/table_text_selector"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From Date"
+            android:id="@+id/textViewAbsenceFromDate"
+            android:paddingTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/table_text_selector"/>
 
-    <EditText
-        android:layout_width="fill_parent"
-        android:id="@+id/editTextFromDate"
-        android:layout_weight=".8"
-        style="@style/SignInEditText"
-        android:inputType="date"
-        android:clickable="false"
-        />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
 
-    <ImageButton
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/imageButtonFromDate"
-        android:background="@drawable/calendar_icon"
-        />
+            <EditText
+                android:layout_width="fill_parent"
+                android:id="@+id/editTextFromDate"
+                android:layout_weight=".8"
+                style="@style/SignInEditText"
+                android:inputType="date"
+                android:clickable="false"
+                />
 
-    </LinearLayout>
+            <ImageButton
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/imageButtonFromDate"
+                android:background="@drawable/calendar_icon"
+                />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="To Date"
-        android:id="@+id/textViewAbsenceToDate"
-        android:paddingTop="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/table_text_selector"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To Date"
+            android:id="@+id/textViewAbsenceToDate"
+            android:paddingTop="5dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/table_text_selector"/>
 
-        <EditText
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:id="@+id/editTextToDate"
-            android:layout_weight=".8"
-            style="@style/SignInEditText"
-            android:inputType="date"
-            android:editable="false"
-            android:clickable="false"
-            />
+            android:layout_height="wrap_content"
+            android:weightSum="1">
 
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/imageButtonToDate"
-            android:background="@drawable/calendar_icon"
-            />
-    </LinearLayout>
+            <EditText
+                android:layout_width="fill_parent"
+                android:id="@+id/editTextToDate"
+                android:layout_weight=".8"
+                style="@style/SignInEditText"
+                android:inputType="date"
+                android:editable="false"
+                android:clickable="false"
+                />
+
+            <ImageButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageButtonToDate"
+                android:background="@drawable/calendar_icon"
+                />
+        </LinearLayout>
+
 
     <Button
         android:id="@+id/buttonAbsenceSubmit"

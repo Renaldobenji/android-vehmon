@@ -28,11 +28,12 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="20dp"
+        android:layout_width="15dp"
         android:layout_height="20dp"
         android:id="@+id/ll_messageIndicator"
         android:layout_marginTop="10dp"
-        android:background="@color/background_selected">
+        android:background="@drawable/triangle_right"
+       >
 
     </LinearLayout>
 

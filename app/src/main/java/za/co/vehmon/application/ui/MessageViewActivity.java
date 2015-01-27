@@ -32,7 +32,7 @@ public class MessageViewActivity extends BootstrapActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        setTitle("Messages");
+        setTitle("Messages" + getIntent().getExtras().getInt("msgConversationID"));
         messageItems = setupConvo().getMessages();
         MessageViewAdapter adapter = new MessageViewAdapter(this.getLayoutInflater(), messageItems);
         listViewMessages.setAdapter(adapter);
