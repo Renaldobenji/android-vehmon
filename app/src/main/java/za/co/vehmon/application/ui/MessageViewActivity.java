@@ -91,8 +91,27 @@ public class MessageViewActivity extends BootstrapActivity {
         msg4.setFrom("Robyn");
         msg4.setDate("2014-05-31");
         msg4.setMessage("Ok No problem, i understand");
-        msg.setMessageConversationID(convo.getMessageConversationID());
+        msg4.setMessageConversationID(convo.getMessageConversationID());
         convo.Messages.add(msg4);
+
+        Message msg7 = new Message();
+        msg7.setTo("Renaldo");
+        msg7.setFrom("Robyn");
+        msg7.setDate("2014-05-31");
+        msg7.setMessage("Ok No problem, i understand");
+        msg7.setMessageConversationID(convo.getMessageConversationID());
+        convo.Messages.add(msg7);
+
+
+        Message msg6 = new Message();
+        msg6.setTo("Renaldo");
+        msg6.setFrom("Robyn");
+        msg6.setDate("2014-05-31");
+        msg6.setMessage("Ok No problem, i understand");
+        msg6.setMessageConversationID(convo.getMessageConversationID());
+        convo.Messages.add(msg6);
+
+        convo.Messages.add(msg3);
 
         return convo;
     }

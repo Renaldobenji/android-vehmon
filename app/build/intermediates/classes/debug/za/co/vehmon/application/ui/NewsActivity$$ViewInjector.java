@@ -7,9 +7,9 @@ import butterknife.ButterKnife.Finder;
 public class NewsActivity$$ViewInjector {
   public static void inject(Finder finder, final za.co.vehmon.application.ui.NewsActivity target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131230817, "field 'title'");
+    view = finder.findRequiredView(source, 2131230820, "field 'title'");
     target.title = (android.widget.TextView) view;
-    view = finder.findRequiredView(source, 2131230818, "field 'content'");
+    view = finder.findRequiredView(source, 2131230821, "field 'content'");
     target.content = (android.widget.TextView) view;
   }
 
