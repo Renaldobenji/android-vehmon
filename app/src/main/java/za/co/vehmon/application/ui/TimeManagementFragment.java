@@ -36,6 +36,7 @@ import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.authenticator.LogoutService;
 import za.co.vehmon.application.core.BootstrapService;
 import za.co.vehmon.application.core.StopTimerEvent;
+import za.co.vehmon.application.core.TimeManagementWrapper;
 import za.co.vehmon.application.core.TimerService;
 import za.co.vehmon.application.core.TimerTickEvent;
 import za.co.vehmon.application.util.SafeAsyncTask;
@@ -167,10 +168,10 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
     public void ClockIn(View view) {
         try {
 
-            new SafeAsyncTask<Boolean>() {
+            new SafeAsyncTask<TimeManagementWrapper.TimeManagementResult>() {
                 @Override
-                public Boolean call() throws Exception {
-                    final Boolean svc = serviceProvider.getService(getActivity()).ClockIn(new Date());
+                public TimeManagementWrapper.TimeManagementResult call() throws Exception {
+                    final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockIn(getActivity(), new Date());
                     return svc;
                 }
 
@@ -182,11 +183,8 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
                 }
 
                 @Override
-                protected void onSuccess(final Boolean isSuccessful) throws Exception {
+                protected void onSuccess(final TimeManagementWrapper.TimeManagementResult isSuccessful) throws Exception {
                     super.onSuccess(isSuccessful);
-
-                    if (isSuccessful == false)
-                        return;
 
                     buttonClockIn.setVisibility(View.GONE);
                     buttonClockOut.setVisibility(View.VISIBLE);
@@ -273,10 +271,10 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
     @OnClick(R.id.clockout)
     public void ClockOut(View view) {
         try {
-            new SafeAsyncTask<Boolean>() {
+            new SafeAsyncTask<TimeManagementWrapper.TimeManagementResult>() {
                 @Override
-                public Boolean call() throws Exception {
-                    final Boolean svc = serviceProvider.getService(getActivity()).ClockOut(new Date());
+                public TimeManagementWrapper.TimeManagementResult call() throws Exception {
+                    final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockOut(getActivity(),new Date());
                     return svc;
                 }
 
@@ -288,11 +286,8 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
                 }
 
                 @Override
-                protected void onSuccess(final Boolean isSuccessful) throws Exception {
+                protected void onSuccess(final TimeManagementWrapper.TimeManagementResult isSuccessful) throws Exception {
                     super.onSuccess(isSuccessful);
-
-                    if (isSuccessful == false)
-                        return;
 
                     buttonClockIn.setVisibility(View.VISIBLE);
                     buttonClockOut.setVisibility(View.GONE);

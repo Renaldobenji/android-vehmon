@@ -1,14 +1,14 @@
 digraph G1 {
   concentrate = true;
-  AbsenceRequestActivity -> LogoutService;
   AbsenceRequestActivity -> VehmonServiceProvider;
+  AbsenceRequestActivity -> LogoutService;
   AccountManager -> Context;
   ApiKeyProvider -> AccountManager;
   ApplicationInfo -> Context;
+  BootstrapAuthenticatorActivity -> Bus;
   BootstrapAuthenticatorActivity -> BootstrapService;
   n2 [label="za.co.vehmon.application.core.VehmonService"];
   BootstrapAuthenticatorActivity -> n2;
-  BootstrapAuthenticatorActivity -> Bus;
   BootstrapFragmentActivity -> Bus;
   BootstrapService -> RestAdapter;
   BootstrapServiceProvider -> ApiKeyProvider;
@@ -21,8 +21,8 @@ digraph G1 {
   LogoutService -> AccountManager;
   LogoutService -> Context;
   MainActivity -> BootstrapServiceProvider;
-  MessageListFragment -> LogoutService;
   MessageListFragment -> VehmonServiceProvider;
+  MessageListFragment -> LogoutService;
   MessageViewActivity -> VehmonServiceProvider;
   NavigationDrawerFragment -> Bus;
   NavigationDrawerFragment -> SharedPreferences;
@@ -38,14 +38,14 @@ digraph G1 {
   SharedPreferences -> Context;
   TelephonyManager -> Context;
   TimeManagementFragment -> Bus;
-  TimeManagementFragment -> LogoutService;
   TimeManagementFragment -> VehmonServiceProvider;
-  TimerService -> NotificationManager;
+  TimeManagementFragment -> LogoutService;
   TimerService -> Bus;
-  UserAgentProvider -> TelephonyManager;
-  UserAgentProvider -> PackageInfo;
-  UserAgentProvider -> ClassLoader;
+  TimerService -> NotificationManager;
   UserAgentProvider -> ApplicationInfo;
+  UserAgentProvider -> TelephonyManager;
+  UserAgentProvider -> ClassLoader;
+  UserAgentProvider -> PackageInfo;
   UserListFragment -> BootstrapServiceProvider;
   UserListFragment -> LogoutService;
   VehmonServiceProvider -> ApiKeyProvider;

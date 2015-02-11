@@ -36,14 +36,14 @@ public class AbsenceRequestDatasource {
         dbHelper.close();
     }
 
-    public long InsertAbsenceRequest(String fromDate, String toDate, String userID, String leaveType)
+    public long InsertAbsenceRequest(String fromDate, String toDate, String userID, String leaveTypeID)
     {
         ContentValues values = new ContentValues();
 
         values.put(MySQLiteHelper.TABLE_ABSENCEREQUEST_FROMDATE, fromDate);
         values.put(MySQLiteHelper.TABLE_ABSENCEREQUEST_TODATE, toDate);
         values.put(MySQLiteHelper.TABLE_ABSENCEREQUEST_USERID, userID);
-        values.put(MySQLiteHelper.TABLE_ABSENCEREQUEST_LEAVETYPE, leaveType);
+        values.put(MySQLiteHelper.TABLE_ABSENCEREQUEST_LEAVETYPE, leaveTypeID);
         values.put(MySQLiteHelper.TABLE_ABSENCEREQUEST_SYNCED, 0);
 
         //Insert into database

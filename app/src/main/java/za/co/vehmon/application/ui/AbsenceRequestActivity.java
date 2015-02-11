@@ -4,6 +4,7 @@ import android.accounts.AccountsException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -47,9 +48,6 @@ public class AbsenceRequestActivity extends BootstrapActivity {
     @InjectView(R.id.spinnerAbsenceType) protected Spinner spinnerAbsenceType;
     @InjectView(R.id.editTextFromDate) protected EditText editTextFromDate;
     @InjectView(R.id.editTextToDate) protected EditText editTextToDate;
-    //@InjectView(R.id.imageButtonToDate) protected ImageButton imageButtonToDate;
-    //@InjectView(R.id.imageButtonFromDate) protected ImageButton imageButtonFromDate;
-    //@InjectView(R.id.buttonAbsenceSubmit) protected Button buttonAbsenceSubmit;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -146,7 +144,7 @@ public class AbsenceRequestActivity extends BootstrapActivity {
     public void AbsenceRequestSubmit(View view)
     {
         final int absenceRequestTypeID = 1;
-
+        final ProgressDialog barProgressDialog = ProgressDialog.show(AbsenceRequestActivity.this,"Please wait...", "Saving Request",true);
         try {
             final Date fromDate = parseDate(editTextFromDate.getText().toString());
             final Date toDate = parseDate(editTextToDate.getText().toString());
@@ -155,7 +153,7 @@ public class AbsenceRequestActivity extends BootstrapActivity {
                 @Override
                 public AbsenceRequestWrapper.AbsenceRequestResult call() throws Exception {
 
-                    AbsenceRequestWrapper.AbsenceRequestResult result = serviceProvider.getService(AbsenceRequestActivity.this).SubmitAbsenceRequest(absenceRequestTypeID,fromDate,toDate);
+                    AbsenceRequestWrapper.AbsenceRequestResult result = serviceProvider.getService(AbsenceRequestActivity.this).SubmitAbsenceRequest(AbsenceRequestActivity.this,absenceRequestTypeID,fromDate,toDate);
                     return result;
                 }
 
@@ -164,11 +162,13 @@ public class AbsenceRequestActivity extends BootstrapActivity {
                     super.onException(e);
                     if (e instanceof OperationCanceledException) {
                     }
+                    barProgressDialog.dismiss();
                 }
 
                 @Override
                 protected void onSuccess(final AbsenceRequestWrapper.AbsenceRequestResult result) throws Exception {
                     super.onSuccess(result);
+                    barProgressDialog.dismiss();
                 }
             }.execute();
         } catch (ParseException e) {

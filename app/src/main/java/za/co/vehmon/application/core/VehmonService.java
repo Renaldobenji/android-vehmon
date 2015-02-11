@@ -1,6 +1,7 @@
 
 package za.co.vehmon.application.core;
 
+import android.content.Context;
 import android.provider.Telephony;
 
 import java.util.ArrayList;
@@ -57,14 +58,14 @@ public class VehmonService {
         return user;
     }
 
-    public boolean ClockIn(Date date)
+    public TimeManagementWrapper.TimeManagementResult ClockIn(Context context, Date date)
     {
-        return true;
+        return new TimeManagementWrapper().ClockIn(context, date);
     }
 
-    public boolean ClockOut(Date date)
+    public TimeManagementWrapper.TimeManagementResult ClockOut(Context context, Date date)
     {
-        return true;
+        return new TimeManagementWrapper().ClockOut(context, date);
     }
 
     public String[] FetchAbsenceTypes()
@@ -72,9 +73,9 @@ public class VehmonService {
         return new AbsenceRequestWrapper().FetchAbsenceTypes();
     }
 
-    public AbsenceRequestWrapper.AbsenceRequestResult SubmitAbsenceRequest(int absenceRequestTypeID, Date fromDate, Date toDate)
+    public AbsenceRequestWrapper.AbsenceRequestResult SubmitAbsenceRequest(Context context, int absenceRequestTypeID, Date fromDate, Date toDate)
     {
-        return new AbsenceRequestWrapper().SubmitAbsenceRequestToServer(absenceRequestTypeID,fromDate,toDate);
+        return new AbsenceRequestWrapper().SubmitAbsenceRequest(context,absenceRequestTypeID,fromDate,toDate);
     }
 
     public List<MessageConversation> FetchUnreadMessage()

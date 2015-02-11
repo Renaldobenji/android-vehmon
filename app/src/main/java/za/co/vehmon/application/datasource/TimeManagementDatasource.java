@@ -40,6 +40,28 @@ public class TimeManagementDatasource {
         dbHelper.close();
     }
 
+    public long clockIn(String clockinTime, String userID)
+    {
+        ContentValues values = new ContentValues();
+
+        values.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKINTIME, clockinTime);
+        values.put(MySQLiteHelper.TABLE_TIMEMNG_USERID, userID);
+        values.put(MySQLiteHelper.TABLE_TIMEMNG_SYNCED, 0);
+        //Insert into database
+        return database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
+    }
+
+    public long clockout(String clockoutTime, String userID)
+    {
+        ContentValues values = new ContentValues();
+
+        values.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKOUTTIME, clockoutTime);
+        values.put(MySQLiteHelper.TABLE_TIMEMNG_USERID, userID);
+        values.put(MySQLiteHelper.TABLE_TIMEMNG_SYNCED, 0);
+        //Insert into database
+        return database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
+    }
+
     public long InsertTimeManagement(String clockinTime, String clockoutTime, String inLat, String inLng, String outLat, String outLng, String userID)
     {
         ContentValues values = new ContentValues();
