@@ -52,4 +52,14 @@ public class Message {
 
     public String From;
     public String To;
+
+    public int getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(int messageID) {
+        this.messageID = messageID;
+    }
+
+    public int messageID;
 }

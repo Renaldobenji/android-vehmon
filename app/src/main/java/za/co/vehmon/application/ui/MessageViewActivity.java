@@ -1,6 +1,12 @@
 package za.co.vehmon.application.ui;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.OperationCanceledException;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.List;
@@ -8,10 +14,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.InjectView;
+import butterknife.OnClick;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.core.Message;
 import za.co.vehmon.application.core.MessageConversation;
+import za.co.vehmon.application.core.MessageWrapper;
+import za.co.vehmon.application.util.SafeAsyncTask;
 
 /**
  * Created by Renaldo on 1/25/2015.
@@ -19,8 +28,12 @@ import za.co.vehmon.application.core.MessageConversation;
 public class MessageViewActivity extends BootstrapActivity {
 
     private List<Message> messageItems;
+    private Integer messageConversationID;
 
     @InjectView(R.id.listViewMessages) protected ListView listViewMessages;
+    @InjectView(R.id.editTextMessage) protected EditText editTextMessage;
+    @InjectView(R.id.imageButtonMessageSubmit) protected ImageButton imageButtonMessageSubmit;
+
     @Inject protected VehmonServiceProvider serviceProvider;
 
     @Override
@@ -32,10 +45,71 @@ public class MessageViewActivity extends BootstrapActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        setTitle("Messages" + getIntent().getExtras().getInt("msgConversationID"));
-        messageItems = setupConvo().getMessages();
-        MessageViewAdapter adapter = new MessageViewAdapter(this.getLayoutInflater(), messageItems);
-        listViewMessages.setAdapter(adapter);
+        messageConversationID = getIntent().getExtras().getInt("msgConversationID");
+        setTitle("Messages" + messageConversationID);
+        FetchMessageForConvo(messageConversationID);
+    }
+
+    private void FetchMessageForConvo(final long msgConID)
+    {
+        final ProgressDialog barProgressDialog = ProgressDialog.show(this,"Please wait...", "Fetching Messages",true);
+        final Activity myActivity = this;
+        new SafeAsyncTask<MessageWrapper.MessageResult>() {
+            @Override
+            public MessageWrapper.MessageResult call() throws Exception {
+                final MessageWrapper.MessageResult svc = serviceProvider.getService(myActivity).GetAllMessageForConversation(myActivity,msgConID);
+                return svc;
+            }
+
+            @Override
+            protected void onException(final Exception e) throws RuntimeException {
+                super.onException(e);
+                if (e instanceof OperationCanceledException) {
+                }
+                barProgressDialog.dismiss();
+            }
+
+            @Override
+            protected void onSuccess(final MessageWrapper.MessageResult isSuccessful) throws Exception {
+                super.onSuccess(isSuccessful);
+
+                MessageViewAdapter adapter = new MessageViewAdapter(myActivity.getLayoutInflater(), isSuccessful.getMessages());
+                listViewMessages.setAdapter(adapter);
+
+                barProgressDialog.dismiss();
+            }
+        }.execute();
+    }
+
+    @OnClick(R.id.imageButtonMessageSubmit)
+    public void SubmitMessage(View view) {
+        final ProgressDialog barProgressDialog = ProgressDialog.show(this, "Sending","Submitting message...", true);
+        final Activity myActivity = this;
+        new SafeAsyncTask<MessageWrapper.MessageResult>() {
+            @Override
+            public MessageWrapper.MessageResult call() throws Exception {
+                final MessageWrapper.MessageResult svc = serviceProvider.getService(myActivity).SubmitMessage(myActivity,messageConversationID,"Renaldo","Robyn", editTextMessage.getText().toString());
+                return svc;
+            }
+
+            @Override
+            protected void onException(final Exception e) throws RuntimeException {
+                super.onException(e);
+                if (e instanceof OperationCanceledException) {
+                }
+                barProgressDialog.dismiss();
+            }
+
+            @Override
+            protected void onSuccess(final MessageWrapper.MessageResult isSuccessful) throws Exception {
+                super.onSuccess(isSuccessful);
+
+                MessageViewAdapter adapter = new MessageViewAdapter(myActivity.getLayoutInflater(), isSuccessful.getMessages());
+                listViewMessages.setAdapter(adapter);
+                editTextMessage.setText("");
+                barProgressDialog.dismiss();
+            }
+        }.execute();
     }
 
     private MessageConversation setupConvo()

@@ -169,7 +169,7 @@ public abstract class ItemListFragment<E> extends Fragment
 
     protected abstract LogoutService getLogoutService();
 
-    private void logout() {
+    public void logout() {
         getLogoutService().logout(new Runnable() {
             @Override
             public void run() {

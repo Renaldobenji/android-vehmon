@@ -54,11 +54,13 @@ public class AbsenceRequestWrapper {
         {
             result.setSuccessful(false);
             result.setErrorMessage("FromDate or ToDate is not set");
+            return result;
         }
 
         if (fromDate.after(toDate)) {
             result.setSuccessful(false);
             result.setErrorMessage("FromDate cannot be after ToDate");
+            return result;
         }
 
         //String fromDate, String toDate, String userID, String leaveTypeID

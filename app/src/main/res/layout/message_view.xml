@@ -9,6 +9,8 @@
         android:id="@+id/listViewMessages"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/rlMessage"
+        android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"
         />
 
     <RelativeLayout

@@ -78,6 +78,26 @@ public class VehmonService {
         return new AbsenceRequestWrapper().SubmitAbsenceRequest(context,absenceRequestTypeID,fromDate,toDate);
     }
 
+    public MessageWrapper.MessageResult CreateNewMessage(Context context, String from, String to)
+    {
+        return new MessageWrapper().CreateNewConversation(context,from,to);
+    }
+
+    public MessageWrapper.MessageResult GetAllMessageConversations(Context context)
+    {
+        return new MessageWrapper().GetAllMessage(context);
+    }
+
+    public MessageWrapper.MessageResult GetAllMessageForConversation(Context context, long conversationID)
+    {
+        return new MessageWrapper().GetAllMessageForConversation(context, conversationID);
+    }
+
+    public MessageWrapper.MessageResult SubmitMessage(Context context, Integer conversationID, String from, String to, String message)
+    {
+        return new MessageWrapper().SubmitMessage(context, conversationID,from,to,message);
+    }
+
     public List<MessageConversation> FetchUnreadMessage()
     {
         List<MessageConversation> messages = new ArrayList<MessageConversation>();

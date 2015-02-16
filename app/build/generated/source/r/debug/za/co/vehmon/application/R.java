@@ -1224,8 +1224,8 @@ containing a value of this type.
         public static final int buttonAbsenceSubmit=0x7f080048;
         public static final int checkbox=0x7f080031;
         public static final int chronometer=0x7f080049;
-        public static final int clockIn=0x7f080068;
-        public static final int clockout=0x7f080069;
+        public static final int clockIn=0x7f08006b;
+        public static final int clockout=0x7f08006c;
         public static final int collapseActionView=0x7f080011;
         public static final int container=0x7f080058;
         public static final int default_activity_button=0x7f08002c;
@@ -1236,6 +1236,7 @@ containing a value of this type.
         public static final int editTextFromDate=0x7f080043;
         public static final int editTextMessage=0x7f08005f;
         public static final int editTextToDate=0x7f080046;
+        public static final int edit_name=0x7f080064;
         public static final int edit_query=0x7f080034;
         public static final int end=0x7f08000c;
         public static final int et_email=0x7f080054;
@@ -1252,16 +1253,18 @@ containing a value of this type.
         public static final int imageButtonToDate=0x7f080047;
         public static final int imageViewLogo=0x7f080053;
         public static final int iv_Messageavatar=0x7f08005a;
-        public static final int iv_avatar=0x7f08006a;
+        public static final int iv_avatar=0x7f08006d;
+        public static final int lbl_your_name=0x7f080065;
         public static final int listMode=0x7f080001;
         public static final int listViewMessages=0x7f08005d;
         public static final int list_item=0x7f08002d;
         public static final int ll_message=0x7f080062;
         public static final int ll_messageIndicator=0x7f080061;
-        public static final int logout=0x7f08006d;
+        public static final int logout=0x7f080070;
         public static final int middle=0x7f08000b;
         public static final int navigation_drawer=0x7f080059;
         public static final int never=0x7f08000d;
+        public static final int newMessage=0x7f080071;
         public static final int none=0x7f080009;
         public static final int normal=0x7f080000;
         public static final int pause=0x7f08004c;
@@ -1269,7 +1272,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f08001c;
         public static final int progress_horizontal=0x7f08001d;
         public static final int radio=0x7f080033;
-        public static final int refresh=0x7f08006b;
+        public static final int refresh=0x7f08006e;
         public static final int resume=0x7f08004d;
         public static final int rlMessage=0x7f08005e;
         public static final int search_badge=0x7f080036;
@@ -1295,21 +1298,22 @@ containing a value of this type.
         public static final int textViewAbsenceFromDate=0x7f080042;
         public static final int textViewAbsenceToDate=0x7f080045;
         public static final int textViewAbsenceType=0x7f080040;
-        public static final int timer=0x7f08006c;
-        public static final int timetrackingchronometer=0x7f080067;
+        public static final int timer=0x7f08006f;
+        public static final int timetrackingchronometer=0x7f08006a;
         public static final int title=0x7f08002f;
         public static final int top=0x7f080017;
         public static final int top_action_bar=0x7f080024;
         public static final int tpi_header=0x7f080050;
         public static final int triangle=0x7f080014;
-        public static final int tv_content=0x7f080065;
+        public static final int tv_content=0x7f080068;
         public static final int tv_date=0x7f08004f;
         public static final int tv_messageText=0x7f080063;
         public static final int tv_messagedate=0x7f08005c;
         public static final int tv_messageusername=0x7f08005b;
         public static final int tv_name=0x7f08004e;
-        public static final int tv_summary=0x7f080066;
-        public static final int tv_title=0x7f080064;
+        public static final int tv_summary=0x7f080069;
+        public static final int tv_title=0x7f080067;
+        public static final int txt_your_name=0x7f080066;
         public static final int underline=0x7f080015;
         public static final int up=0x7f080025;
         public static final int useLogo=0x7f080003;
@@ -1365,19 +1369,21 @@ containing a value of this type.
         public static final int message_view_list_item=0x7f030025;
         public static final int message_view_list_item_left=0x7f030026;
         public static final int message_view_list_item_right=0x7f030027;
-        public static final int news=0x7f030028;
-        public static final int news_list_item=0x7f030029;
-        public static final int news_list_item_labels=0x7f03002a;
-        public static final int spinner_item=0x7f03002b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03002c;
-        public static final int time_management=0x7f03002d;
-        public static final int user_list_item=0x7f03002e;
-        public static final int user_list_item_labels=0x7f03002f;
-        public static final int user_view=0x7f030030;
+        public static final int new_message_dialog=0x7f030028;
+        public static final int news=0x7f030029;
+        public static final int news_list_item=0x7f03002a;
+        public static final int news_list_item_labels=0x7f03002b;
+        public static final int spinner_item=0x7f03002c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03002d;
+        public static final int time_management=0x7f03002e;
+        public static final int user_list_item=0x7f03002f;
+        public static final int user_list_item_labels=0x7f030030;
+        public static final int user_view=0x7f030031;
     }
     public static final class menu {
         public static final int bootstrap=0x7f0d0000;
         public static final int global=0x7f0d0001;
+        public static final int message_menu=0x7f0d0002;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f0b0000;

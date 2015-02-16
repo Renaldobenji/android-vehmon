@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "vehmon.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     //Absence Request
     public static final String TABLE_ABSENCEREQUEST = "ABSENCEREQUEST";
@@ -21,14 +21,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_ABSENCEREQUEST_LEAVETYPE = "LEAVETYPE";
     public static final String TABLE_ABSENCEREQUEST_SYNCED = "SYNCED";
 
-    private static final String TABLE_CREATE_ABSENCEREQUEST = "create table "
+    private static final String TABLE_CREATE_ABSENCEREQUEST = "CREATE TABLE "
             +TABLE_ABSENCEREQUEST + "("
-            +TABLE_ABSENCEREQUEST_ID + " integer primary key autoincrement, "
-            +TABLE_ABSENCEREQUEST_FROMDATE + " text not null, "
-            +TABLE_ABSENCEREQUEST_TODATE + " text not null, "
-            +TABLE_ABSENCEREQUEST_USERID + " text not null, "
-            +TABLE_ABSENCEREQUEST_LEAVETYPE +  " text not null, "
-            +TABLE_ABSENCEREQUEST_SYNCED + " integer)";
+            +TABLE_ABSENCEREQUEST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +TABLE_ABSENCEREQUEST_FROMDATE + " TEXT NOT NULL, "
+            +TABLE_ABSENCEREQUEST_TODATE + " TEXT NOT NULL, "
+            +TABLE_ABSENCEREQUEST_USERID + " TEXT NOT NULL, "
+            +TABLE_ABSENCEREQUEST_LEAVETYPE +  " TEXT NOT NULL, "
+            +TABLE_ABSENCEREQUEST_SYNCED + " INTEGER)";
 
     public static final String TABLE_TIMEMNG = "TIMEMANAGEMENT";
     public static final String TABLE_TIMEMNG_ID = "ID";
@@ -39,53 +39,55 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_TIMEMNG_OUTLAT = "OUTLAT";
     public static final String TABLE_TIMEMNG_OUTLNG = "OUTLNG";
     public static final String TABLE_TIMEMNG_USERID = "USERID";
-    public static final String TABLE_TIMEMNG_SYNCED = "SYNCED";
+    public static final String TABLE_TIMEMNG_INSYNCED = "INSYNCED";
+    public static final String TABLE_TIMEMNG_OUTSYNCED = "OUTSYNCED";
 
     private static final String TABLE_CREATE_TIMEMNG = "create table "
             +TABLE_TIMEMNG + "("
-            +TABLE_TIMEMNG_ID + " integer primary key autoincrement, "
-            +TABLE_TIMEMNG_CLOCKINTIME + " text not null, "
-            +TABLE_TIMEMNG_CLOCKOUTTIME + " text not null, "
-            +TABLE_TIMEMNG_INLAT + " text not null, "
-            +TABLE_TIMEMNG_INLNG + " text not null, "
-            +TABLE_TIMEMNG_OUTLAT + " text not null, "
-            +TABLE_TIMEMNG_OUTLNG + " text not null, "
-            +TABLE_TIMEMNG_USERID + " text not null, "
-            +TABLE_TIMEMNG_SYNCED + " integer)";
+            +TABLE_TIMEMNG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +TABLE_TIMEMNG_CLOCKINTIME + " TEXT, "
+            +TABLE_TIMEMNG_CLOCKOUTTIME + " TEXT, "
+            +TABLE_TIMEMNG_INLAT + " TEXT, "
+            +TABLE_TIMEMNG_INLNG + " TEXT, "
+            +TABLE_TIMEMNG_OUTLAT + " TEXT, "
+            +TABLE_TIMEMNG_OUTLNG + " TEXT, "
+            +TABLE_TIMEMNG_USERID + " TEXT NOT NULL, "
+            +TABLE_TIMEMNG_INSYNCED + " INTEGER, "
+            +TABLE_TIMEMNG_OUTSYNCED + " INTEGER)";
 
     public static final String TABLE_MSGCONVO = "MESSAGECONVERSATION";
     public static final String TABLE_MSGCONVO_ID = "ID";
     public static final String TABLE_MSGCONVO_DATE = "DATE";
-    public static final String TABLE_MSGCONVO_FROM = "FROM";
-    public static final String TABLE_MSGCONVO_TO = "TO";
+    public static final String TABLE_MSGCONVO_FROM = "MSGFROM";
+    public static final String TABLE_MSGCONVO_TO = "MSGTO";
     public static final String TABLE_MSGCONVO_SYNCED = "SYNCED";
 
-    private static final String TABLE_CREATE_MSGCONVO = "create table "
+    private static final String TABLE_CREATE_MSGCONVO = "CREATE TABLE "
             +TABLE_MSGCONVO + "("
-            +TABLE_MSGCONVO_ID + " integer primary key autoincrement, "
-            +TABLE_MSGCONVO_DATE + " text not null, "
-            +TABLE_MSGCONVO_FROM + " text not null, "
-            +TABLE_MSGCONVO_TO + " text not null, "
-            +TABLE_MSGCONVO_SYNCED + " integer)";
+            +TABLE_MSGCONVO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +TABLE_MSGCONVO_DATE + " TEXT NOT NULL, "
+            +TABLE_MSGCONVO_FROM + " TEXT NOT NULL, "
+            +TABLE_MSGCONVO_TO + " TEXT NOT NULL, "
+            +TABLE_MSGCONVO_SYNCED + " INTEGER)";
 
     public static final String TABLE_MSG = "MESSAGES";
     public static final String TABLE_MSG_ID = "ID";
     public static final String TABLE_MSG_CONVOID = "CONVOID";
     public static final String TABLE_MSG_MSG = "MSG";
-    public static final String TABLE_MSG_TO = "TO";
-    public static final String TABLE_MSG_FROM = "FROM";
+    public static final String TABLE_MSG_TO = "MSGTO";
+    public static final String TABLE_MSG_FROM = "MSGFROM";
     public static final String TABLE_MSG_DATE = "DATE";
     public static final String TABLE_MSG_SYNCED = "SYNCED";
 
-    private static final String TABLE_CREATE_MSG = "create table "
+    private static final String TABLE_CREATE_MSG = "CREATE TABLE "
             +TABLE_MSG + "("
-            +TABLE_MSG_ID + " integer primary key autoincrement, "
-            +TABLE_MSG_CONVOID + " integer not null, "
-            +TABLE_MSG_MSG + " text not null, "
-            +TABLE_MSG_TO + " text not null, "
-            +TABLE_MSG_FROM + " text not null, "
-            +TABLE_MSG_DATE + " text not null, "
-            +TABLE_MSG_SYNCED + " integer)";
+            +TABLE_MSG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +TABLE_MSG_CONVOID + " INTEGER NOT NULL, "
+            +TABLE_MSG_MSG + " TEXT NOT NULL, "
+            +TABLE_MSG_TO + " TEXT NOT NULL, "
+            +TABLE_MSG_FROM + " TEXT NOT NULL, "
+            +TABLE_MSG_DATE + " TEXT NOT NULL, "
+            +TABLE_MSG_SYNCED + " INTEGER)";
 
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -95,9 +97,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(TABLE_CREATE_ABSENCEREQUEST);
+        sqLiteDatabase.execSQL(TABLE_CREATE_TIMEMNG);
         sqLiteDatabase.execSQL(TABLE_CREATE_MSG);
         sqLiteDatabase.execSQL(TABLE_CREATE_MSGCONVO);
-        sqLiteDatabase.execSQL(TABLE_CREATE_TIMEMNG);
+
     }
 
     @Override

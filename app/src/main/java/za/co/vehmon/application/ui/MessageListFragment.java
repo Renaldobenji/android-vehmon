@@ -2,11 +2,19 @@ package za.co.vehmon.application.ui;
 
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.Loader;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
 
@@ -21,15 +29,18 @@ import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.authenticator.LogoutService;
 import za.co.vehmon.application.core.MessageConversation;
+import za.co.vehmon.application.core.MessageWrapper;
 import za.co.vehmon.application.core.User;
 import za.co.vehmon.application.core.VehmonService;
+import za.co.vehmon.application.ui.Dialogs.NewMessageDialog;
+import za.co.vehmon.application.util.SafeAsyncTask;
 
 import static za.co.vehmon.application.core.Constants.Extra.USER;
 
 /**
  * Created by Renaldo on 1/21/2015.
  */
-public class MessageListFragment extends ItemListFragment<MessageConversation> {
+public class MessageListFragment extends ItemListFragment<MessageConversation>{
 
     @Inject protected VehmonServiceProvider serviceProvider;
     @Inject protected LogoutService logoutService;
@@ -45,6 +56,78 @@ public class MessageListFragment extends ItemListFragment<MessageConversation> {
         super.onActivityCreated(savedInstanceState);
 
         setEmptyText("No Messages");
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final Menu optionsMenu, final MenuInflater inflater) {
+        inflater.inflate(R.menu.message_menu, optionsMenu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (!isUsable()) {
+            return false;
+        }
+        switch (item.getItemId()) {
+            case R.id.newMessage:
+                showNewMessageDialog();
+                return true;
+            case R.id.logout:
+                this.logout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showNewMessageDialog() {
+        AlertDialog.Builder messageRecipient = new AlertDialog.Builder(getActivity());
+        messageRecipient.setMessage("Choose recipient here");
+        messageRecipient.setCancelable(true);
+        messageRecipient.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        CreateNewMessage();
+                        dialog.cancel();
+                    }
+                });
+        messageRecipient.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = messageRecipient.create();
+        alert11.show();
+    }
+
+    private void CreateNewMessage()
+    {
+        final ProgressDialog barProgressDialog = ProgressDialog.show(getActivity(),"Please wait...", "Creating Message",true);
+        new SafeAsyncTask<MessageWrapper.MessageResult>() {
+            @Override
+            public MessageWrapper.MessageResult call() throws Exception {
+                final MessageWrapper.MessageResult svc = serviceProvider.getService(getActivity()).CreateNewMessage(getActivity(),"Renaldo", "Robyn");
+                return svc;
+            }
+
+            @Override
+            protected void onException(final Exception e) throws RuntimeException {
+                super.onException(e);
+                if (e instanceof OperationCanceledException) {
+                }
+                barProgressDialog.dismiss();
+            }
+
+            @Override
+            protected void onSuccess(final MessageWrapper.MessageResult isSuccessful) throws Exception {
+                super.onSuccess(isSuccessful);
+                barProgressDialog.dismiss();
+                forceRefresh();
+            }
+        }.execute();
     }
 
     @Override
@@ -96,7 +179,12 @@ public class MessageListFragment extends ItemListFragment<MessageConversation> {
                     List<MessageConversation> latest = null;
 
                     if (getActivity() != null) {
-                        latest = serviceProvider.getService(getActivity()).FetchUnreadMessage();
+                        MessageWrapper.MessageResult result = serviceProvider.getService(getActivity()).GetAllMessageConversations(getActivity());
+
+                        if (result.isSuccessful())
+                            latest = result.getMessageConversations();
+                        else
+                            latest = null;
                     }
 
                     if (latest != null) {

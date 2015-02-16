@@ -33,6 +33,16 @@ public class TimeManagementWrapper {
         }
 
         private String  errorMessage;
+
+        public long getTimeTrackingID() {
+            return timeTrackingID;
+        }
+
+        public void setTimeTrackingID(long timeTrackingID) {
+            this.timeTrackingID = timeTrackingID;
+        }
+
+        private long timeTrackingID;
     }
 
     public TimeManagementResult ClockIn(Context context, Date clockInDateTime)
@@ -46,6 +56,7 @@ public class TimeManagementWrapper {
             result.setErrorMessage("Unable to clock in");
             result.setIsSuccessful(false);
         }
+        result.setTimeTrackingID(id);
 
         return result;
     }
@@ -55,7 +66,7 @@ public class TimeManagementWrapper {
         TimeManagementResult result = new TimeManagementResult();
         TimeManagementDatasource ds = new TimeManagementDatasource(context);
 
-        long id = ds.clockIn(clockOutDateTime.toString(), "Renaldo");
+        long id = ds.clockout(clockOutDateTime.toString(), "Renaldo");
         if (id == -1)
         {
             result.setErrorMessage("Unable to clock out");

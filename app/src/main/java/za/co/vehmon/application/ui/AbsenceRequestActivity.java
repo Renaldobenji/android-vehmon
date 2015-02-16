@@ -82,7 +82,6 @@ public class AbsenceRequestActivity extends BootstrapActivity {
             @Override
             protected void onSuccess(final String[] isSuccessful) throws Exception {
                 super.onSuccess(isSuccessful);
-
                 spinnerAbsenceType.setAdapter(createAbsenceTypeAdapter(isSuccessful));
             }
         }.execute();
@@ -168,6 +167,8 @@ public class AbsenceRequestActivity extends BootstrapActivity {
                 @Override
                 protected void onSuccess(final AbsenceRequestWrapper.AbsenceRequestResult result) throws Exception {
                     super.onSuccess(result);
+                    editTextFromDate.setText("");
+                    editTextToDate.setText("");
                     barProgressDialog.dismiss();
                 }
             }.execute();
