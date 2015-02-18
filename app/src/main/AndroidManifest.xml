@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".BootstrapApplication"
@@ -57,6 +59,8 @@
         </activity>
 
         <service android:name=".core.TimerService" android:enabled="true" android:exported="false" />
+
+        <service android:name=".gps.GPSTrackingService" android:enabled="true" android:exported="false" />
 
         <service
             android:name=".authenticator.AccountAuthenticatorService"

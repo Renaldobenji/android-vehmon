@@ -14,6 +14,7 @@ import za.co.vehmon.application.core.RestErrorHandler;
 import za.co.vehmon.application.core.TimerService;
 import za.co.vehmon.application.core.UserAgentProvider;
 import za.co.vehmon.application.core.VehmonService;
+import za.co.vehmon.application.gps.GPSTrackingService;
 import za.co.vehmon.application.ui.AbsenceRequestActivity;
 import za.co.vehmon.application.ui.BootstrapTimerActivity;
 import za.co.vehmon.application.ui.CheckInsListFragment;
@@ -62,7 +63,8 @@ import retrofit.converter.GsonConverter;
                 AbsenceRequestActivity.class,
                 MessageListFragment.class,
                 MessageViewActivity.class,
-                NewMessageDialog.class
+                NewMessageDialog.class,
+                GPSTrackingService.class
         }
 )
 public class BootstrapModule {

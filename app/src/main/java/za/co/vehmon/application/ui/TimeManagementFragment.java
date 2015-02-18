@@ -39,6 +39,7 @@ import za.co.vehmon.application.core.StopTimerEvent;
 import za.co.vehmon.application.core.TimeManagementWrapper;
 import za.co.vehmon.application.core.TimerService;
 import za.co.vehmon.application.core.TimerTickEvent;
+import za.co.vehmon.application.gps.GPSTrackingService;
 import za.co.vehmon.application.util.SafeAsyncTask;
 
 import static android.view.View.GONE;
@@ -172,8 +173,8 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
             new SafeAsyncTask<TimeManagementWrapper.TimeManagementResult>() {
                 @Override
                 public TimeManagementWrapper.TimeManagementResult call() throws Exception {
-                    final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockIn(getActivity(), new Date());
-                    return svc;
+                    //final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockIn(getActivity(), new Date());
+                    return null;
                 }
 
                 @Override
@@ -189,8 +190,9 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
 
                     buttonClockIn.setVisibility(View.GONE);
                     buttonClockOut.setVisibility(View.VISIBLE);
-                    timetrackingchronometer.setTag(TIMETRACKINGID,isSuccessful.getTimeTrackingID());
-                    startTimer();
+                    //timetrackingchronometer.setTag(TIMETRACKINGID,isSuccessful.getTimeTrackingID());
+                    startTracking();
+                    //startTimer();
                 }
             }.execute();
 
@@ -204,6 +206,14 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
     private void startTimer() {
         if (!isTimerServiceRunning()) {
             final Intent i = new Intent(getActivity(), TimerService.class);
+            getActivity().startService(i);
+        }
+    }
+
+    private void startTracking()
+    {
+        if (!isTrackingServiceRunning()) {
+            final Intent i = new Intent(getActivity(), GPSTrackingService.class);
             getActivity().startService(i);
         }
     }
@@ -270,14 +280,24 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
         return false;
     }
 
+    private boolean isTrackingServiceRunning() {
+        final ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (GPSTrackingService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @OnClick(R.id.clockout)
     public void ClockOut(View view) {
         try {
             new SafeAsyncTask<TimeManagementWrapper.TimeManagementResult>() {
                 @Override
                 public TimeManagementWrapper.TimeManagementResult call() throws Exception {
-                    final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockOut(getActivity(),new Date());
-                    return svc;
+                    //final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockOut(getActivity(),new Date());
+                    return null;
                 }
 
                 @Override
