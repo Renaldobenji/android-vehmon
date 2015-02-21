@@ -14,10 +14,14 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -36,9 +40,10 @@ public class GPSTrackingService extends Service implements LocationListener {
 
     private LocationManager locationManager;
     private String provider;
-    private long minTime = (1000 * 6 * 1) / 50; //5 Minute updates
+    private long minTime = 1000 * 60 * 2; //5 Minute updates
     private int minDistance = 1000 * 2 ; //5 Kilometers
     private final int TWO_MINUTES = 1000 * 60 * 2;
+    private Timer sourceGPSTimer;
     @Inject protected Bus eventBus;
     @Inject NotificationManager notificationManager;
 
@@ -47,18 +52,40 @@ public class GPSTrackingService extends Service implements LocationListener {
     @Override
     public void onCreate() {
         super.onCreate();
-
         Injector.inject(this);
-
         // Register the bus so we can send notifications.
         eventBus.register(this);
-
     }
 
     @Subscribe
     public void onStopEvent(StopTimerEvent stopEvent) {
+        if (this.locationManager != null)
+        {
+            this.locationManager.removeUpdates(this);
+        }
+        if (sourceGPSTimer != null)
+            sourceGPSTimer.cancel();
         stopSelf();
     }
+
+    private void setupGPSTimer()
+    {
+        sourceGPSTimer = new Timer("GPSTimer", true);
+        sourceGPSTimer.scheduleAtFixedRate
+        (
+                new TimerTask() {
+                    public void run() {
+                        try {
+                            onLocationChanged(locationManager.getLastKnownLocation(provider));
+                        } catch (Exception e) {
+
+                        }
+
+                    }
+                },0,minTime
+        );
+    }
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
@@ -73,6 +100,7 @@ public class GPSTrackingService extends Service implements LocationListener {
         if (provider == null)
         {
             //No location provider enabled, this is a problem.....
+            stopSelf();
         }
 
         //The last known location of this provider
@@ -89,7 +117,8 @@ public class GPSTrackingService extends Service implements LocationListener {
         notifyTimerRunning();
 
         startForeground(TIMER_NOTIFICATION_ID, getNotification("Vehicle Tracking"));
-        return Service.START_NOT_STICKY;
+        setupGPSTimer();
+        return Service.START_STICKY;
     }
 
     @Override
