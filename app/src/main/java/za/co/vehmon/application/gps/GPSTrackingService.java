@@ -1,5 +1,6 @@
 package za.co.vehmon.application.gps;
 
+import android.accounts.AccountsException;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -19,6 +20,7 @@ import com.google.android.gms.location.LocationServices;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,6 +29,8 @@ import javax.inject.Inject;
 
 import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
+import za.co.vehmon.application.VehmonServiceProvider;
+import za.co.vehmon.application.authenticator.LogoutService;
 import za.co.vehmon.application.core.StopTimerEvent;
 import za.co.vehmon.application.ui.BootstrapTimerActivity;
 import za.co.vehmon.application.util.VehmonCurrentDate;
@@ -46,6 +50,7 @@ public class GPSTrackingService extends Service implements LocationListener {
     private Timer sourceGPSTimer;
     @Inject protected Bus eventBus;
     @Inject NotificationManager notificationManager;
+    @Inject protected VehmonServiceProvider serviceProvider;
 
     private Location currentBestLocation;
 
@@ -148,6 +153,15 @@ public class GPSTrackingService extends Service implements LocationListener {
             Logger.addRecordToLog(currentBestString.toString());
 
         Logger.addRecordToLog(currentLocationString.toString());
+
+        //Save to DB
+        try {
+            serviceProvider.getService(this).LogGPSCoordinates(this,String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()),String.valueOf(location.getAccuracy()),"1");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (AccountsException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

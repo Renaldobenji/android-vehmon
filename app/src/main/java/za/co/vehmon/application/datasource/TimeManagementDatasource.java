@@ -48,24 +48,42 @@ public class TimeManagementDatasource {
 
     public long clockIn(String clockinTime, String userID)
     {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         ContentValues values = new ContentValues();
 
         values.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKINTIME, clockinTime);
         values.put(MySQLiteHelper.TABLE_TIMEMNG_USERID, userID);
         values.put(MySQLiteHelper.TABLE_TIMEMNG_INSYNCED, 0);
         //Insert into database
-        return database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
+        long id = database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
+        close();
+
+        return id;
     }
 
     public long clockout(String clockoutTime, String userID)
     {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         ContentValues values = new ContentValues();
 
         values.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKOUTTIME, clockoutTime);
         values.put(MySQLiteHelper.TABLE_TIMEMNG_USERID, userID);
         values.put(MySQLiteHelper.TABLE_TIMEMNG_OUTSYNCED, 0);
         //Insert into database
-        return database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
+        long id = database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
+        close();
+
+        return id;
     }
 
     public long InsertTimeManagement(String clockinTime, String clockoutTime, String inLat, String inLng, String outLat, String outLng, String userID)

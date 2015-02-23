@@ -2,10 +2,12 @@
 
 package za.co.vehmon.application.authenticator;
 
+import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AccountsException;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import java.io.IOException;
@@ -47,6 +49,16 @@ public class ApiKeyProvider {
         final AccountManagerFuture<Bundle> accountManagerFuture
                 = accountManager.getAuthTokenByFeatures(BOOTSTRAP_ACCOUNT_TYPE,
                 AUTHTOKEN_TYPE, new String[0], activity, null, null, null, null);
+
+        return accountManagerFuture.getResult().getString(KEY_AUTHTOKEN);
+    }
+
+    public String getAuthKey(final Context activity) throws AccountsException, IOException {
+
+        Account acc = new Account(BOOTSTRAP_ACCOUNT_TYPE,AUTHTOKEN_TYPE);
+
+        final AccountManagerFuture<Bundle> accountManagerFuture
+                = accountManager.getAuthToken(acc,AUTHTOKEN_TYPE,null,false,null,null);
 
         return accountManagerFuture.getResult().getString(KEY_AUTHTOKEN);
     }

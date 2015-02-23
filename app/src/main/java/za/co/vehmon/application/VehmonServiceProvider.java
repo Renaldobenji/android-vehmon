@@ -3,6 +3,7 @@ package za.co.vehmon.application;
 
 import android.accounts.AccountsException;
 import android.app.Activity;
+import android.content.Context;
 
 import java.io.IOException;
 
@@ -37,6 +38,15 @@ public class VehmonServiceProvider {
             throws IOException, AccountsException {
         // The call to keyProvider.getAuthKey(...) is what initiates the login screen. Call that now.
         String AuthKey = keyProvider.getAuthKey(activity);
+
+        // TODO: See how that affects the bootstrap service.
+        return new VehmonService(restAdapter);
+    }
+
+    public VehmonService getService(final Context context)
+            throws IOException, AccountsException {
+        // The call to keyProvider.getAuthKey(...) is what initiates the login screen. Call that now.
+        String AuthKey = keyProvider.getAuthKey(context);
 
         // TODO: See how that affects the bootstrap service.
         return new VehmonService(restAdapter);

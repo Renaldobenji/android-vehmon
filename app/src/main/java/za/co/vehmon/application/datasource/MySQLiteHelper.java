@@ -39,6 +39,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_TIMEMNG_OUTLAT = "OUTLAT";
     public static final String TABLE_TIMEMNG_OUTLNG = "OUTLNG";
     public static final String TABLE_TIMEMNG_USERID = "USERID";
+    public static final String TABLE_TIMEMNG_SHIFTID = "SHIFTID";
     public static final String TABLE_TIMEMNG_INSYNCED = "INSYNCED";
     public static final String TABLE_TIMEMNG_OUTSYNCED = "OUTSYNCED";
 
@@ -52,6 +53,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             +TABLE_TIMEMNG_OUTLAT + " TEXT, "
             +TABLE_TIMEMNG_OUTLNG + " TEXT, "
             +TABLE_TIMEMNG_USERID + " TEXT NOT NULL, "
+            +TABLE_TIMEMNG_SHIFTID + " INTEGER, "
             +TABLE_TIMEMNG_INSYNCED + " INTEGER, "
             +TABLE_TIMEMNG_OUTSYNCED + " INTEGER)";
 
@@ -89,6 +91,25 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             +TABLE_MSG_DATE + " TEXT NOT NULL, "
             +TABLE_MSG_SYNCED + " INTEGER)";
 
+    public static final String TABLE_GPSLOG = "GPSLOG";
+    public static final String TABLE_GPSLOG_ID = "ID";
+    public static final String TABLE_GPSLOG_LAT = "GPSLAT";
+    public static final String TABLE_GPSLOG_LNG = "GPSLNG";
+    public static final String TABLE_GPSLOG_ACCURACY = "GPSACCURACY";
+    public static final String TABLE_GPSLOG_DATE = "GPSDATE";
+    public static final String TABLE_GPSLOG_SYNC = "SYNCED";
+    public static final String TABLE_GPSLOG_TIMEMNG_ID = "TIMEMNGID";
+
+    private static final String TABLE_CREATE_GPSLOG = "CREATE TABLE "
+            +TABLE_GPSLOG + "("
+            +TABLE_GPSLOG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            +TABLE_GPSLOG_TIMEMNG_ID + " INTEGER NOT NULL, "
+            +TABLE_GPSLOG_LAT + " TEXT NOT NULL, "
+            +TABLE_GPSLOG_LNG + " TEXT NOT NULL, "
+            +TABLE_GPSLOG_ACCURACY + " TEXT NOT NULL, "
+            +TABLE_GPSLOG_DATE + " TEXT NOT NULL, "
+            +TABLE_GPSLOG_SYNC + " INTEGER)";
+
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -100,7 +121,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(TABLE_CREATE_TIMEMNG);
         sqLiteDatabase.execSQL(TABLE_CREATE_MSG);
         sqLiteDatabase.execSQL(TABLE_CREATE_MSGCONVO);
-
+        sqLiteDatabase.execSQL(TABLE_CREATE_GPSLOG);
     }
 
     @Override
@@ -110,6 +131,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MSG);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MSGCONVO);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_TIMEMNG);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CREATE_GPSLOG);
         onCreate(sqLiteDatabase);
 
     }
