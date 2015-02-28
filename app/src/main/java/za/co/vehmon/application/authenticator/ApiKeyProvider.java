@@ -14,6 +14,8 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
+import za.co.vehmon.application.core.Constants;
+
 import static android.accounts.AccountManager.KEY_AUTHTOKEN;
 import static za.co.vehmon.application.core.Constants.Auth.AUTHTOKEN_TYPE;
 import static za.co.vehmon.application.core.Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE;
@@ -44,22 +46,16 @@ public class ApiKeyProvider {
      * {@link za.co.vehmon.application.core.BootstrapService} instance
      * @throws AccountsException
      * @throws IOException
-     */
+
     public String getAuthKey(final Activity activity) throws AccountsException, IOException {
-        final AccountManagerFuture<Bundle> accountManagerFuture
+        AccountManagerFuture<Bundle> accountManagerFuture
                 = accountManager.getAuthTokenByFeatures(BOOTSTRAP_ACCOUNT_TYPE,
                 AUTHTOKEN_TYPE, new String[0], activity, null, null, null, null);
 
         return accountManagerFuture.getResult().getString(KEY_AUTHTOKEN);
-    }
+    }*/
 
     public String getAuthKey(final Context activity) throws AccountsException, IOException {
-
-        Account acc = new Account(BOOTSTRAP_ACCOUNT_TYPE,AUTHTOKEN_TYPE);
-
-        final AccountManagerFuture<Bundle> accountManagerFuture
-                = accountManager.getAuthToken(acc,AUTHTOKEN_TYPE,null,false,null,null);
-
-        return accountManagerFuture.getResult().getString(KEY_AUTHTOKEN);
+        return null;
     }
 }

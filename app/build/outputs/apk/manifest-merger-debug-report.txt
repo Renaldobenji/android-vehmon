@@ -152,16 +152,6 @@ ADDED from AndroidManifest.xml:76:9
 		ADDED from AndroidManifest.xml:78:13
 	android:name
 		ADDED from AndroidManifest.xml:77:13
-activity#za.co.vehmon.application.ui.NewsActivity
-ADDED from AndroidManifest.xml:86:9
-	android:name
-		ADDED from AndroidManifest.xml:86:19
-activity#za.co.vehmon.application.ui.UserActivity
-ADDED from AndroidManifest.xml:87:9
-	android:label
-		ADDED from AndroidManifest.xml:87:51
-	android:name
-		ADDED from AndroidManifest.xml:87:19
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:19.1.0:18:5

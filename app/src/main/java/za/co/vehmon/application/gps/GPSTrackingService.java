@@ -13,6 +13,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.OperationCanceledException;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -31,11 +32,13 @@ import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.authenticator.LogoutService;
+import za.co.vehmon.application.core.Constants;
+import za.co.vehmon.application.core.GPSLogWrapper;
 import za.co.vehmon.application.core.StopTimerEvent;
 import za.co.vehmon.application.ui.BootstrapTimerActivity;
+import za.co.vehmon.application.util.Ln;
+import za.co.vehmon.application.util.SafeAsyncTask;
 import za.co.vehmon.application.util.VehmonCurrentDate;
-
-import static za.co.vehmon.application.core.Constants.Notification.TIMER_NOTIFICATION_ID;
 
 /**
  * Created by Renaldo on 2/18/2015.
@@ -71,6 +74,19 @@ public class GPSTrackingService extends Service implements LocationListener {
         if (sourceGPSTimer != null)
             sourceGPSTimer.cancel();
         stopSelf();
+    }
+
+    @Override
+    public void onDestroy() {
+
+        // Unregister bus, since its not longer needed as the service is shutting down
+        eventBus.unregister(this);
+
+        notificationManager.cancel(Constants.Notification.GPS_NOTIFICATION_ID);
+
+        Ln.d("Service has been destroyed");
+
+        super.onDestroy();
     }
 
     private void setupGPSTimer()
@@ -121,16 +137,19 @@ public class GPSTrackingService extends Service implements LocationListener {
         }
         notifyTimerRunning();
 
-        startForeground(TIMER_NOTIFICATION_ID, getNotification("Vehicle Tracking"));
+        startForeground(Constants.Notification.GPS_NOTIFICATION_ID, getNotification("Vehicle Tracking"));
         setupGPSTimer();
-        return Service.START_STICKY;
+        return Service.START_NOT_STICKY;
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(final Location location) {
         // TODO Auto-generated method stub
         StringBuilder currentBestString = new StringBuilder();
         StringBuilder currentLocationString = new StringBuilder();
+
+        if (location == null)
+            return;
 
         if (isBetterLocation(location,currentBestLocation))
         {
@@ -155,13 +174,26 @@ public class GPSTrackingService extends Service implements LocationListener {
         Logger.addRecordToLog(currentLocationString.toString());
 
         //Save to DB
-        try {
-            serviceProvider.getService(this).LogGPSCoordinates(this,String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()),String.valueOf(location.getAccuracy()),"1");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (AccountsException e) {
-            e.printStackTrace();
-        }
+        new SafeAsyncTask<GPSLogWrapper.GPSLogResult>() {
+            @Override
+            public GPSLogWrapper.GPSLogResult call() throws Exception {
+                serviceProvider.getService(getApplicationContext()).LogGPSCoordinates(getApplicationContext(),String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()),String.valueOf(location.getAccuracy()),"1");
+                return null;
+            }
+
+            @Override
+            protected void onException(final Exception e) throws RuntimeException {
+                super.onException(e);
+                if (e instanceof OperationCanceledException) {
+                }
+            }
+
+            @Override
+            protected void onSuccess(final GPSLogWrapper.GPSLogResult isSuccessful) throws Exception {
+                super.onSuccess(isSuccessful);
+            }
+        }.execute();
+
     }
 
     @Override
@@ -270,9 +302,8 @@ public class GPSTrackingService extends Service implements LocationListener {
      * @return a new {@link android.app.Notification}
      */
     private Notification getNotification(String message) {
-        final Intent i = new Intent(this, BootstrapTimerActivity.class);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
+        //final Intent i = new Intent(this, BootstrapTimerActivity.class);
+        //PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
 
         return new NotificationCompat.Builder(this)
                 .setContentTitle(getString(R.string.app_name))
@@ -282,7 +313,7 @@ public class GPSTrackingService extends Service implements LocationListener {
                 .setOnlyAlertOnce(true)
                 .setOngoing(true)
                 .setWhen(System.currentTimeMillis())
-                .setContentIntent(pendingIntent)
+                //.setContentIntent(pendingIntent)
                 .getNotification();
     }
 
@@ -292,7 +323,7 @@ public class GPSTrackingService extends Service implements LocationListener {
 
 
     private void updateNotification(String message) {
-        notificationManager.notify(TIMER_NOTIFICATION_ID, getNotification(message));
+        notificationManager.notify(Constants.Notification.GPS_NOTIFICATION_ID, getNotification(message));
 
     }
 }

@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import retrofit.RestAdapter;
+import za.co.vehmon.application.services.TokenGenerationResult;
+import za.co.vehmon.application.services.UserTokenValidationResponse;
 
 /**
  * Bootstrap API service
@@ -16,6 +18,16 @@ import retrofit.RestAdapter;
 public class VehmonService {
 
     private RestAdapter restAdapter;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token;
 
     /**
      * Create bootstrap service
@@ -31,11 +43,10 @@ public class VehmonService {
      */
     public VehmonService(RestAdapter restAdapter) {
         this.restAdapter = restAdapter;
+        this.token = token;
     }
 
-    private UserService getUserService() {
-        return getRestAdapter().create(UserService.class);
-    }
+    private AuthService getAuthService() {return getRestAdapter().create(AuthService.class);}
 
     private RestAdapter getRestAdapter() {
         return restAdapter;
@@ -48,14 +59,46 @@ public class VehmonService {
      * @return
      */
     public User Authenticate(String email, String password) {
+
+        email = "Renaldob";
+        password = "Password";
         User user = new User();
-        user.setFirstName("Renaldo");
-        user.setLastName("Benjamin");
-        user.setObjectId("#12345");
-        user.setPhone("0722771137");
-        user.setUsername("Renaldob");
-        user.setSessionToken("#SessionToken");
+
+        TokenGenerationResult result = getAuthService().GetTokenForUser(email,password);
+
+        if (result.TokenGenerationState.equals("0")) {
+            user.setSuccessful(false);
+            user.setErrorMessage("User not found");
+            return user;
+        }
+        else if (result.TokenGenerationState.equals("1"))
+        {
+            user.setSuccessful(false);
+            user.setErrorMessage("invalid password");
+            return user;
+        }
+
+        user.setSuccessful(true);
+        user.setFirstName(email);
+        user.setLastName("email");
+        user.setUsername(email);
+        user.setSessionToken(result.GeneratedToken);
+
         return user;
+    }
+
+    public UserTokenValidationResponse RenewUserToken()
+    {
+        UserTokenValidationResponse response = new UserTokenValidationResponse();
+        try {
+            response = getAuthService().RenewToken(token);
+        }
+        catch (Exception ex)
+        {
+            response.UserTokenState = "1";
+        }
+        //Fetch token from shared preferences
+        return response;
     }
 
     public TimeManagementWrapper.TimeManagementResult ClockIn(Context context, Date date)

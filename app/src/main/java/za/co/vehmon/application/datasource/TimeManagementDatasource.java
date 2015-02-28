@@ -74,13 +74,18 @@ public class TimeManagementDatasource {
             e.printStackTrace();
         }
 
-        ContentValues values = new ContentValues();
+        String query = "SELECT " + MySQLiteHelper.TABLE_TIMEMNG_ID + " FROM " + MySQLiteHelper.TABLE_TIMEMNG + " ORDER BY " + MySQLiteHelper.TABLE_TIMEMNG_ID + " DESC LIMIT 1;";
 
-        values.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKOUTTIME, clockoutTime);
-        values.put(MySQLiteHelper.TABLE_TIMEMNG_USERID, userID);
-        values.put(MySQLiteHelper.TABLE_TIMEMNG_OUTSYNCED, 0);
-        //Insert into database
-        long id = database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
+        Cursor cursor = database.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        TimeManagement record = cursorToTimeManagement(cursor);
+
+        ContentValues args = new ContentValues();
+        args.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKOUTTIME, clockoutTime);
+
+        long id = database.update(MySQLiteHelper.TABLE_TIMEMNG, args, MySQLiteHelper.TABLE_TIMEMNG_ID + "=" + record.getId(), null);
+
         close();
 
         return id;

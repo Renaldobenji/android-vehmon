@@ -194,9 +194,9 @@ public class TimerService extends Service {
      * @return a new {@link Notification}
      */
     private Notification getNotification(String message) {
-        final Intent i = new Intent(this, BootstrapTimerActivity.class);
+        //final Intent i = new Intent(this, BootstrapTimerActivity.class);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
+        //PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, 0);
 
         return new NotificationCompat.Builder(this)
                 .setContentTitle(getString(R.string.app_name))
@@ -206,7 +206,7 @@ public class TimerService extends Service {
                 .setOnlyAlertOnce(true)
                 .setOngoing(true)
                 .setWhen(System.currentTimeMillis())
-                .setContentIntent(pendingIntent)
+                //.setContentIntent(pendingIntent)
                 .getNotification();
     }
 }

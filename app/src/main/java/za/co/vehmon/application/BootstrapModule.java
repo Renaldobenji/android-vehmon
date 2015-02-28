@@ -6,7 +6,6 @@ import android.content.Context;
 import za.co.vehmon.application.authenticator.ApiKeyProvider;
 import za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity;
 import za.co.vehmon.application.authenticator.LogoutService;
-import za.co.vehmon.application.core.BootstrapService;
 import za.co.vehmon.application.core.Constants;
 import za.co.vehmon.application.core.PostFromAnyThreadBus;
 import za.co.vehmon.application.core.RestAdapterRequestInterceptor;
@@ -17,17 +16,12 @@ import za.co.vehmon.application.core.VehmonService;
 import za.co.vehmon.application.gps.GPSTrackingService;
 import za.co.vehmon.application.ui.AbsenceRequestActivity;
 import za.co.vehmon.application.ui.BootstrapTimerActivity;
-import za.co.vehmon.application.ui.CheckInsListFragment;
 import za.co.vehmon.application.ui.Dialogs.NewMessageDialog;
 import za.co.vehmon.application.ui.MainActivity;
 import za.co.vehmon.application.ui.MessageListFragment;
 import za.co.vehmon.application.ui.MessageViewActivity;
 import za.co.vehmon.application.ui.NavigationDrawerFragment;
-import za.co.vehmon.application.ui.NewsActivity;
-import za.co.vehmon.application.ui.NewsListFragment;
 import za.co.vehmon.application.ui.TimeManagementFragment;
-import za.co.vehmon.application.ui.UserActivity;
-import za.co.vehmon.application.ui.UserListFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.otto.Bus;
@@ -51,12 +45,7 @@ import retrofit.converter.GsonConverter;
                 BootstrapAuthenticatorActivity.class,
                 MainActivity.class,
                 BootstrapTimerActivity.class,
-                CheckInsListFragment.class,
                 NavigationDrawerFragment.class,
-                NewsActivity.class,
-                NewsListFragment.class,
-                UserActivity.class,
-                UserListFragment.class,
                 TimerService.class,
                 VehmonService.class,
                 TimeManagementFragment.class,
@@ -82,18 +71,8 @@ public class BootstrapModule {
     }
 
     @Provides
-    BootstrapService provideBootstrapService(RestAdapter restAdapter) {
-        return new BootstrapService(restAdapter);
-    }
-
-    @Provides
     VehmonService provideVehmonService(RestAdapter restAdapter) {
         return new VehmonService(restAdapter);
-    }
-
-    @Provides
-    BootstrapServiceProvider provideBootstrapServiceProvider(RestAdapter restAdapter, ApiKeyProvider apiKeyProvider) {
-        return new BootstrapServiceProvider(restAdapter, apiKeyProvider);
     }
 
     @Provides
@@ -136,7 +115,7 @@ public class BootstrapModule {
     @Provides
     RestAdapter provideRestAdapter(RestErrorHandler restErrorHandler, RestAdapterRequestInterceptor restRequestInterceptor, Gson gson) {
         return new RestAdapter.Builder()
-                .setEndpoint(Constants.Http.URL_BASE)
+                .setEndpoint(Constants.Http.VEHMON_URL_BASE)
                 .setErrorHandler(restErrorHandler)
                 .setRequestInterceptor(restRequestInterceptor)
                 .setLogLevel(RestAdapter.LogLevel.FULL)

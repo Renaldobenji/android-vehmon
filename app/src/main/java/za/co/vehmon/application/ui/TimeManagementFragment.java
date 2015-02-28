@@ -29,12 +29,10 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import za.co.vehmon.application.BootstrapServiceProvider;
 import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.authenticator.LogoutService;
-import za.co.vehmon.application.core.BootstrapService;
 import za.co.vehmon.application.core.StopTimerEvent;
 import za.co.vehmon.application.core.TimeManagementWrapper;
 import za.co.vehmon.application.core.TimerService;
@@ -173,8 +171,8 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
             new SafeAsyncTask<TimeManagementWrapper.TimeManagementResult>() {
                 @Override
                 public TimeManagementWrapper.TimeManagementResult call() throws Exception {
-                    //final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockIn(getActivity(), new Date());
-                    return null;
+                    final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockIn(getActivity(), new Date());
+                    return svc;
                 }
 
                 @Override
@@ -192,7 +190,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
                     buttonClockOut.setVisibility(View.VISIBLE);
                     //timetrackingchronometer.setTag(TIMETRACKINGID,isSuccessful.getTimeTrackingID());
                     startTracking();
-                    //startTimer();
+                    startTimer();
                 }
             }.execute();
 
@@ -296,7 +294,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
             new SafeAsyncTask<TimeManagementWrapper.TimeManagementResult>() {
                 @Override
                 public TimeManagementWrapper.TimeManagementResult call() throws Exception {
-                    //final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockOut(getActivity(),new Date());
+                    final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockOut(getActivity(),new Date());
                     return null;
                 }
 

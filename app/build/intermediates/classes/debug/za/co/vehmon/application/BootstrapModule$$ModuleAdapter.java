@@ -14,7 +14,7 @@ import javax.inject.Provider;
  * instance provision of types served by {@code @Provides} methods.
  */
 public final class BootstrapModule$$ModuleAdapter extends ModuleAdapter<BootstrapModule> {
-  private static final String[] INJECTS = { "members/za.co.vehmon.application.BootstrapApplication", "members/za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity", "members/za.co.vehmon.application.ui.MainActivity", "members/za.co.vehmon.application.ui.BootstrapTimerActivity", "members/za.co.vehmon.application.ui.CheckInsListFragment", "members/za.co.vehmon.application.ui.NavigationDrawerFragment", "members/za.co.vehmon.application.ui.NewsActivity", "members/za.co.vehmon.application.ui.NewsListFragment", "members/za.co.vehmon.application.ui.UserActivity", "members/za.co.vehmon.application.ui.UserListFragment", "members/za.co.vehmon.application.core.TimerService", "members/za.co.vehmon.application.core.VehmonService", "members/za.co.vehmon.application.ui.TimeManagementFragment", "members/za.co.vehmon.application.ui.AbsenceRequestActivity", "members/za.co.vehmon.application.ui.MessageListFragment", "members/za.co.vehmon.application.ui.MessageViewActivity", "members/za.co.vehmon.application.ui.Dialogs.NewMessageDialog", "members/za.co.vehmon.application.gps.GPSTrackingService", };
+  private static final String[] INJECTS = { "members/za.co.vehmon.application.BootstrapApplication", "members/za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity", "members/za.co.vehmon.application.ui.MainActivity", "members/za.co.vehmon.application.ui.BootstrapTimerActivity", "members/za.co.vehmon.application.ui.NavigationDrawerFragment", "members/za.co.vehmon.application.core.TimerService", "members/za.co.vehmon.application.core.VehmonService", "members/za.co.vehmon.application.ui.TimeManagementFragment", "members/za.co.vehmon.application.ui.AbsenceRequestActivity", "members/za.co.vehmon.application.ui.MessageListFragment", "members/za.co.vehmon.application.ui.MessageViewActivity", "members/za.co.vehmon.application.ui.Dialogs.NewMessageDialog", "members/za.co.vehmon.application.gps.GPSTrackingService", };
   private static final Class<?>[] STATIC_INJECTIONS = { };
   private static final Class<?>[] INCLUDES = { };
 
@@ -35,9 +35,7 @@ public final class BootstrapModule$$ModuleAdapter extends ModuleAdapter<Bootstra
   public void getBindings(Map<String, Binding<?>> map) {
     map.put("com.squareup.otto.Bus", new ProvideOttoBusProvidesAdapter(module));
     map.put("za.co.vehmon.application.authenticator.LogoutService", new ProvideLogoutServiceProvidesAdapter(module));
-    map.put("za.co.vehmon.application.core.BootstrapService", new ProvideBootstrapServiceProvidesAdapter(module));
     map.put("za.co.vehmon.application.core.VehmonService", new ProvideVehmonServiceProvidesAdapter(module));
-    map.put("za.co.vehmon.application.BootstrapServiceProvider", new ProvideBootstrapServiceProviderProvidesAdapter(module));
     map.put("za.co.vehmon.application.VehmonServiceProvider", new ProvideVehmonServiceProviderProvidesAdapter(module));
     map.put("za.co.vehmon.application.authenticator.ApiKeyProvider", new ProvideApiKeyProviderProvidesAdapter(module));
     map.put("com.google.gson.Gson", new ProvideGsonProvidesAdapter(module));
@@ -127,56 +125,6 @@ public final class BootstrapModule$$ModuleAdapter extends ModuleAdapter<Bootstra
   }
 
   /**
-   * A {@code Binder<za.co.vehmon.application.core.BootstrapService>} implementation which satisfies
-   * Dagger's infrastructure requirements including:
-   * 
-   * Owning the dependency links between {@code za.co.vehmon.application.core.BootstrapService} and its
-   * dependencies.
-   * 
-   * Being a {@code Provider<za.co.vehmon.application.core.BootstrapService>} and handling creation and
-   * preparation of object instances.
-   */
-  public static final class ProvideBootstrapServiceProvidesAdapter extends Binding<za.co.vehmon.application.core.BootstrapService>
-      implements Provider<za.co.vehmon.application.core.BootstrapService> {
-    private final BootstrapModule module;
-    private Binding<retrofit.RestAdapter> restAdapter;
-
-    public ProvideBootstrapServiceProvidesAdapter(BootstrapModule module) {
-      super("za.co.vehmon.application.core.BootstrapService", null, NOT_SINGLETON, "za.co.vehmon.application.BootstrapModule.provideBootstrapService()");
-      this.module = module;
-      setLibrary(false);
-    }
-
-    /**
-     * Used internally to link bindings/providers together at run time
-     * according to their dependency graph.
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void attach(Linker linker) {
-      restAdapter = (Binding<retrofit.RestAdapter>) linker.requestBinding("retrofit.RestAdapter", BootstrapModule.class);
-    }
-
-    /**
-     * Used internally obtain dependency information, such as for cyclical
-     * graph detection.
-     */
-    @Override
-    public void getDependencies(Set<Binding<?>> getBindings, Set<Binding<?>> injectMembersBindings) {
-      getBindings.add(restAdapter);
-    }
-
-    /**
-     * Returns the fully provisioned instance satisfying the contract for
-     * {@code Provider<za.co.vehmon.application.core.BootstrapService>}.
-     */
-    @Override
-    public za.co.vehmon.application.core.BootstrapService get() {
-      return module.provideBootstrapService(restAdapter.get());
-    }
-  }
-
-  /**
    * A {@code Binder<za.co.vehmon.application.core.VehmonService>} implementation which satisfies
    * Dagger's infrastructure requirements including:
    * 
@@ -223,59 +171,6 @@ public final class BootstrapModule$$ModuleAdapter extends ModuleAdapter<Bootstra
     @Override
     public za.co.vehmon.application.core.VehmonService get() {
       return module.provideVehmonService(restAdapter.get());
-    }
-  }
-
-  /**
-   * A {@code Binder<za.co.vehmon.application.BootstrapServiceProvider>} implementation which satisfies
-   * Dagger's infrastructure requirements including:
-   * 
-   * Owning the dependency links between {@code za.co.vehmon.application.BootstrapServiceProvider} and its
-   * dependencies.
-   * 
-   * Being a {@code Provider<za.co.vehmon.application.BootstrapServiceProvider>} and handling creation and
-   * preparation of object instances.
-   */
-  public static final class ProvideBootstrapServiceProviderProvidesAdapter extends Binding<BootstrapServiceProvider>
-      implements Provider<BootstrapServiceProvider> {
-    private final BootstrapModule module;
-    private Binding<retrofit.RestAdapter> restAdapter;
-    private Binding<za.co.vehmon.application.authenticator.ApiKeyProvider> apiKeyProvider;
-
-    public ProvideBootstrapServiceProviderProvidesAdapter(BootstrapModule module) {
-      super("za.co.vehmon.application.BootstrapServiceProvider", null, NOT_SINGLETON, "za.co.vehmon.application.BootstrapModule.provideBootstrapServiceProvider()");
-      this.module = module;
-      setLibrary(false);
-    }
-
-    /**
-     * Used internally to link bindings/providers together at run time
-     * according to their dependency graph.
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void attach(Linker linker) {
-      restAdapter = (Binding<retrofit.RestAdapter>) linker.requestBinding("retrofit.RestAdapter", BootstrapModule.class);
-      apiKeyProvider = (Binding<za.co.vehmon.application.authenticator.ApiKeyProvider>) linker.requestBinding("za.co.vehmon.application.authenticator.ApiKeyProvider", BootstrapModule.class);
-    }
-
-    /**
-     * Used internally obtain dependency information, such as for cyclical
-     * graph detection.
-     */
-    @Override
-    public void getDependencies(Set<Binding<?>> getBindings, Set<Binding<?>> injectMembersBindings) {
-      getBindings.add(restAdapter);
-      getBindings.add(apiKeyProvider);
-    }
-
-    /**
-     * Returns the fully provisioned instance satisfying the contract for
-     * {@code Provider<za.co.vehmon.application.BootstrapServiceProvider>}.
-     */
-    @Override
-    public BootstrapServiceProvider get() {
-      return module.provideBootstrapServiceProvider(restAdapter.get(), apiKeyProvider.get());
     }
   }
 

@@ -8,13 +8,21 @@ import static android.accounts.AccountManager.KEY_BOOLEAN_RESULT;
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static za.co.vehmon.application.core.Constants.Auth.AUTHTOKEN_TYPE;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -30,12 +38,12 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import butterknife.ButterKnife;
+import za.co.vehmon.application.BootstrapApplication;
 import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.R.id;
 import za.co.vehmon.application.R.layout;
 import za.co.vehmon.application.R.string;
-import za.co.vehmon.application.core.BootstrapService;
 import za.co.vehmon.application.core.Constants;
 import za.co.vehmon.application.core.User;
 import za.co.vehmon.application.core.VehmonService;
@@ -48,6 +56,8 @@ import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +68,7 @@ import retrofit.RetrofitError;
 /**
  * Activity to authenticate the user against an API (example API on Parse.com)
  */
-public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticatorActivity {
+public class BootstrapAuthenticatorActivity extends ActionBarActivity {
 
     /**
      * PARAM_CONFIRM_CREDENTIALS
@@ -83,7 +93,6 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
 
     private AccountManager accountManager;
 
-    @Inject BootstrapService bootstrapService;
     @Inject VehmonService vehmonService;
     @Inject Bus bus;
 
@@ -122,25 +131,13 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
 
     @Override
     public void onCreate(Bundle bundle) {
+
         super.onCreate(bundle);
-
-        Injector.inject(this);
-
-        accountManager = AccountManager.get(this);
-
-        final Intent intent = getIntent();
-        email = intent.getStringExtra(PARAM_USERNAME);
-        authTokenType = intent.getStringExtra(PARAM_AUTHTOKEN_TYPE);
-        confirmCredentials = intent.getBooleanExtra(PARAM_CONFIRM_CREDENTIALS, false);
-
-        requestNewAccount = email == null;
 
         setContentView(layout.login_activity);
 
+        Injector.inject(this);
         ButterKnife.inject(this);
-
-        emailText.setAdapter(new ArrayAdapter<String>(this,
-                simple_dropdown_item_1line, userEmailAccounts()));
 
         passwordText.setOnKeyListener(new OnKeyListener() {
 
@@ -168,20 +165,6 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
 
         emailText.addTextChangedListener(watcher);
         passwordText.addTextChangedListener(watcher);
-
-        /* TODO: DELETE
-        final TextView signUpText = (TextView) findViewById(id.tv_signup);
-        signUpText.setMovementMethod(LinkMovementMethod.getInstance());
-        signUpText.setText(Html.fromHtml(getString(string.signup_link)));*/
-    }
-
-    private List<String> userEmailAccounts() {
-        final Account[] accounts = accountManager.getAccountsByType("com.google");
-        final List<String> emailAddresses = new ArrayList<String>(accounts.length);
-        for (final Account account : accounts) {
-            emailAddresses.add(account.name);
-        }
-        return emailAddresses;
     }
 
     private TextWatcher validationTextWatcher() {
@@ -264,6 +247,13 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
                         PARAM_USERNAME, email, PARAM_PASSWORD, password);
 
                 User loginResponse = vehmonService.Authenticate(email, password);
+
+                if (!loginResponse.isSuccessful())
+                    throw new Exception(loginResponse.errorMessage);
+
+                final BootstrapApplication globalApplication = (BootstrapApplication)getApplicationContext();
+                globalApplication.setUser(loginResponse);
+
                 token = loginResponse.getSessionToken();
 
                 return true;
@@ -278,6 +268,8 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
                         Toaster.showLong(BootstrapAuthenticatorActivity.this, cause.getMessage());
                     }
                 }
+                else
+                    Toaster.showLong(BootstrapAuthenticatorActivity.this, e.getMessage());
             }
 
             @Override
@@ -293,25 +285,6 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
         };
         authenticationTask.execute();
     }
-
-    /**
-     * Called when response is received from the server for confirm credentials
-     * request. See onAuthenticationResult(). Sets the
-     * AccountAuthenticatorResult which is sent back to the caller.
-     *
-     * @param result
-     */
-    protected void finishConfirmCredentials(final boolean result) {
-        final Account account = new Account(email, Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE);
-        accountManager.setPassword(account, password);
-
-        final Intent intent = new Intent();
-        intent.putExtra(KEY_BOOLEAN_RESULT, result);
-        setAccountAuthenticatorResult(intent.getExtras());
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
     /**
      * Called when response is received from the server for authentication
      * request. See onAuthenticationResult(). Sets the
@@ -320,27 +293,13 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
      */
 
     protected void finishLogin() {
-        final Account account = new Account(email, Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE);
-
-        if (requestNewAccount) {
-            accountManager.addAccountExplicitly(account, password, null);
-        } else {
-            accountManager.setPassword(account, password);
-        }
-
         authToken = token;
 
-        final Intent intent = new Intent();
-        intent.putExtra(KEY_ACCOUNT_NAME, email);
-        intent.putExtra(KEY_ACCOUNT_TYPE, Constants.Auth.BOOTSTRAP_ACCOUNT_TYPE);
+        SharedPreferences sharedPref = getSharedPreferences(Constants.VehmonSharedPrefs.name,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("AuthToken",token);
+        editor.commit();
 
-        if (authTokenType != null
-                && authTokenType.equals(Constants.Auth.AUTHTOKEN_TYPE)) {
-            intent.putExtra(KEY_AUTHTOKEN, authToken);
-        }
-
-        setAccountAuthenticatorResult(intent.getExtras());
-        setResult(RESULT_OK, intent);
         finish();
     }
 
@@ -367,11 +326,7 @@ public class BootstrapAuthenticatorActivity extends ActionBarAccountAuthenticato
      */
     public void onAuthenticationResult(final boolean result) {
         if (result) {
-            if (!confirmCredentials) {
-                finishLogin();
-            } else {
-                finishConfirmCredentials(true);
-            }
+            finishLogin();
         } else {
             Ln.d("onAuthenticationResult: failed to authenticate");
             if (requestNewAccount) {

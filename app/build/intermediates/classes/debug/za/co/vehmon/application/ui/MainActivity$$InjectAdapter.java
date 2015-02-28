@@ -23,7 +23,7 @@ import javax.inject.Provider;
  */
 public final class MainActivity$$InjectAdapter extends Binding<MainActivity>
     implements Provider<MainActivity>, MembersInjector<MainActivity> {
-  private Binding<za.co.vehmon.application.BootstrapServiceProvider> serviceProvider;
+  private Binding<za.co.vehmon.application.VehmonServiceProvider> serviceProvider;
   private Binding<BootstrapFragmentActivity> supertype;
 
   public MainActivity$$InjectAdapter() {
@@ -37,7 +37,7 @@ public final class MainActivity$$InjectAdapter extends Binding<MainActivity>
   @Override
   @SuppressWarnings("unchecked")
   public void attach(Linker linker) {
-    serviceProvider = (Binding<za.co.vehmon.application.BootstrapServiceProvider>) linker.requestBinding("za.co.vehmon.application.BootstrapServiceProvider", MainActivity.class);
+    serviceProvider = (Binding<za.co.vehmon.application.VehmonServiceProvider>) linker.requestBinding("za.co.vehmon.application.VehmonServiceProvider", MainActivity.class);
     supertype = (Binding<BootstrapFragmentActivity>) linker.requestBinding("members/za.co.vehmon.application.ui.BootstrapFragmentActivity", MainActivity.class, false, true);
   }
 

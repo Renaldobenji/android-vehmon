@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "vehmon.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     //Absence Request
     public static final String TABLE_ABSENCEREQUEST = "ABSENCEREQUEST";
@@ -131,7 +131,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MSG);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_MSGCONVO);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_TIMEMNG);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_CREATE_GPSLOG);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_GPSLOG);
         onCreate(sqLiteDatabase);
 
     }

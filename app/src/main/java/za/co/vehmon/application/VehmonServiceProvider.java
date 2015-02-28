@@ -4,17 +4,15 @@ package za.co.vehmon.application;
 import android.accounts.AccountsException;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import java.io.IOException;
 
 import retrofit.RestAdapter;
 import za.co.vehmon.application.authenticator.ApiKeyProvider;
-import za.co.vehmon.application.core.BootstrapService;
+import za.co.vehmon.application.core.Constants;
 import za.co.vehmon.application.core.VehmonService;
 
-/**
- * Provider for a {@link za.co.vehmon.application.core.BootstrapService} instance
- */
 public class VehmonServiceProvider {
 
     private RestAdapter restAdapter;
@@ -34,21 +32,15 @@ public class VehmonServiceProvider {
      * @throws java.io.IOException
      * @throws android.accounts.AccountsException
      */
-    public VehmonService getService(final Activity activity)
-            throws IOException, AccountsException {
-        // The call to keyProvider.getAuthKey(...) is what initiates the login screen. Call that now.
-        String AuthKey = keyProvider.getAuthKey(activity);
-
-        // TODO: See how that affects the bootstrap service.
-        return new VehmonService(restAdapter);
-    }
 
     public VehmonService getService(final Context context)
             throws IOException, AccountsException {
-        // The call to keyProvider.getAuthKey(...) is what initiates the login screen. Call that now.
-        String AuthKey = keyProvider.getAuthKey(context);
 
+        SharedPreferences sharedPref = context.getSharedPreferences(Constants.VehmonSharedPrefs.name, Context.MODE_PRIVATE);
+        String token = sharedPref.getString("AuthToken","");
+        VehmonService service = new VehmonService(restAdapter);
+        service.setToken(token);
         // TODO: See how that affects the bootstrap service.
-        return new VehmonService(restAdapter);
+        return service;
     }
 }

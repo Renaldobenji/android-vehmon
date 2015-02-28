@@ -23,10 +23,8 @@ import javax.inject.Provider;
  */
 public final class BootstrapAuthenticatorActivity$$InjectAdapter extends Binding<BootstrapAuthenticatorActivity>
     implements Provider<BootstrapAuthenticatorActivity>, MembersInjector<BootstrapAuthenticatorActivity> {
-  private Binding<za.co.vehmon.application.core.BootstrapService> bootstrapService;
   private Binding<za.co.vehmon.application.core.VehmonService> vehmonService;
   private Binding<com.squareup.otto.Bus> bus;
-  private Binding<ActionBarAccountAuthenticatorActivity> supertype;
 
   public BootstrapAuthenticatorActivity$$InjectAdapter() {
     super("za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity", "members/za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity", NOT_SINGLETON, BootstrapAuthenticatorActivity.class);
@@ -39,10 +37,8 @@ public final class BootstrapAuthenticatorActivity$$InjectAdapter extends Binding
   @Override
   @SuppressWarnings("unchecked")
   public void attach(Linker linker) {
-    bootstrapService = (Binding<za.co.vehmon.application.core.BootstrapService>) linker.requestBinding("za.co.vehmon.application.core.BootstrapService", BootstrapAuthenticatorActivity.class);
     vehmonService = (Binding<za.co.vehmon.application.core.VehmonService>) linker.requestBinding("za.co.vehmon.application.core.VehmonService", BootstrapAuthenticatorActivity.class);
     bus = (Binding<com.squareup.otto.Bus>) linker.requestBinding("com.squareup.otto.Bus", BootstrapAuthenticatorActivity.class);
-    supertype = (Binding<ActionBarAccountAuthenticatorActivity>) linker.requestBinding("members/za.co.vehmon.application.authenticator.ActionBarAccountAuthenticatorActivity", BootstrapAuthenticatorActivity.class, false, true);
   }
 
   /**
@@ -51,10 +47,8 @@ public final class BootstrapAuthenticatorActivity$$InjectAdapter extends Binding
    */
   @Override
   public void getDependencies(Set<Binding<?>> getBindings, Set<Binding<?>> injectMembersBindings) {
-    injectMembersBindings.add(bootstrapService);
     injectMembersBindings.add(vehmonService);
     injectMembersBindings.add(bus);
-    injectMembersBindings.add(supertype);
   }
 
   /**
@@ -74,9 +68,7 @@ public final class BootstrapAuthenticatorActivity$$InjectAdapter extends Binding
    */
   @Override
   public void injectMembers(BootstrapAuthenticatorActivity object) {
-    object.bootstrapService = bootstrapService.get();
     object.vehmonService = vehmonService.get();
     object.bus = bus.get();
-    supertype.injectMembers(object);
   }
 }

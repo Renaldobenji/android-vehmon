@@ -14,10 +14,12 @@ import android.view.View;
 import android.view.Window;
 
 import butterknife.ButterKnife;
-import za.co.vehmon.application.BootstrapServiceProvider;
 import za.co.vehmon.application.R;
-import za.co.vehmon.application.core.BootstrapService;
+import za.co.vehmon.application.VehmonServiceProvider;
+import za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity;
+import za.co.vehmon.application.core.VehmonService;
 import za.co.vehmon.application.events.NavItemSelectedEvent;
+import za.co.vehmon.application.services.UserTokenValidationResponse;
 import za.co.vehmon.application.util.Ln;
 import za.co.vehmon.application.util.SafeAsyncTask;
 import za.co.vehmon.application.util.UIUtils;
@@ -36,7 +38,7 @@ import javax.inject.Inject;
  */
 public class MainActivity extends BootstrapFragmentActivity {
 
-    @Inject protected BootstrapServiceProvider serviceProvider;
+    @Inject protected VehmonServiceProvider serviceProvider;
 
     private boolean userHasAuthenticated = false;
 
@@ -133,15 +135,15 @@ public class MainActivity extends BootstrapFragmentActivity {
 
 
     private void initScreen() {
-        if (userHasAuthenticated) {
+        Ln.d("Foo");
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, new CarouselFragment())
+                .commit();
 
-            Ln.d("Foo");
-            final FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, new CarouselFragment())
-                    .commit();
+        if (!userHasAuthenticated) {
+            navigateToLogin();
         }
-
     }
 
     private void checkAuth() {
@@ -149,8 +151,9 @@ public class MainActivity extends BootstrapFragmentActivity {
 
             @Override
             public Boolean call() throws Exception {
-                final BootstrapService svc = serviceProvider.getService(MainActivity.this);
-                return svc != null;
+                UserTokenValidationResponse response = serviceProvider.getService(MainActivity.this).RenewUserToken();
+                String status = UserTokenValidationResponse.getStatus(response.UserTokenState);
+                return (status.equals("Valid"));
             }
 
             @Override
@@ -166,7 +169,7 @@ public class MainActivity extends BootstrapFragmentActivity {
             @Override
             protected void onSuccess(final Boolean hasAuthenticated) throws Exception {
                 super.onSuccess(hasAuthenticated);
-                userHasAuthenticated = true;
+                userHasAuthenticated = hasAuthenticated;
                 initScreen();
             }
         }.execute();
@@ -193,6 +196,11 @@ public class MainActivity extends BootstrapFragmentActivity {
 
     private void navigateToTimer() {
         final Intent i = new Intent(this, BootstrapTimerActivity.class);
+        startActivity(i);
+    }
+
+    private void navigateToLogin() {
+        final Intent i = new Intent(this, BootstrapAuthenticatorActivity.class);
         startActivity(i);
     }
 

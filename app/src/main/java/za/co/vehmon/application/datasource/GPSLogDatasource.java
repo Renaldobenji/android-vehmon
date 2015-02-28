@@ -48,13 +48,14 @@ public class GPSLogDatasource {
 
         ContentValues values = new ContentValues();
 
+        values.put(MySQLiteHelper.TABLE_GPSLOG_TIMEMNG_ID, timeManagementID);
         values.put(MySQLiteHelper.TABLE_GPSLOG_LAT, lat);
         values.put(MySQLiteHelper.TABLE_GPSLOG_LNG, lng);
         values.put(MySQLiteHelper.TABLE_GPSLOG_ACCURACY, accuracy);
         values.put(MySQLiteHelper.TABLE_GPSLOG_DATE, date);
-        values.put(MySQLiteHelper.TABLE_GPSLOG_TIMEMNG_ID, timeManagementID);
 
-        long id = database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
+
+        long id = database.insert(MySQLiteHelper.TABLE_GPSLOG, null,values);
 
         close();
         return id;

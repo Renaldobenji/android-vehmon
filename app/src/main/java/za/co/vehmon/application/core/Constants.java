@@ -44,6 +44,7 @@ public final class Constants {
          * Base URL for all requests
          */
         public static final String URL_BASE = "https://api.parse.com";
+        public static final String VEHMON_URL_BASE = "http://vehmonmachine.cloudapp.net";
 
 
         /**
@@ -51,6 +52,9 @@ public final class Constants {
          */
         public static final String URL_AUTH_FRAG = "/1/login";
         public static final String URL_AUTH = URL_BASE + URL_AUTH_FRAG;
+
+        public static final String VEHMON_URL_AUTH_FRAG = "/services/Authentication.svc/GetTokenForUser/{userName}/{password}";
+        public static final String VEHMON_URL_AUTH_RENEW_FRAG = "/services/Authentication.svc/RenewToken/{token}";
 
         /**
          * List Users URL
@@ -101,6 +105,11 @@ public final class Constants {
 
     }
 
+    public static final class VehmonSharedPrefs
+    {
+        public static final String name = "VehmonSharedPrefs";
+    }
+
     public static final class Intent {
         private Intent() {}
 
@@ -116,6 +125,7 @@ public final class Constants {
         }
 
         public static final int TIMER_NOTIFICATION_ID = 1000; // Why 1000? Why not? :)
+        public static final int GPS_NOTIFICATION_ID = 1001; // Why 1000? Why not? :)
     }
 
 }

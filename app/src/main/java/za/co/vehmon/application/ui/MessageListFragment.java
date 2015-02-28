@@ -23,7 +23,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import za.co.vehmon.application.BootstrapServiceProvider;
 import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;

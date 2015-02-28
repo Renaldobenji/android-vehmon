@@ -6,6 +6,8 @@ import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
 
+import za.co.vehmon.application.core.User;
+
 /**
  * vehmon application
  */
@@ -58,4 +60,14 @@ public class BootstrapApplication extends Application {
     public static BootstrapApplication getInstance() {
         return instance;
     }
+
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        BootstrapApplication.user = user;
+    }
+
+    private static User user;
 }

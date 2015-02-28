@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="686344a780033e4ba22b926cd225f8d4941247e6">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-f43f0c03ef33febfb70d50a051dec749d125be34.jar" />
+    </item>
+    <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
@@ -28,6 +35,13 @@
         revision="19.1.0"
         sha1="a60a5e993c98c864010053cb901b7eab25306568">
         <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\gson-2.2.4-780e722dbf198bbd1932b8f7df61872202accb9a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Renaldo\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.0\support-annotations-21.0.0.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1a578b9607b36266c63d43a4fa0ab5664dbe911e">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.0-b3e79005d73dbf1c85ecbff992d55f26f81fdae4.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup.dagger\dagger\1.0.1\ec469f2b494fed2aec5af606b61e66ab5ac451cd\dagger-1.0.1.jar"
@@ -72,6 +86,13 @@
         <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\retrofit-1.5.1-12cf41737df1aae142c99237994fc8160d561f42.jar" />
     </item>
     <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-9b08de7b8bbff184425b12d02205bce06d95040e.jar" />
+    </item>
+    <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.github.kevinsawicki\wishlist\0.9\classes.jar"
         jumboMode="false"
         revision="19.1.0"
@@ -86,11 +107,11 @@
         <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\picasso-1.1.1-d1d64b6b4dd0cbe79ba2793565d3f8a594e42092.jar" />
     </item>
     <item
-        jar="C:\Users\Renaldo\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"
         jumboMode="false"
         revision="19.1.0"
-        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
-        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0-317cdc76cda9b9134320d4a54e393d312bce3e0e.jar" />
+        sha1="1609e6d42d0480b0f4188e2c29f75388fa12a8f0">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.0-797a7c8427f5599869efbc65f52a1ff918cb210e.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"

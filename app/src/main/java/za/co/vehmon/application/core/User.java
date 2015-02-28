@@ -6,6 +6,24 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
+    public boolean isSuccessful;
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;    }
+
+    public boolean isSuccessful() {
+        return isSuccessful;
+    }
+
+    public void setSuccessful(boolean isSuccessful) {
+        this.isSuccessful = isSuccessful;
+    }
+
+    public String errorMessage;
+
     private static final long serialVersionUID = -7495897652017488896L;
 
     protected String firstName;
