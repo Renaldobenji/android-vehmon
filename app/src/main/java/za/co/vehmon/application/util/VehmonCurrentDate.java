@@ -10,7 +10,7 @@ public class VehmonCurrentDate {
 
     public static String GetCurrentDate()
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HHmmss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/HH/mm");
         return sdf.format(new Date());
     }
 

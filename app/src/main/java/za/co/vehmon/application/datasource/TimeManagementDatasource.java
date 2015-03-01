@@ -29,6 +29,7 @@ public class TimeManagementDatasource {
                     MySQLiteHelper.TABLE_TIMEMNG_OUTLAT,
                     MySQLiteHelper.TABLE_TIMEMNG_OUTLNG,
                     MySQLiteHelper.TABLE_TIMEMNG_USERID,
+                    MySQLiteHelper.TABLE_TIMEMNG_SHIFTID,
                     MySQLiteHelper.TABLE_TIMEMNG_INSYNCED,
                     MySQLiteHelper.TABLE_TIMEMNG_OUTSYNCED
             };
@@ -108,21 +109,38 @@ public class TimeManagementDatasource {
         return database.insert(MySQLiteHelper.TABLE_TIMEMNG, null,values);
     }
 
-    public Boolean updateClockInSynced(Integer id)
+    public Boolean updateClockInSynced(Integer id, String shiftID)
     {
         //This is set when the file has been successfully uploaded to server.
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         ContentValues args = new ContentValues();
         args.put(MySQLiteHelper.TABLE_TIMEMNG_INSYNCED, 1);
-        database.update(MySQLiteHelper.TABLE_TIMEMNG, args, MySQLiteHelper.TABLE_TIMEMNG_ID + "=" + id, null);
+        args.put(MySQLiteHelper.TABLE_TIMEMNG_SHIFTID,Integer.valueOf(shiftID));
+
+        long success = database.update(MySQLiteHelper.TABLE_TIMEMNG, args, MySQLiteHelper.TABLE_TIMEMNG_ID + "=" + id, null);
+
+        close();
         return true;
     }
 
     public Boolean updateClockOutSynced(Integer id)
     {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //This is set when the file has been successfully uploaded to server.
         ContentValues args = new ContentValues();
         args.put(MySQLiteHelper.TABLE_TIMEMNG_OUTSYNCED, 1);
-        database.update(MySQLiteHelper.TABLE_TIMEMNG, args, MySQLiteHelper.TABLE_TIMEMNG_ID + "=" + id, null);
+        long success = database.update(MySQLiteHelper.TABLE_TIMEMNG, args, MySQLiteHelper.TABLE_TIMEMNG_ID + "=" + id, null);
+
+        close();
         return true;
     }
 
@@ -185,8 +203,10 @@ public class TimeManagementDatasource {
         obj.setOutLat(cursor.getString(5));
         obj.setOutLng(cursor.getString(6));
         obj.setUserID(cursor.getString(7));
-        obj.setInSynced(cursor.getInt(8));
-        obj.setOutSynced(cursor.getInt(9));
+        obj.setUserID(cursor.getString(7));
+        obj.setShiftID(String.valueOf(cursor.getInt(8)));
+        obj.setInSynced(cursor.getInt(9));
+        obj.setOutSynced(cursor.getInt(10));
 
         return obj;
     }

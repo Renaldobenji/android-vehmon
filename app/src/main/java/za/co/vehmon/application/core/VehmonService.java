@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import retrofit.RestAdapter;
+import za.co.vehmon.application.services.LeaveRequestResponse;
+import za.co.vehmon.application.services.ShiftResponse;
 import za.co.vehmon.application.services.TokenGenerationResult;
 import za.co.vehmon.application.services.UserTokenValidationResponse;
 
@@ -47,6 +49,10 @@ public class VehmonService {
     }
 
     private AuthService getAuthService() {return getRestAdapter().create(AuthService.class);}
+
+    private LeaveService getLeaveService() {return getRestAdapter().create(LeaveService.class);}
+
+    private TimeTrackingService getTimeTrackingService() {return getRestAdapter().create(TimeTrackingService.class);}
 
     private RestAdapter getRestAdapter() {
         return restAdapter;
@@ -98,6 +104,50 @@ public class VehmonService {
             response.UserTokenState = "1";
         }
         //Fetch token from shared preferences
+        return response;
+    }
+
+    public LeaveRequestResponse SyncLeaveRequestToServer(String startTime, String endTime, String leaveRequestType)
+    {
+        LeaveRequestResponse response;
+        try
+        {
+            response = getLeaveService().RequestLeave(this.token,startTime,endTime,leaveRequestType);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+        return response;
+    }
+
+    public ShiftResponse SyncStartShiftToServer(String clockInLat, String clockOutLat, String startTime)
+    {
+        ShiftResponse response;
+        try
+        {
+            response = getTimeTrackingService().StartShift(token,Long.valueOf(clockInLat).longValue(),Long.valueOf(clockOutLat).longValue(),startTime);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
+    public ShiftResponse SyncEndShiftToServer(String shiftID, String endTime)
+    {
+        ShiftResponse response;
+
+        try
+        {
+            response = getTimeTrackingService().EndShift(token,Integer.valueOf(shiftID),endTime);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
         return response;
     }
 

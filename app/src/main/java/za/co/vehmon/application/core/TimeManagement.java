@@ -9,6 +9,16 @@ public class TimeManagement {
     private String clockOutTime;
     private String inLat;
     private String inLng;
+
+    public String getShiftID() {
+        return shiftID;
+    }
+
+    public void setShiftID(String shiftID) {
+        this.shiftID = shiftID;
+    }
+
+    private String shiftID;
     private String outLat;
     private String outLng;
 

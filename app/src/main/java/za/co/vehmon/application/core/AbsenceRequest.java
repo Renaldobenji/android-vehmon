@@ -18,11 +18,9 @@ public class AbsenceRequest {
     public AbsenceRequest()
     {
         String[] absenceTypes = new String[5];
-        absenceTypes[0] = "Sick Leave";
-        absenceTypes[1] = "Annual Leave";
-        absenceTypes[2] = "Family Leave";
-        absenceTypes[3] = "Maternity Leave";
-        absenceTypes[4] = "MIA Leave";
+
+        absenceTypes[0] = "Sick";
+        absenceTypes[1] = "Annual";
 
         this.setAbsenceRequestTypes(absenceTypes);
     }
