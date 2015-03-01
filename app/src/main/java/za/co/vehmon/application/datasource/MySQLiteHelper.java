@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "vehmon.db";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 6;
 
     //Absence Request
     public static final String TABLE_ABSENCEREQUEST = "ABSENCEREQUEST";
@@ -63,6 +63,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_MSGCONVO_FROM = "MSGFROM";
     public static final String TABLE_MSGCONVO_TO = "MSGTO";
     public static final String TABLE_MSGCONVO_SYNCED = "SYNCED";
+    public static final String TABLE_MSGCONVO_SERVERCONVOID = "SERVERCONVOID";
+    public static final String TABLE_MSGCONVO_UNREADMESSAGES = "UNREADMESSAGES";
+    public static final String TABLE_MSGCONVO_LASTUPDATED = "LASTUPDATED";
 
     private static final String TABLE_CREATE_MSGCONVO = "CREATE TABLE "
             +TABLE_MSGCONVO + "("
@@ -70,6 +73,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             +TABLE_MSGCONVO_DATE + " TEXT NOT NULL, "
             +TABLE_MSGCONVO_FROM + " TEXT NOT NULL, "
             +TABLE_MSGCONVO_TO + " TEXT NOT NULL, "
+            +TABLE_MSGCONVO_SERVERCONVOID + " INTEGER, "
+            +TABLE_MSGCONVO_UNREADMESSAGES + " INTEGER, "
+            +TABLE_MSGCONVO_LASTUPDATED + " TEXT, " //TEXT as ISO8601 strings ("YYYY-MM-DD HH:MM:SS.SSS").
             +TABLE_MSGCONVO_SYNCED + " INTEGER)";
 
     public static final String TABLE_MSG = "MESSAGES";
