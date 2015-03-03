@@ -55,13 +55,13 @@ public class MessageWrapper {
         public List<Message> Messages;
     }
 
-    public MessageResult CreateNewConversation(Context context, String from, String to)
+    public MessageResult CreateNewConversation(Context context, String from, String to, int conversationID)
     {
         MessageResult result = new MessageResult();
 
        try {
            MessageConversationDatasource msgConvo = new MessageConversationDatasource(context);
-           msgConvo.InsertMessageConversation(VehmonCurrentDate.GetCurrentDate(), from, to);
+           msgConvo.InsertMessageConversation(VehmonCurrentDate.GetCurrentDate(), from, to,conversationID);
        }catch (Exception e)
        {
             String renaldo = "Renaldo";

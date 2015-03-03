@@ -55,9 +55,11 @@ public final class Constants {
 
         public static final String VEHMON_URL_AUTH_FRAG = "/services/Authentication.svc/GetTokenForUser/{userName}/{password}";
         public static final String VEHMON_URL_AUTH_RENEW_FRAG = "/services/Authentication.svc/RenewToken/{token}";
+        public static final String VEHMON_URL_AUTH_GETALLUSERS_FRAG = "/services/Authentication.svc/GetAllUsers/{token}";
         public static final String VEHMON_URL_AUTH_LEAVE_FRAG = "/services/LeaveService.svc/RequestLeave/{token}/{startTime}/{endTime}/{leaveRequestType}";
         public static final String VEHMON_URL_AUTH_STARTSHIFT_FRAG = "/services/TimeTrackingService.svc/StartShift/{token}/{clockInLat}/{clockOutLat}/{startTime}";
         public static final String VEHMON_URL_AUTH_ENDSHIFT_FRAG = "/services/TimeTrackingService.svc/EndShift/{userToken}/{shiftId}/{endTime}";
+        public static final String VEHMON_URL_MESSAGE_CREATECONV_FRAG = "/services/MessageService.svc/CreateConversation/{token}/{conversationName}/{userNames}";
 
 
 

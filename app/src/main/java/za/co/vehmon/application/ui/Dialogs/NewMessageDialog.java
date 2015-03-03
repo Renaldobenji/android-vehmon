@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import butterknife.InjectView;
 import za.co.vehmon.application.R;
@@ -31,7 +30,7 @@ public class NewMessageDialog extends DialogFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.new_message_dialog, container);
+        View view = inflater.inflate(R.layout.new_message, container);
         mEditText = (EditText) view.findViewById(R.id.txt_your_name);
         getDialog().setTitle("New Message");
         getDialog().setCancelable(true);

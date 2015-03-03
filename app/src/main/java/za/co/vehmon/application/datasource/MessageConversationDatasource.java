@@ -25,6 +25,7 @@ public class MessageConversationDatasource {
                     MySQLiteHelper.TABLE_MSGCONVO_DATE,
                     MySQLiteHelper.TABLE_MSGCONVO_FROM,
                     MySQLiteHelper.TABLE_MSGCONVO_TO,
+                    MySQLiteHelper.TABLE_MSGCONVO_SERVERCONVOID,
                     MySQLiteHelper.TABLE_MSGCONVO_SYNCED
             };
 
@@ -41,13 +42,14 @@ public class MessageConversationDatasource {
         dbHelper.close();
     }
 
-    public long InsertMessageConversation(String date, String from, String to)
+    public long InsertMessageConversation(String date, String from, String to, int conversationID)
     {
         ContentValues values = new ContentValues();
 
         values.put(MySQLiteHelper.TABLE_MSGCONVO_DATE, date);
         values.put(MySQLiteHelper.TABLE_MSGCONVO_FROM, from);
         values.put(MySQLiteHelper.TABLE_MSGCONVO_TO, to);
+        values.put(MySQLiteHelper.TABLE_MSGCONVO_SERVERCONVOID, conversationID);
         values.put(MySQLiteHelper.TABLE_MSGCONVO_SYNCED, 0);
         //Insert into database
         try {

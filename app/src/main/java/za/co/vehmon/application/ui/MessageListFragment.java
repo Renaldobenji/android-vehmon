@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import za.co.vehmon.application.BootstrapApplication;
 import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
@@ -31,6 +32,7 @@ import za.co.vehmon.application.core.MessageConversation;
 import za.co.vehmon.application.core.MessageWrapper;
 import za.co.vehmon.application.core.User;
 import za.co.vehmon.application.core.VehmonService;
+import za.co.vehmon.application.services.ConversationResponse;
 import za.co.vehmon.application.ui.Dialogs.NewMessageDialog;
 import za.co.vehmon.application.util.SafeAsyncTask;
 
@@ -69,7 +71,8 @@ public class MessageListFragment extends ItemListFragment<MessageConversation>{
         }
         switch (item.getItemId()) {
             case R.id.newMessage:
-                showNewMessageDialog();
+                Intent intent = new Intent(getActivity(), NewMessageActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.logout:
                 this.logout();
@@ -86,8 +89,8 @@ public class MessageListFragment extends ItemListFragment<MessageConversation>{
         messageRecipient.setPositiveButton("Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        CreateNewMessage();
                         dialog.cancel();
+
                     }
                 });
         messageRecipient.setNegativeButton("No",
@@ -108,8 +111,14 @@ public class MessageListFragment extends ItemListFragment<MessageConversation>{
         new SafeAsyncTask<MessageWrapper.MessageResult>() {
             @Override
             public MessageWrapper.MessageResult call() throws Exception {
-                final MessageWrapper.MessageResult svc = serviceProvider.getService(getActivity()).CreateNewMessage(getActivity(),"Renaldo", "Robyn");
-                return svc;
+
+                BootstrapApplication app = (BootstrapApplication)getActivity().getApplicationContext();
+                ConversationResponse response = serviceProvider.getService(getActivity()).CreateConversation(String.format("{0}Conversation{1}",app.getUser().getUsername(),"Robyn"),"Robyn");
+                if (response.CreateStatus.equals("Successfull")) {
+                    final MessageWrapper.MessageResult svc = serviceProvider.getService(getActivity()).CreateNewMessage(getActivity(), "Renaldo", "Robyn",response.ConversationId);
+                    return svc;
+                }
+                return null;
             }
 
             @Override

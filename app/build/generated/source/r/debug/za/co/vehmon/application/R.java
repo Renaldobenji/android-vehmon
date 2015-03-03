@@ -1781,7 +1781,7 @@ containing a value of this type.
         public static final int message_view_list_item=0x7f030025;
         public static final int message_view_list_item_left=0x7f030026;
         public static final int message_view_list_item_right=0x7f030027;
-        public static final int new_message_dialog=0x7f030028;
+        public static final int new_message =0x7f030028;
         public static final int news=0x7f030029;
         public static final int news_list_item=0x7f03002a;
         public static final int news_list_item_labels=0x7f03002b;

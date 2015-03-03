@@ -9,9 +9,11 @@ import java.util.Date;
 import java.util.List;
 
 import retrofit.RestAdapter;
+import za.co.vehmon.application.services.ConversationResponse;
 import za.co.vehmon.application.services.LeaveRequestResponse;
 import za.co.vehmon.application.services.ShiftResponse;
 import za.co.vehmon.application.services.TokenGenerationResult;
+import za.co.vehmon.application.services.UserDetailContract;
 import za.co.vehmon.application.services.UserTokenValidationResponse;
 
 /**
@@ -53,6 +55,8 @@ public class VehmonService {
     private LeaveService getLeaveService() {return getRestAdapter().create(LeaveService.class);}
 
     private TimeTrackingService getTimeTrackingService() {return getRestAdapter().create(TimeTrackingService.class);}
+
+    private MessageService getMessageService() {return getRestAdapter().create(MessageService.class);}
 
     private RestAdapter getRestAdapter() {
         return restAdapter;
@@ -151,6 +155,34 @@ public class VehmonService {
         return response;
     }
 
+    public ConversationResponse CreateConversation(String conversationName, String userNames) {
+        ConversationResponse response;
+        try
+        {
+            response = getMessageService().CreateConversation(this.token,conversationName,userNames);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
+    public List<UserDetailContract> GetAllUsersFromServer() {
+        List<UserDetailContract> response;
+        try
+        {
+            response = getAuthService().GetAllUsers(this.token);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
     public TimeManagementWrapper.TimeManagementResult ClockIn(Context context, Date date)
     {
         return new TimeManagementWrapper().ClockIn(context, date);
@@ -171,9 +203,9 @@ public class VehmonService {
         return new AbsenceRequestWrapper().SubmitAbsenceRequest(context,absenceRequestTypeID,fromDate,toDate);
     }
 
-    public MessageWrapper.MessageResult CreateNewMessage(Context context, String from, String to)
+    public MessageWrapper.MessageResult CreateNewMessage(Context context, String from, String to, int conversationID)
     {
-        return new MessageWrapper().CreateNewConversation(context,from,to);
+        return new MessageWrapper().CreateNewConversation(context,from,to,conversationID);
     }
 
     public MessageWrapper.MessageResult GetAllMessageConversations(Context context)
