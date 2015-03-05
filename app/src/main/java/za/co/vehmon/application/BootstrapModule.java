@@ -15,6 +15,7 @@ import za.co.vehmon.application.core.UserAgentProvider;
 import za.co.vehmon.application.core.VehmonService;
 import za.co.vehmon.application.gps.GPSTrackingService;
 import za.co.vehmon.application.synchronizers.AbsenceRequestSynchronizer;
+import za.co.vehmon.application.synchronizers.MessageSynchronizer;
 import za.co.vehmon.application.synchronizers.TimeManagementSynchronizer;
 import za.co.vehmon.application.ui.AbsenceRequestActivity;
 import za.co.vehmon.application.ui.BootstrapTimerActivity;
@@ -59,7 +60,8 @@ import retrofit.converter.GsonConverter;
                 GPSTrackingService.class,
                 AbsenceRequestSynchronizer.class,
                 TimeManagementSynchronizer.class,
-                NewMessageActivity.class
+                NewMessageActivity.class,
+                MessageSynchronizer.class
         }
 )
 public class BootstrapModule {

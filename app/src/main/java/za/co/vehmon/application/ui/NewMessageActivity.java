@@ -91,10 +91,9 @@ public class NewMessageActivity extends BootstrapActivity {
         new SafeAsyncTask<MessageWrapper.MessageResult>() {
             @Override
             public MessageWrapper.MessageResult call() throws Exception {
-
                 BootstrapApplication app = (BootstrapApplication)activity.getApplicationContext();
                 ConversationResponse response = serviceProvider.getService(activity).CreateConversation(String.format("{0}Conversation{1}",app.getUser().getUsername(),to),to);
-                if (response.CreateStatus.equals("Successfull")) {
+                if (response.CreateStatus.equals("1")) {
                     final MessageWrapper.MessageResult svc = serviceProvider.getService(activity).CreateNewMessage(activity, app.getUser().getUsername(), to,response.ConversationId);
                     return svc;
                 }

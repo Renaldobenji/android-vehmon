@@ -9,8 +9,10 @@ import java.util.Date;
 import java.util.List;
 
 import retrofit.RestAdapter;
+import retrofit.http.Field;
 import za.co.vehmon.application.services.ConversationResponse;
 import za.co.vehmon.application.services.LeaveRequestResponse;
+import za.co.vehmon.application.services.MessageResponse;
 import za.co.vehmon.application.services.ShiftResponse;
 import za.co.vehmon.application.services.TokenGenerationResult;
 import za.co.vehmon.application.services.UserDetailContract;
@@ -160,6 +162,34 @@ public class VehmonService {
         try
         {
             response = getMessageService().CreateConversation(this.token,conversationName,userNames);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
+    public MessageResponse SendMessageToServer(int conversationId, String date, String message) {
+        MessageResponse response;
+        try
+        {
+            response = getMessageService().SendMessage(this.token,conversationId,date,message);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
+    public List<MessageResponse> SyncUnreadMessagesFromServer() {
+        List<MessageResponse> response;
+        try
+        {
+            response = getMessageService().GetAllUnreadMessages(this.token);
         }
         catch (Exception ex)
         {

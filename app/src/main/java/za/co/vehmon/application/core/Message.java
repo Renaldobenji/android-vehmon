@@ -62,4 +62,14 @@ public class Message {
     }
 
     public int messageID;
+
+    public int getMessageServerConversationID() {
+        return MessageServerConversationID;
+    }
+
+    public void setMessageServerConversationID(int messageServerConversationID) {
+        MessageServerConversationID = messageServerConversationID;
+    }
+
+    public int MessageServerConversationID;
 }

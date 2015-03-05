@@ -50,7 +50,7 @@ public class MessageConversationDatasource {
         values.put(MySQLiteHelper.TABLE_MSGCONVO_FROM, from);
         values.put(MySQLiteHelper.TABLE_MSGCONVO_TO, to);
         values.put(MySQLiteHelper.TABLE_MSGCONVO_SERVERCONVOID, conversationID);
-        values.put(MySQLiteHelper.TABLE_MSGCONVO_SYNCED, 0);
+        values.put(MySQLiteHelper.TABLE_MSGCONVO_SYNCED, 1);
         //Insert into database
         try {
             open();
@@ -61,6 +61,47 @@ public class MessageConversationDatasource {
         close();
         return dbID;
     }
+
+    public int GetServerConversationID(int conversationID)
+    {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_MSGCONVO,allColumns, MySQLiteHelper.TABLE_MSGCONVO_ID + "= ?",  new String[] {String.valueOf(conversationID)}, null, null, MySQLiteHelper.TABLE_MSGCONVO_ID+ " ASC");
+
+        cursor.moveToFirst();
+        MessageConversation msgConvo = cursorToMsgConvo(cursor);
+
+        cursor.close();
+        close();
+
+        return msgConvo.getMessageServerConversationID();
+    }
+
+    public MessageConversation GetConversation(int serverConversationID)
+    {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_MSGCONVO,allColumns, MySQLiteHelper.TABLE_MSGCONVO_SERVERCONVOID + "= ?",  new String[] {String.valueOf(serverConversationID)}, null, null, MySQLiteHelper.TABLE_MSGCONVO_ID+ " ASC");
+
+        cursor.moveToFirst();
+
+        MessageConversation msgConvo = cursorToMsgConvo(cursor);
+
+        cursor.close();
+        close();
+
+        return msgConvo;
+    }
+
+
+
+
 
     public List<MessageConversation> GetAllConversations()
     {
@@ -90,6 +131,7 @@ public class MessageConversationDatasource {
         msg.setDate(cursor.getString(1));
         msg.setFrom(cursor.getString(2));
         msg.setTo(cursor.getString(3));
+        msg.setMessageServerConversationID(cursor.getInt(4));
 
         return msg;
     }

@@ -60,6 +60,9 @@ public final class Constants {
         public static final String VEHMON_URL_AUTH_STARTSHIFT_FRAG = "/services/TimeTrackingService.svc/StartShift/{token}/{clockInLat}/{clockOutLat}/{startTime}";
         public static final String VEHMON_URL_AUTH_ENDSHIFT_FRAG = "/services/TimeTrackingService.svc/EndShift/{userToken}/{shiftId}/{endTime}";
         public static final String VEHMON_URL_MESSAGE_CREATECONV_FRAG = "/services/MessageService.svc/CreateConversation/{token}/{conversationName}/{userNames}";
+        public static final String VEHMON_URL_MESSAGE_SENDMSG_FRAG = "/services/MessageService.svc/SendMessage";
+        public static final String VEHMON_URL_MESSAGE_CONVUNREADMSG_FRAG = "/services/MessageService.svc/GetAllUnreadMessagesForConversation/{token}/{conversationId}";
+        public static final String VEHMON_URL_MESSAGE_UNREADMSG_FRAG = "/services/MessageService.svc/GetAllUnreadMessages/{token}";
 
 
 
