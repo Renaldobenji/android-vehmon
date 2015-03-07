@@ -29,6 +29,9 @@ public class MessageSynchronizer implements ISynchronize {
         SynchronizedResult result = new SynchronizedResult();
         result.setSynchronizedSuccessful(true);
 
+        SendMessages(context);
+        SyncUnReadMessages(context);
+
         return result;
     }
 
@@ -73,34 +76,51 @@ public class MessageSynchronizer implements ISynchronize {
     private void SyncUnReadMessages(final Context context)
     {
         try {
-            MessageConversationDatasource msgConvoDS = new MessageConversationDatasource(context);
-            MessagesDatasource msgDS = new MessagesDatasource(context);
-            List<MessageResponse> unreadMessages = serviceProvider.getService(context).SyncUnreadMessagesFromServer();
+            final MessageConversationDatasource msgConvoDS = new MessageConversationDatasource(context);
+            final MessagesDatasource msgDS = new MessagesDatasource(context);
 
-            if (unreadMessages == null)
-                return;
-
-            if (unreadMessages.isEmpty())
-                return;
-
-
-            for (final MessageResponse msg : unreadMessages) {
-                long conversationID;
-                MessageConversation conv = msgConvoDS.GetConversation(msg.ConversationId);
-                if (conv == null)
-                {
-                    conversationID = msgConvoDS.InsertMessageConversation(VehmonCurrentDate.GetCurrentDate(),msg.Sender,"",msg.ConversationId);
+            new SafeAsyncTask<List<MessageResponse>>() {
+                @Override
+                public List<MessageResponse> call() throws Exception {
+                    final List<MessageResponse> unreadMessages = serviceProvider.getService(context).SyncUnreadMessagesFromServer();
+                    return unreadMessages;
                 }
-                else
-                {
-                    conversationID = conv.getMessageConversationID();
+
+                @Override
+                protected void onException(final Exception e) throws RuntimeException {
+                    super.onException(e);
+                    if (e instanceof OperationCanceledException) {
+                    }
                 }
-                msgDS.InsertMessage(conversationID,msg.Message,msg.Sender,"",VehmonCurrentDate.GetCurrentDate(),1);
-            }
+
+                @Override
+                protected void onSuccess(final List<MessageResponse> response) throws Exception {
+                    super.onSuccess(response);
+
+                    if (response == null)
+                        return;
+
+                    if (response.isEmpty())
+                        return;
+
+                    for (final MessageResponse msg : response) {
+                        long conversationID;
+                        MessageConversation conv = msgConvoDS.GetConversation(msg.ConversationId);
+                        if (conv == null)
+                        {
+                            conversationID = msgConvoDS.InsertMessageConversation(VehmonCurrentDate.GetCurrentDate(),msg.Sender,"",msg.ConversationId);
+                        }
+                        else
+                        {
+                            conversationID = conv.getMessageConversationID();
+                        }
+                        msgDS.InsertMessage(conversationID,msg.Message,msg.Sender,"",VehmonCurrentDate.GetCurrentDate(),1);
+                    }
+                }
+            }.execute();
         }catch (Exception ex)
         {
             ex.printStackTrace();
         }
-
     }
 }

@@ -84,6 +84,7 @@ public class TimeManagementDatasource {
 
         ContentValues args = new ContentValues();
         args.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKOUTTIME, clockoutTime);
+        args.put(MySQLiteHelper.TABLE_TIMEMNG_OUTSYNCED, 0);
 
         long id = database.update(MySQLiteHelper.TABLE_TIMEMNG, args, MySQLiteHelper.TABLE_TIMEMNG_ID + "=" + record.getId(), null);
 
@@ -166,6 +167,26 @@ public class TimeManagementDatasource {
         close();
 
         return listTime;
+    }
+
+    public int GetShiftID(int timeManagementID)
+    {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_TIMEMNG,allColumns, MySQLiteHelper.TABLE_TIMEMNG_ID + "= ?", new String[]{String.valueOf(timeManagementID)}, null, null, MySQLiteHelper.TABLE_TIMEMNG_ID+ " ASC");
+
+        cursor.moveToFirst();
+
+        int shiftId = cursor.getInt(8);
+
+        cursor.close();
+        close();
+
+        return shiftId;
     }
 
     public List<TimeManagement> GetUnsynchronizedClockOut()

@@ -59,6 +59,7 @@ public final class Constants {
         public static final String VEHMON_URL_AUTH_LEAVE_FRAG = "/services/LeaveService.svc/RequestLeave/{token}/{startTime}/{endTime}/{leaveRequestType}";
         public static final String VEHMON_URL_AUTH_STARTSHIFT_FRAG = "/services/TimeTrackingService.svc/StartShift/{token}/{clockInLat}/{clockOutLat}/{startTime}";
         public static final String VEHMON_URL_AUTH_ENDSHIFT_FRAG = "/services/TimeTrackingService.svc/EndShift/{userToken}/{shiftId}/{endTime}";
+        public static final String VEHMON_URL_AUTH_LOGGPS_FRAG = "/services/TimeTrackingService.svc/LogCoordinatesToShift";
         public static final String VEHMON_URL_MESSAGE_CREATECONV_FRAG = "/services/MessageService.svc/CreateConversation/{token}/{conversationName}/{userNames}";
         public static final String VEHMON_URL_MESSAGE_SENDMSG_FRAG = "/services/MessageService.svc/SendMessage";
         public static final String VEHMON_URL_MESSAGE_CONVUNREADMSG_FRAG = "/services/MessageService.svc/GetAllUnreadMessagesForConversation/{token}/{conversationId}";
@@ -136,6 +137,7 @@ public final class Constants {
 
         public static final int TIMER_NOTIFICATION_ID = 1000; // Why 1000? Why not? :)
         public static final int GPS_NOTIFICATION_ID = 1001; // Why 1000? Why not? :)
+        public static final int SYNC_NOTIFICATION_ID = 1002; // Why 1000? Why not? :)
     }
 
 }

@@ -1,7 +1,9 @@
 package za.co.vehmon.application.core;
 
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
+import za.co.vehmon.application.services.Coordinate;
 import za.co.vehmon.application.services.ShiftResponse;
 
 /**
@@ -15,5 +17,6 @@ public interface TimeTrackingService {
     @GET(Constants.Http.VEHMON_URL_AUTH_ENDSHIFT_FRAG)
     ShiftResponse EndShift(@Path("userToken") String userToken,@Path("shiftId") int shiftId, @Path("endTime") String endTime);
 
-    ShiftResponse LogCoordinatesToShift(String userToken, int shiftId, String csvCoords);
+    @POST(Constants.Http.VEHMON_URL_AUTH_LOGGPS_FRAG)
+    ShiftResponse LogCoordinatesToShift(@Path("userToken")String userToken,@Path("shiftId") int shiftId,@Path("userToken") Coordinate[] coords);
 }

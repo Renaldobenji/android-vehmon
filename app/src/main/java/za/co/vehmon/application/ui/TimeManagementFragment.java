@@ -57,7 +57,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
     @InjectView(R.id.timetrackingchronometer) protected TextView timetrackingchronometer;
 
     private static final String FORCE_REFRESH = "forceRefresh";
-    private static int TIMETRACKINGID = 1;
+    private static long TIMETRACKINGID = 1;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -183,13 +183,12 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
                 }
 
                 @Override
-                protected void onSuccess(final TimeManagementWrapper.TimeManagementResult isSuccessful) throws Exception {
-                    super.onSuccess(isSuccessful);
+                protected void onSuccess(final TimeManagementWrapper.TimeManagementResult response) throws Exception {
+                    super.onSuccess(response);
 
                     buttonClockIn.setVisibility(View.GONE);
                     buttonClockOut.setVisibility(View.VISIBLE);
-                    //timetrackingchronometer.setTag(TIMETRACKINGID,isSuccessful.getTimeTrackingID());
-                    startTracking();
+                    startTracking(response.getTimeTrackingID());
                     startTimer();
                 }
             }.execute();
@@ -208,10 +207,11 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
         }
     }
 
-    private void startTracking()
+    private void startTracking(long timeTrackingID)
     {
         if (!isTrackingServiceRunning()) {
             final Intent i = new Intent(getActivity(), GPSTrackingService.class);
+            i.putExtra("TimeTrackingID",timeTrackingID);
             getActivity().startService(i);
         }
     }

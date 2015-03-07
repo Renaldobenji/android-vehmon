@@ -51,6 +51,7 @@ public class GPSTrackingService extends Service implements LocationListener {
     private int minDistance = 1000 * 2 ; //5 Kilometers
     private final int TWO_MINUTES = 1000 * 60 * 2;
     private Timer sourceGPSTimer;
+    private int timeTrackingID;
     @Inject protected Bus eventBus;
     @Inject NotificationManager notificationManager;
     @Inject protected VehmonServiceProvider serviceProvider;
@@ -111,6 +112,10 @@ public class GPSTrackingService extends Service implements LocationListener {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+        this.timeTrackingID = intent.getIntExtra("TimeTrackingID",1);
+        if (this.timeTrackingID  == 1)
+            stopSelf();
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         Criteria criteria = new Criteria();
@@ -177,7 +182,7 @@ public class GPSTrackingService extends Service implements LocationListener {
         new SafeAsyncTask<GPSLogWrapper.GPSLogResult>() {
             @Override
             public GPSLogWrapper.GPSLogResult call() throws Exception {
-                serviceProvider.getService(getApplicationContext()).LogGPSCoordinates(getApplicationContext(),String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()),String.valueOf(location.getAccuracy()),"1");
+                serviceProvider.getService(getApplicationContext()).LogGPSCoordinates(getApplicationContext(),String.valueOf(location.getLatitude()),String.valueOf(location.getLongitude()),String.valueOf(location.getAccuracy()),String.valueOf(timeTrackingID));
                 return null;
             }
 

@@ -11,6 +11,7 @@ import java.util.List;
 import retrofit.RestAdapter;
 import retrofit.http.Field;
 import za.co.vehmon.application.services.ConversationResponse;
+import za.co.vehmon.application.services.Coordinate;
 import za.co.vehmon.application.services.LeaveRequestResponse;
 import za.co.vehmon.application.services.MessageResponse;
 import za.co.vehmon.application.services.ShiftResponse;
@@ -72,7 +73,7 @@ public class VehmonService {
      */
     public User Authenticate(String email, String password) {
 
-        email = "Renaldob";
+        email = "PhilipSc";
         password = "Password";
         User user = new User();
 
@@ -176,6 +177,21 @@ public class VehmonService {
         try
         {
             response = getMessageService().SendMessage(this.token,conversationId,date,message);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
+    public ShiftResponse SendGPSLogToServer(int shiftID, Coordinate[] coords)
+    {
+        ShiftResponse response;
+        try
+        {
+            response = getTimeTrackingService().LogCoordinatesToShift(this.token,shiftID,coords);
         }
         catch (Exception ex)
         {

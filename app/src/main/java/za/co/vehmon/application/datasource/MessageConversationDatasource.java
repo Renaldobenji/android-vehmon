@@ -100,9 +100,6 @@ public class MessageConversationDatasource {
     }
 
 
-
-
-
     public List<MessageConversation> GetAllConversations()
     {
         List<MessageConversation> msgs = new ArrayList<MessageConversation>();
