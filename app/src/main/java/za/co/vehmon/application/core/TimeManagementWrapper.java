@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.Date;
 
 import za.co.vehmon.application.datasource.TimeManagementDatasource;
+import za.co.vehmon.application.util.VehmonCurrentDate;
 
 /**
  * Created by Renaldo on 1/12/2015.
@@ -50,7 +51,7 @@ public class TimeManagementWrapper {
         TimeManagementResult result = new TimeManagementResult();
         TimeManagementDatasource ds = new TimeManagementDatasource(context);
 
-        long id = ds.clockIn(clockInDateTime.toString(), "Renaldo");
+        long id = ds.clockIn(VehmonCurrentDate.GetCurrentDate(), "Renaldo");
         if (id == -1)
         {
             result.setErrorMessage("Unable to clock in");
@@ -66,7 +67,7 @@ public class TimeManagementWrapper {
         TimeManagementResult result = new TimeManagementResult();
         TimeManagementDatasource ds = new TimeManagementDatasource(context);
 
-        long id = ds.clockout(clockOutDateTime.toString(), "Renaldo");
+        long id = ds.clockout(VehmonCurrentDate.GetCurrentDate(), "Renaldo");
         if (id == -1)
         {
             result.setErrorMessage("Unable to clock out");

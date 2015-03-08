@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.core.TimeManagement;
+import za.co.vehmon.application.core.VehmonService;
 import za.co.vehmon.application.datasource.TimeManagementDatasource;
 import za.co.vehmon.application.services.ShiftResponse;
 import za.co.vehmon.application.util.SafeAsyncTask;
@@ -18,28 +19,40 @@ import za.co.vehmon.application.util.SafeAsyncTask;
  */
 public class TimeManagementSynchronizer implements ISynchronize {
 
-    @Inject protected VehmonServiceProvider serviceProvider;
-
     @Override
-    public SynchronizedResult Synchronize(Context context) {
+    public SynchronizedResult Synchronize(final Context context,final VehmonServiceProvider serviceProvider) {
 
         SynchronizedResult result = new SynchronizedResult();
 
         try {
             TimeManagementDatasource ds = new TimeManagementDatasource(context);
-            synchronizeClockIns(context,ds);
-            synchronizeClockOuts(context,ds);
+            try {
+                synchronizeClockIns(context, serviceProvider, ds);
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+            try
+            {
+                synchronizeClockOuts(context,serviceProvider,ds);
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
         }
         catch (Exception ex)
         {
-
+            ex.printStackTrace();
         }
         return result;
     }
 
-    private SynchronizedResult synchronizeClockIns(final Context context, final TimeManagementDatasource ds)
+    private SynchronizedResult synchronizeClockIns(final Context context,final VehmonServiceProvider serviceProvider, final TimeManagementDatasource ds)
     {
         SynchronizedResult result = new SynchronizedResult();
+        result.setSynchronizedSuccessful(true);
         List<TimeManagement> clockIns = ds.GetUnsynchronizedClockIn();
 
         for(final TimeManagement times: clockIns)
@@ -48,7 +61,9 @@ public class TimeManagementSynchronizer implements ISynchronize {
                 new SafeAsyncTask<ShiftResponse>() {
                     @Override
                     public ShiftResponse call() throws Exception {
-                        final ShiftResponse svc = serviceProvider.getService(context).SyncStartShiftToServer(times.getInLat(),times.getInLng(), times.getClockInTime());
+                        String clockInTime = times.getClockInTime();
+                        VehmonService service = serviceProvider.getService(context);
+                        ShiftResponse svc = service.SyncStartShiftToServer(clockInTime);
                         return svc;
                     }
 
@@ -62,7 +77,10 @@ public class TimeManagementSynchronizer implements ISynchronize {
                     @Override
                     protected void onSuccess(final ShiftResponse response) throws Exception {
                         super.onSuccess(response);
-                        if (response.LogState == "Success")
+                        if (response == null)
+                            return;
+
+                        if (response.LogState.equals("4"))
                         {
                             ds.updateClockInSynced(times.getId(),response.ShiftId);
                         }
@@ -78,7 +96,7 @@ public class TimeManagementSynchronizer implements ISynchronize {
         return result;
     }
 
-    private SynchronizedResult synchronizeClockOuts(final Context context, final TimeManagementDatasource ds)
+    private SynchronizedResult synchronizeClockOuts(final Context context,final VehmonServiceProvider serviceProvider, final TimeManagementDatasource ds)
     {
         SynchronizedResult result = new SynchronizedResult();
         List<TimeManagement> clockOuts = ds.GetUnsynchronizedClockOut();
@@ -89,6 +107,9 @@ public class TimeManagementSynchronizer implements ISynchronize {
                 new SafeAsyncTask<ShiftResponse>() {
                     @Override
                     public ShiftResponse call() throws Exception {
+                        if (times.getShiftID() == null || times.getShiftID().isEmpty())
+                            return null;
+
                         final ShiftResponse svc = serviceProvider.getService(context).SyncEndShiftToServer(times.getShiftID(), times.getClockOutTime());
                         return svc;
                     }
@@ -103,7 +124,10 @@ public class TimeManagementSynchronizer implements ISynchronize {
                     @Override
                     protected void onSuccess(final ShiftResponse response) throws Exception {
                         super.onSuccess(response);
-                        if (response.LogState == "Success")
+                        if (response == null)
+                            return;
+
+                        if (response.LogState == "4")
                         {
                             ds.updateClockOutSynced(times.getId());
                         }

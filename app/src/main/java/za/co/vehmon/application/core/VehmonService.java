@@ -128,12 +128,12 @@ public class VehmonService {
         return response;
     }
 
-    public ShiftResponse SyncStartShiftToServer(String clockInLat, String clockOutLat, String startTime)
+    public ShiftResponse SyncStartShiftToServer(String startTime)
     {
         ShiftResponse response;
         try
         {
-            response = getTimeTrackingService().StartShift(token,Long.valueOf(clockInLat).longValue(),Long.valueOf(clockOutLat).longValue(),startTime);
+            response = getTimeTrackingService().StartShift(token,"0","0",startTime);
         }
         catch (Exception ex)
         {
@@ -149,7 +149,7 @@ public class VehmonService {
 
         try
         {
-            response = getTimeTrackingService().EndShift(token,Integer.valueOf(shiftID),endTime);
+            response = getTimeTrackingService().EndShift(token,shiftID);
         }
         catch (Exception ex)
         {
@@ -172,7 +172,7 @@ public class VehmonService {
         return response;
     }
 
-    public MessageResponse SendMessageToServer(int conversationId, String date, String message) {
+    public MessageResponse SendMessageToServer(String conversationId, String date, String message) {
         MessageResponse response;
         try
         {
@@ -186,7 +186,7 @@ public class VehmonService {
         return response;
     }
 
-    public ShiftResponse SendGPSLogToServer(int shiftID, Coordinate[] coords)
+    public ShiftResponse SendGPSLogToServer(String shiftID, Coordinate[] coords)
     {
         ShiftResponse response;
         try
@@ -244,7 +244,7 @@ public class VehmonService {
         return new AbsenceRequestWrapper().FetchAbsenceTypes();
     }
 
-    public AbsenceRequestWrapper.AbsenceRequestResult SubmitAbsenceRequest(Context context, int absenceRequestTypeID, Date fromDate, Date toDate)
+    public AbsenceRequestWrapper.AbsenceRequestResult SubmitAbsenceRequest(Context context, String absenceRequestTypeID, Date fromDate, Date toDate)
     {
         return new AbsenceRequestWrapper().SubmitAbsenceRequest(context,absenceRequestTypeID,fromDate,toDate);
     }

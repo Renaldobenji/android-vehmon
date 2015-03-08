@@ -11,12 +11,15 @@ import za.co.vehmon.application.services.ShiftResponse;
  */
 public interface TimeTrackingService {
 
-    @GET(Constants.Http.VEHMON_URL_AUTH_STARTSHIFT_FRAG)
-    ShiftResponse StartShift(@Path("token") String token,@Path("clockInLat") long clockInLat,@Path("clockOutLat") long clockOutLat,@Path("startTime") String startTime);
+    @POST(Constants.Http.VEHMON_URL_AUTH_STARTSHIFT_FRAG)
+    ShiftResponse StartShift(@Path("token") String token,@Path("clockInLat") String clockInLat,@Path("clockOutLat") String clockOutLat,@Path("startTime") String startTime);
 
-    @GET(Constants.Http.VEHMON_URL_AUTH_ENDSHIFT_FRAG)
-    ShiftResponse EndShift(@Path("userToken") String userToken,@Path("shiftId") int shiftId, @Path("endTime") String endTime);
+    //@POST(Constants.Http.VEHMON_URL_AUTH_ENDSHIFT_FRAG)
+    //ShiftResponse EndShift(@Path("userToken") String userToken,@Path("shiftId") String shiftId, @Path("endTime") String endTime);
+
+    @POST(Constants.Http.VEHMON_URL_AUTH_ENDSHIFT_FRAG)
+    ShiftResponse EndShift(@Path("userToken") String userToken,@Path("shiftId") String shiftId);
 
     @POST(Constants.Http.VEHMON_URL_AUTH_LOGGPS_FRAG)
-    ShiftResponse LogCoordinatesToShift(@Path("userToken")String userToken,@Path("shiftId") int shiftId,@Path("userToken") Coordinate[] coords);
+    ShiftResponse LogCoordinatesToShift(@Path("userToken")String userToken,@Path("shiftId") String shiftId,@Path("userToken") Coordinate[] coords);
 }

@@ -49,6 +49,7 @@ public class NewMessageActivity extends BootstrapActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 CreateNewMessage(myActivity,((UserDetailContract)listMessageContacts.getAdapter().getItem(position)).UserName);
+                setResult(2);
                 finish();
             }
         });
@@ -92,8 +93,9 @@ public class NewMessageActivity extends BootstrapActivity {
             @Override
             public MessageWrapper.MessageResult call() throws Exception {
                 BootstrapApplication app = (BootstrapApplication)activity.getApplicationContext();
-                ConversationResponse response = serviceProvider.getService(activity).CreateConversation(String.format("{0}Conversation{1}",app.getUser().getUsername(),to),to);
-                if (response.CreateStatus.equals("1")) {
+                String username = app.getUser().getUsername();
+                ConversationResponse response = serviceProvider.getService(activity).CreateConversation(String.format("%1$s Conversation %2$s",username,to),to);
+                if (response.CreateStatus.equals("0")) {
                     final MessageWrapper.MessageResult svc = serviceProvider.getService(activity).CreateNewMessage(activity, app.getUser().getUsername(), to,response.ConversationId);
                     return svc;
                 }

@@ -22,20 +22,18 @@ import za.co.vehmon.application.util.VehmonCurrentDate;
  */
 public class MessageSynchronizer implements ISynchronize {
 
-    @Inject protected VehmonServiceProvider serviceProvider;
-
     @Override
-    public SynchronizedResult Synchronize(Context context) {
+    public SynchronizedResult Synchronize(Context context,VehmonServiceProvider serviceProvider) {
         SynchronizedResult result = new SynchronizedResult();
         result.setSynchronizedSuccessful(true);
 
-        SendMessages(context);
-        SyncUnReadMessages(context);
+        SendMessages(context,serviceProvider);
+        //SyncUnReadMessages(context,serviceProvider);
 
         return result;
     }
 
-    private void SendMessages(final Context context)
+    private void SendMessages(final Context context,final VehmonServiceProvider serviceProvider)
     {
         final MessagesDatasource msgDS = new MessagesDatasource(context);
         List<Message> messages = msgDS.GetUnsyncedMessages(context);
@@ -45,7 +43,7 @@ public class MessageSynchronizer implements ISynchronize {
                 new SafeAsyncTask<MessageResponse>() {
                     @Override
                     public MessageResponse call() throws Exception {
-                        final MessageResponse svc = serviceProvider.getService(context).SendMessageToServer(msg.getMessageServerConversationID(),msg.getDate(),msg.getMessage());
+                        final MessageResponse svc = serviceProvider.getService(context).SendMessageToServer(String.valueOf(msg.getMessageServerConversationID()),msg.getDate(),msg.getMessage());
                         return svc;
                     }
 
@@ -59,7 +57,11 @@ public class MessageSynchronizer implements ISynchronize {
                     @Override
                     protected void onSuccess(final MessageResponse response) throws Exception {
                         super.onSuccess(response);
-                        if (response.MessageStatus == "1")
+
+                        if (response == null)
+                            return;
+
+                        if (response.MessageStatus == "0")
                         {
                             msgDS.updateSynced(msg.getMessageID());
                         }
@@ -73,7 +75,7 @@ public class MessageSynchronizer implements ISynchronize {
         }
     }
 
-    private void SyncUnReadMessages(final Context context)
+    private void SyncUnReadMessages(final Context context,final VehmonServiceProvider serviceProvider)
     {
         try {
             final MessageConversationDatasource msgConvoDS = new MessageConversationDatasource(context);

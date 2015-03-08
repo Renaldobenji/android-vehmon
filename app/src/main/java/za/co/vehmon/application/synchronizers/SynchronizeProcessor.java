@@ -17,6 +17,7 @@ import javax.inject.Inject;
 
 import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
+import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.util.Ln;
 
 import static za.co.vehmon.application.core.Constants.Notification.SYNC_NOTIFICATION_ID;
@@ -29,6 +30,7 @@ public class SynchronizeProcessor extends Service {
 
     @Inject protected Bus eventBus;
     @Inject NotificationManager notificationManager;
+    @Inject protected VehmonServiceProvider serviceProvider;
 
     private List<ISynchronize> synchronizers;
 
@@ -54,9 +56,10 @@ public class SynchronizeProcessor extends Service {
     {
         this.synchronizers = new ArrayList<ISynchronize>();
         this.synchronizers.add(new AbsenceRequestSynchronizer());
-        this.synchronizers.add(new MessageSynchronizer());
-        this.synchronizers.add(new TimeManagementSynchronizer());
-        this.synchronizers.add(new GPSSynchronizer());
+        //this.synchronizers.add(new MessageSynchronizer());
+        this.synchronizers.add(new TimeClockInSynchronizer());
+        this.synchronizers.add(new TimeClockOutSynchronizer());
+        //this.synchronizers.add(new GPSSynchronizer());
     }
 
     @Override
@@ -81,8 +84,8 @@ public class SynchronizeProcessor extends Service {
             for(ISynchronize sync : this.synchronizers)
             {
                 try {
-                    updateNotification(String.format("{0} is syncing",sync.toString()));
-                    sync.Synchronize(this);
+                    updateNotification(String.format("%1s is syncing",sync.toString()));
+                    sync.Synchronize(this,serviceProvider);
                 }
                 catch (Exception ex)
                 {

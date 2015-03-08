@@ -15,7 +15,7 @@ import za.co.vehmon.application.R;
  */
 public class NewMessageDialog extends DialogFragment
 {
-    @InjectView(R.id.txt_your_name) protected EditText content;
+    //@InjectView(R.id.txt_your_name) protected EditText content;
     private EditText mEditText;
 
     public interface NewMessageDialogListener {
@@ -31,9 +31,9 @@ public class NewMessageDialog extends DialogFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.new_message, container);
-        mEditText = (EditText) view.findViewById(R.id.txt_your_name);
+        /*mEditText = (EditText) view.findViewById(R.id.txt_your_name);
         getDialog().setTitle("New Message");
-        getDialog().setCancelable(true);
+        getDialog().setCancelable(true);*/
         return view;
     }
 

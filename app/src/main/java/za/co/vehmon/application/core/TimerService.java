@@ -200,7 +200,7 @@ public class TimerService extends Service {
 
         return new NotificationCompat.Builder(this)
                 .setContentTitle(getString(R.string.app_name))
-                .setSmallIcon(R.drawable.ic_stat_ab_notification)
+                .setSmallIcon(R.drawable.icon)
                 .setContentText(message)
                 .setAutoCancel(false)
                 .setOnlyAlertOnce(true)

@@ -43,6 +43,10 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name="za.co.vehmon.application.ui.NewMessageActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="za.co.vehmon.application.ui.MessageViewActivity"
             android:label="@string/app_name" >
         </activity>
@@ -66,6 +70,10 @@
             android:exported="false" />
         <service
             android:name="za.co.vehmon.application.gps.GPSTrackingService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name="za.co.vehmon.application.synchronizers.SynchronizeProcessor"
             android:enabled="true"
             android:exported="false" />
         <service

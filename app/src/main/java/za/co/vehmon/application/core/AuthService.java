@@ -3,6 +3,7 @@ package za.co.vehmon.application.core;
 import java.util.List;
 
 import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
@@ -19,7 +20,7 @@ public interface AuthService {
     TokenGenerationResult GetTokenForUser(@Path("userName") String username, @Path("password") String password);
 
     @POST(Constants.Http.VEHMON_URL_AUTH_RENEW_FRAG)
-    UserTokenValidationResponse RenewToken(@Field("token") String token);
+    UserTokenValidationResponse RenewToken(@Path("token") String token);
 
     @GET(Constants.Http.VEHMON_URL_AUTH_GETALLUSERS_FRAG)
     List<UserDetailContract> GetAllUsers(@Path("token") String token);

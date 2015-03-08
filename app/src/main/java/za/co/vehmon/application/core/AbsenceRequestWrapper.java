@@ -6,6 +6,7 @@ import java.util.Date;
 
 import za.co.vehmon.application.datasource.AbsenceRequestDatasource;
 import za.co.vehmon.application.ui.AbsenceRequestActivity;
+import za.co.vehmon.application.util.VehmonCurrentDate;
 
 /**
  * Created by Renaldo on 1/15/2015.
@@ -45,7 +46,7 @@ public class AbsenceRequestWrapper {
         return new AbsenceRequest().getAbsenceRequestTypes();
     }
 
-    public AbsenceRequestResult SubmitAbsenceRequest(Context context, int absenceRequestTypeID, Date fromDate, Date toDate)
+    public AbsenceRequestResult SubmitAbsenceRequest(Context context, String absenceRequestTypeID, Date fromDate, Date toDate)
     {
         String userID = "Renaldob";
         AbsenceRequestResult result = new AbsenceRequestResult();
@@ -64,7 +65,7 @@ public class AbsenceRequestWrapper {
         }
 
         //String fromDate, String toDate, String userID, String leaveTypeID
-        if (ds.InsertAbsenceRequest(fromDate.toString(),toDate.toString(),userID,Integer.toString(absenceRequestTypeID)) == -1)
+        if (ds.InsertAbsenceRequest(VehmonCurrentDate.GetCurrentDate(fromDate), VehmonCurrentDate.GetCurrentDate(toDate),userID,absenceRequestTypeID) == -1)
         {
             //Error inserting into table
             result.setSuccessful(false);

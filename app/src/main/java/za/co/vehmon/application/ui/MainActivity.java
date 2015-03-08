@@ -3,7 +3,10 @@
 package za.co.vehmon.application.ui;
 
 import android.accounts.OperationCanceledException;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -14,12 +17,17 @@ import android.view.View;
 import android.view.Window;
 
 import butterknife.ButterKnife;
+import za.co.vehmon.application.BootstrapApplication;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity;
+import za.co.vehmon.application.core.Constants;
+import za.co.vehmon.application.core.User;
 import za.co.vehmon.application.core.VehmonService;
 import za.co.vehmon.application.events.NavItemSelectedEvent;
+import za.co.vehmon.application.gps.GPSTrackingService;
 import za.co.vehmon.application.services.UserTokenValidationResponse;
+import za.co.vehmon.application.synchronizers.SynchronizeProcessor;
 import za.co.vehmon.application.util.Ln;
 import za.co.vehmon.application.util.SafeAsyncTask;
 import za.co.vehmon.application.util.UIUtils;
@@ -105,7 +113,7 @@ public class MainActivity extends BootstrapFragmentActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-
+        startSynchronization();
         checkAuth();
 
     }
@@ -147,13 +155,12 @@ public class MainActivity extends BootstrapFragmentActivity {
     }
 
     private void checkAuth() {
-        new SafeAsyncTask<Boolean>() {
+        new SafeAsyncTask<UserTokenValidationResponse>() {
 
             @Override
-            public Boolean call() throws Exception {
+            public UserTokenValidationResponse call() throws Exception {
                 UserTokenValidationResponse response = serviceProvider.getService(MainActivity.this).RenewUserToken();
-                String status = UserTokenValidationResponse.getStatus(response.UserTokenState);
-                return (status.equals("Valid"));
+                return response;
             }
 
             @Override
@@ -167,9 +174,18 @@ public class MainActivity extends BootstrapFragmentActivity {
             }
 
             @Override
-            protected void onSuccess(final Boolean hasAuthenticated) throws Exception {
+            protected void onSuccess(final UserTokenValidationResponse hasAuthenticated) throws Exception {
                 super.onSuccess(hasAuthenticated);
-                userHasAuthenticated = hasAuthenticated;
+                userHasAuthenticated = (hasAuthenticated.UserTokenState.equals("Valid"));
+                if (userHasAuthenticated)
+                {
+                    SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(Constants.VehmonSharedPrefs.name, Context.MODE_PRIVATE);
+                    String username = sharedPref.getString("username","");
+                    User user = new User();
+                    user.setUsername(username);
+                    final BootstrapApplication globalApplication = (BootstrapApplication)getApplicationContext();
+                    globalApplication.setUser(user);
+                }
                 initScreen();
             }
         }.execute();
@@ -185,9 +201,6 @@ public class MainActivity extends BootstrapFragmentActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 //menuDrawer.toggleMenu();
-                return true;
-            case R.id.timer:
-                navigateToTimer();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -221,12 +234,26 @@ public class MainActivity extends BootstrapFragmentActivity {
                 // do nothing as we're already on the home screen.
                 break;
             case 1:
-                // Timer
-                navigateToTimer();
-                break;
-            case 2:
                 navigateToAbsenceRequest();
                 break;
         }
+    }
+
+    private void startSynchronization()
+    {
+        if (!isSynchronizationServiceRunning()) {
+            final Intent i = new Intent(this, SynchronizeProcessor.class);
+            startService(i);
+        }
+    }
+
+    private boolean isSynchronizationServiceRunning() {
+        final ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (SynchronizeProcessor.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

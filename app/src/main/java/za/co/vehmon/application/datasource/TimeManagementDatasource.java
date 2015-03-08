@@ -80,13 +80,13 @@ public class TimeManagementDatasource {
         Cursor cursor = database.rawQuery(query, null);
         cursor.moveToFirst();
 
-        TimeManagement record = cursorToTimeManagement(cursor);
+        int timeManagementID = cursor.getInt(0);
 
         ContentValues args = new ContentValues();
         args.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKOUTTIME, clockoutTime);
         args.put(MySQLiteHelper.TABLE_TIMEMNG_OUTSYNCED, 0);
 
-        long id = database.update(MySQLiteHelper.TABLE_TIMEMNG, args, MySQLiteHelper.TABLE_TIMEMNG_ID + "=" + record.getId(), null);
+        long id = database.update(MySQLiteHelper.TABLE_TIMEMNG, args, MySQLiteHelper.TABLE_TIMEMNG_ID + "=" + timeManagementID, null);
 
         close();
 

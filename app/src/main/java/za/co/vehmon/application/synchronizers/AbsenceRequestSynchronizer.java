@@ -19,10 +19,8 @@ import za.co.vehmon.application.util.SafeAsyncTask;
  */
 public class AbsenceRequestSynchronizer implements ISynchronize {
 
-    @Inject protected VehmonServiceProvider serviceProvider;
-
     @Override
-    public SynchronizedResult Synchronize(final Context context) {
+    public SynchronizedResult Synchronize(final Context context,final VehmonServiceProvider serviceProvider) {
 
         SynchronizedResult result = new SynchronizedResult();
         result.setSynchronizedSuccessful(true);
@@ -50,7 +48,7 @@ public class AbsenceRequestSynchronizer implements ISynchronize {
                         @Override
                         protected void onSuccess(final LeaveRequestResponse response) throws Exception {
                             super.onSuccess(response);
-                            if (response.RequestStatus == "Success")
+                            if (response.RequestStatus.equals("0"))
                             {
                                 ds.updateSynced(items.getId());
                             }

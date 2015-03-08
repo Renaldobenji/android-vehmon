@@ -58,14 +58,12 @@ public final class Constants {
         public static final String VEHMON_URL_AUTH_GETALLUSERS_FRAG = "/services/Authentication.svc/GetAllUsers/{token}";
         public static final String VEHMON_URL_AUTH_LEAVE_FRAG = "/services/LeaveService.svc/RequestLeave/{token}/{startTime}/{endTime}/{leaveRequestType}";
         public static final String VEHMON_URL_AUTH_STARTSHIFT_FRAG = "/services/TimeTrackingService.svc/StartShift/{token}/{clockInLat}/{clockOutLat}/{startTime}";
-        public static final String VEHMON_URL_AUTH_ENDSHIFT_FRAG = "/services/TimeTrackingService.svc/EndShift/{userToken}/{shiftId}/{endTime}";
-        public static final String VEHMON_URL_AUTH_LOGGPS_FRAG = "/services/TimeTrackingService.svc/LogCoordinatesToShift";
+        public static final String VEHMON_URL_AUTH_ENDSHIFT_FRAG = "/services/TimeTrackingService.svc/EndShift/{userToken}/{shiftId}";
+        public static final String VEHMON_URL_AUTH_LOGGPS_FRAG = "/services/TimeTrackingService.svc/LogCoordinatesToShift/{token}/{shiftId}/{coords}";
         public static final String VEHMON_URL_MESSAGE_CREATECONV_FRAG = "/services/MessageService.svc/CreateConversation/{token}/{conversationName}/{userNames}";
-        public static final String VEHMON_URL_MESSAGE_SENDMSG_FRAG = "/services/MessageService.svc/SendMessage";
+        public static final String VEHMON_URL_MESSAGE_SENDMSG_FRAG = "/services/MessageService.svc/SendMessage/{token}/{conversationId}/{dateSent}/{message}";
         public static final String VEHMON_URL_MESSAGE_CONVUNREADMSG_FRAG = "/services/MessageService.svc/GetAllUnreadMessagesForConversation/{token}/{conversationId}";
         public static final String VEHMON_URL_MESSAGE_UNREADMSG_FRAG = "/services/MessageService.svc/GetAllUnreadMessages/{token}";
-
-
 
         /**
          * List Users URL

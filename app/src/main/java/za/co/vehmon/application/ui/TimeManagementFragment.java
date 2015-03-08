@@ -3,9 +3,12 @@ package za.co.vehmon.application.ui;
 import android.accounts.AccountsException;
 import android.accounts.OperationCanceledException;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.BoringLayout;
@@ -78,12 +81,6 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
             return false;
         }
         switch (item.getItemId()) {
-            case R.id.refresh:
-                forceRefresh();
-                return true;
-            case R.id.logout:
-                logout();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -166,6 +163,14 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
 
     @OnClick(R.id.clockIn)
     public void ClockIn(View view) {
+
+        //GPS must be enabled
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(getActivity().LOCATION_SERVICE);
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+            showGPSDisabledAlertToUser();
+            return;
+        }
+
         try {
 
             new SafeAsyncTask<TimeManagementWrapper.TimeManagementResult>() {
@@ -198,6 +203,28 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
         {
             e.printStackTrace();
         }
+    }
+
+    private void showGPSDisabledAlertToUser(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setMessage("GPS is disabled. Would you like to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Enable GPS",
+                        new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog, int id){
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(callGPSSettingIntent);
+                            }
+                        });
+        alertDialogBuilder.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog, int id){
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
     }
 
     private void startTimer() {

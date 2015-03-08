@@ -136,6 +136,7 @@ public class MessagesDatasource {
 
     private Message cursorToMsgConvo(Cursor cursor) {
         Message msg = new Message();
+        msg.setMessageID(cursor.getInt(0));
         msg.setMessageConversationID(cursor.getInt(1));
         msg.setMessage(cursor.getString(2));
         msg.setTo(cursor.getString(3));

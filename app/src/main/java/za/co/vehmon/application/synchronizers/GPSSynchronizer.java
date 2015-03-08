@@ -20,9 +20,8 @@ import za.co.vehmon.application.util.SafeAsyncTask;
  */
 public class GPSSynchronizer implements ISynchronize {
 
-    @Inject protected VehmonServiceProvider serviceProvider;
     @Override
-    public SynchronizedResult Synchronize(final Context context) {
+    public SynchronizedResult Synchronize(final Context context,final VehmonServiceProvider serviceProvider) {
 
         SynchronizedResult result = new SynchronizedResult();
         result.setSynchronizedSuccessful(true);
@@ -37,7 +36,7 @@ public class GPSSynchronizer implements ISynchronize {
                     @Override
                     public ShiftResponse call() throws Exception {
                         Coordinate[] coordinates = new Coordinate[1];{new Coordinate(gps.getLat(),gps.getLng(),gps.getDate());};
-                        final ShiftResponse svc = serviceProvider.getService(context).SendGPSLogToServer(gps.getShiftID(),coordinates);
+                        final ShiftResponse svc = serviceProvider.getService(context).SendGPSLogToServer(String.valueOf(gps.getShiftID()),coordinates);
                         return svc;
                     }
 

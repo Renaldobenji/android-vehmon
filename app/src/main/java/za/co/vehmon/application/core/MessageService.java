@@ -14,11 +14,11 @@ import za.co.vehmon.application.services.MessageResponse;
  */
 public interface MessageService {
 
-    @GET(Constants.Http.VEHMON_URL_MESSAGE_CREATECONV_FRAG)
+    @POST(Constants.Http.VEHMON_URL_MESSAGE_CREATECONV_FRAG)
     ConversationResponse CreateConversation(@Path("token")String token,@Path("conversationName") String conversationName,@Path("userNames") String userNames);
 
     @POST(Constants.Http.VEHMON_URL_MESSAGE_SENDMSG_FRAG)
-    MessageResponse SendMessage(@Field("token") String token,@Field("conversationId") int conversationId,@Field("dateSent") String dateSent,@Field("message") String message);
+    MessageResponse SendMessage(@Path("token") String token,@Path("conversationId") String conversationId,@Path("dateSent") String dateSent,@Path("message") String message);
 
     @GET(Constants.Http.VEHMON_URL_MESSAGE_CONVUNREADMSG_FRAG)
     List<MessageResponse> GetAllUnreadMessagesForConversation(@Path("token")String token,@Path("conversationId") Integer conversationId);

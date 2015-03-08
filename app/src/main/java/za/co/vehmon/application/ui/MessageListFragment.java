@@ -7,7 +7,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.Loader;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -72,15 +71,22 @@ public class MessageListFragment extends ItemListFragment<MessageConversation>{
         switch (item.getItemId()) {
             case R.id.newMessage:
                 Intent intent = new Intent(getActivity(), NewMessageActivity.class);
-                startActivity(intent);
-                return true;
-            case R.id.logout:
-                this.logout();
+                startActivityForResult(intent,2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        forceRefresh();
+    }
+
 
     private void showNewMessageDialog() {
         AlertDialog.Builder messageRecipient = new AlertDialog.Builder(getActivity());

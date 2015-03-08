@@ -88,70 +88,84 @@ ADDED from AndroidManifest.xml:38:9
 		ADDED from AndroidManifest.xml:39:13
 	android:name
 		ADDED from AndroidManifest.xml:38:19
-activity#za.co.vehmon.application.ui.MessageViewActivity
+activity#za.co.vehmon.application.ui.NewMessageActivity
 ADDED from AndroidManifest.xml:43:9
 	android:label
 		ADDED from AndroidManifest.xml:44:13
 	android:name
 		ADDED from AndroidManifest.xml:43:19
-activity#za.co.vehmon.application.ui.BootstrapTimerActivity
+activity#za.co.vehmon.application.ui.MessageViewActivity
 ADDED from AndroidManifest.xml:48:9
 	android:label
-		ADDED from AndroidManifest.xml:50:19
-	android:configChanges
-		ADDED from AndroidManifest.xml:49:19
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:52:19
+		ADDED from AndroidManifest.xml:49:13
 	android:name
 		ADDED from AndroidManifest.xml:48:19
+activity#za.co.vehmon.application.ui.BootstrapTimerActivity
+ADDED from AndroidManifest.xml:53:9
+	android:label
+		ADDED from AndroidManifest.xml:55:19
+	android:configChanges
+		ADDED from AndroidManifest.xml:54:19
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:57:19
+	android:name
+		ADDED from AndroidManifest.xml:53:19
 	android:launchMode
-		ADDED from AndroidManifest.xml:51:19
+		ADDED from AndroidManifest.xml:56:19
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:55:13
+ADDED from AndroidManifest.xml:60:13
 	android:name
-		ADDED from AndroidManifest.xml:56:17
+		ADDED from AndroidManifest.xml:61:17
 	android:value
-		ADDED from AndroidManifest.xml:57:17
+		ADDED from AndroidManifest.xml:62:17
 service#za.co.vehmon.application.core.TimerService
-ADDED from AndroidManifest.xml:60:9
+ADDED from AndroidManifest.xml:65:9
 	android:exported
-		ADDED from AndroidManifest.xml:60:75
+		ADDED from AndroidManifest.xml:65:75
 	android:enabled
-		ADDED from AndroidManifest.xml:60:52
+		ADDED from AndroidManifest.xml:65:52
 	android:name
-		ADDED from AndroidManifest.xml:60:18
+		ADDED from AndroidManifest.xml:65:18
 service#za.co.vehmon.application.gps.GPSTrackingService
-ADDED from AndroidManifest.xml:62:9
+ADDED from AndroidManifest.xml:67:9
 	android:exported
-		ADDED from AndroidManifest.xml:62:80
+		ADDED from AndroidManifest.xml:67:80
 	android:enabled
-		ADDED from AndroidManifest.xml:62:57
+		ADDED from AndroidManifest.xml:67:57
 	android:name
-		ADDED from AndroidManifest.xml:62:18
+		ADDED from AndroidManifest.xml:67:18
+service#za.co.vehmon.application.synchronizers.SynchronizeProcessor
+ADDED from AndroidManifest.xml:69:9
+	android:exported
+		ADDED from AndroidManifest.xml:69:92
+	android:enabled
+		ADDED from AndroidManifest.xml:69:69
+	android:name
+		ADDED from AndroidManifest.xml:69:18
 service#za.co.vehmon.application.authenticator.AccountAuthenticatorService
-ADDED from AndroidManifest.xml:64:9
+ADDED from AndroidManifest.xml:71:9
 	android:process
-		ADDED from AndroidManifest.xml:66:13
+		ADDED from AndroidManifest.xml:73:13
 	android:name
-		ADDED from AndroidManifest.xml:65:13
+		ADDED from AndroidManifest.xml:72:13
 intent-filter#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:67:13
+ADDED from AndroidManifest.xml:74:13
 action#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:68:17
+ADDED from AndroidManifest.xml:75:17
 	android:name
-		ADDED from AndroidManifest.xml:68:25
+		ADDED from AndroidManifest.xml:75:25
 meta-data#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:71:13
+ADDED from AndroidManifest.xml:78:13
 	android:resource
-		ADDED from AndroidManifest.xml:73:17
+		ADDED from AndroidManifest.xml:80:17
 	android:name
-		ADDED from AndroidManifest.xml:72:17
+		ADDED from AndroidManifest.xml:79:17
 activity#za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity
-ADDED from AndroidManifest.xml:76:9
+ADDED from AndroidManifest.xml:83:9
 	android:excludeFromRecents
-		ADDED from AndroidManifest.xml:78:13
+		ADDED from AndroidManifest.xml:85:13
 	android:name
-		ADDED from AndroidManifest.xml:77:13
+		ADDED from AndroidManifest.xml:84:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:19.1.0:18:5

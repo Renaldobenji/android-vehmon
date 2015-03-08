@@ -253,7 +253,7 @@ public class BootstrapAuthenticatorActivity extends ActionBarActivity {
 
                 final BootstrapApplication globalApplication = (BootstrapApplication)getApplicationContext();
                 globalApplication.setUser(loginResponse);
-
+                storeUserInPref(loginResponse.getUsername());
                 token = loginResponse.getSessionToken();
 
                 return true;
@@ -301,6 +301,14 @@ public class BootstrapAuthenticatorActivity extends ActionBarActivity {
         editor.commit();
 
         finish();
+    }
+
+    private void storeUserInPref(String username)
+    {
+        SharedPreferences sharedPref = getSharedPreferences(Constants.VehmonSharedPrefs.name,Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("username",username);
+        editor.commit();
     }
 
     /**

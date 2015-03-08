@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -142,7 +143,7 @@ public class AbsenceRequestActivity extends BootstrapActivity {
     @OnClick(R.id.buttonAbsenceSubmit)
     public void AbsenceRequestSubmit(View view)
     {
-        final int absenceRequestTypeID = 1;
+        final String absenceRequestTypeID = spinnerAbsenceType.getAdapter().getItem(spinnerAbsenceType.getSelectedItemPosition()).toString();
         final ProgressDialog barProgressDialog = ProgressDialog.show(AbsenceRequestActivity.this,"Please wait...", "Saving Request",true);
         try {
             final Date fromDate = parseDate(editTextFromDate.getText().toString());

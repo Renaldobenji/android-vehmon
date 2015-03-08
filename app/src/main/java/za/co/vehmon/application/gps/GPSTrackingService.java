@@ -112,38 +112,44 @@ public class GPSTrackingService extends Service implements LocationListener {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
-        this.timeTrackingID = intent.getIntExtra("TimeTrackingID",1);
-        if (this.timeTrackingID  == 1)
-            stopSelf();
+        try {
+            this.timeTrackingID = Integer.valueOf(intent.getExtras().get("TimeTrackingID").toString());
+            if (this.timeTrackingID == 0)
+                stopSelf();
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);//Only use gps coordinates
+            Criteria criteria = new Criteria();
+            criteria.setAccuracy(Criteria.ACCURACY_FINE);//Only use gps coordinates
 
-        provider = locationManager.getBestProvider(criteria, false);
+            provider = locationManager.getBestProvider(criteria, false);
 
-        if (provider == null)
+            if (provider == null) {
+                //No location provider enabled, this is a problem.....
+                stopSelf();
+            }
+
+            //The last known location of this provider
+            Location location = locationManager.getLastKnownLocation(provider);
+
+            if (location != null)
+                this.onLocationChanged(location);
+
+            if (provider != null && provider.length() > 0) {
+                //Provider found
+                locationManager.requestLocationUpdates(provider, minTime, minDistance, this);
+            }
+            notifyTimerRunning();
+
+            startForeground(Constants.Notification.GPS_NOTIFICATION_ID, getNotification("Vehicle Tracking"));
+            setupGPSTimer();
+        }
+        catch (Exception e)
         {
-            //No location provider enabled, this is a problem.....
+            e.printStackTrace();
+            //Something went wrong, exit
             stopSelf();
         }
-
-        //The last known location of this provider
-        Location location = locationManager.getLastKnownLocation(provider);
-
-        if (location != null)
-            this.onLocationChanged(location);
-
-        if (provider != null && provider.length() > 0)
-        {
-            //Provider found
-            locationManager.requestLocationUpdates(provider, minTime, minDistance, this);
-        }
-        notifyTimerRunning();
-
-        startForeground(Constants.Notification.GPS_NOTIFICATION_ID, getNotification("Vehicle Tracking"));
-        setupGPSTimer();
         return Service.START_NOT_STICKY;
     }
 

@@ -17,7 +17,7 @@ public class AbsenceRequest {
 
     public AbsenceRequest()
     {
-        String[] absenceTypes = new String[5];
+        String[] absenceTypes = new String[2];
 
         absenceTypes[0] = "Sick";
         absenceTypes[1] = "Annual";
