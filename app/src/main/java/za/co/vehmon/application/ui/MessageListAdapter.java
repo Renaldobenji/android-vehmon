@@ -29,7 +29,12 @@ public class MessageListAdapter extends SingleTypeAdapter<MessageConversation> {
     @Override
     protected void update(int i, MessageConversation messageConversation) {
         imageView(0).setBackgroundResource(R.drawable.gravatar_icon);
-        setText(1, String.format("%1$s", messageConversation.getTo()));
+
+        if (!messageConversation.getTo().equals(""))
+            setText(1, String.format("%1$s", messageConversation.getTo()));
+        else
+            setText(1, String.format("%1$s", messageConversation.getFrom()));
+
         setText(2, String.format("%1$s", messageConversation.getDate()));
     }
 

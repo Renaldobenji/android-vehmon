@@ -87,63 +87,6 @@ public class MessageListFragment extends ItemListFragment<MessageConversation>{
         forceRefresh();
     }
 
-
-    private void showNewMessageDialog() {
-        AlertDialog.Builder messageRecipient = new AlertDialog.Builder(getActivity());
-        messageRecipient.setMessage("Choose recipient here");
-        messageRecipient.setCancelable(true);
-        messageRecipient.setPositiveButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-
-                    }
-                });
-        messageRecipient.setNegativeButton("No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alert11 = messageRecipient.create();
-        alert11.show();
-    }
-
-    private void CreateNewMessage()
-    {
-        final ProgressDialog barProgressDialog = ProgressDialog.show(getActivity(),"Please wait...", "Creating Message",true);
-        new SafeAsyncTask<MessageWrapper.MessageResult>() {
-            @Override
-            public MessageWrapper.MessageResult call() throws Exception {
-
-                BootstrapApplication app = (BootstrapApplication)getActivity().getApplicationContext();
-                ConversationResponse response = serviceProvider.getService(getActivity()).CreateConversation(String.format("{0}Conversation{1}",app.getUser().getUsername(),"Robyn"),"Robyn");
-                if (response.CreateStatus.equals("Successfull")) {
-                    final MessageWrapper.MessageResult svc = serviceProvider.getService(getActivity()).CreateNewMessage(getActivity(), "Renaldo", "Robyn",response.ConversationId);
-                    return svc;
-                }
-                return null;
-            }
-
-            @Override
-            protected void onException(final Exception e) throws RuntimeException {
-                super.onException(e);
-                if (e instanceof OperationCanceledException) {
-                }
-                barProgressDialog.dismiss();
-            }
-
-            @Override
-            protected void onSuccess(final MessageWrapper.MessageResult isSuccessful) throws Exception {
-                super.onSuccess(isSuccessful);
-                barProgressDialog.dismiss();
-                forceRefresh();
-            }
-        }.execute();
-    }
-
     @Override
     protected LogoutService getLogoutService() {
         return null;

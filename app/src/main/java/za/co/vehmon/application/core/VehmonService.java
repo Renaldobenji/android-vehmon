@@ -73,7 +73,7 @@ public class VehmonService {
      */
     public User Authenticate(String email, String password) {
 
-        email = "PhilipSc";
+        email = "Renaldob";
         password = "Password";
         User user = new User();
 

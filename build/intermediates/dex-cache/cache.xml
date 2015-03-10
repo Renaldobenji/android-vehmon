@@ -93,18 +93,18 @@
         <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-9b08de7b8bbff184425b12d02205bce06d95040e.jar" />
     </item>
     <item
-        jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\1.1.1\c62362968b40fc5fdb6715945fc7876a7516a846\picasso-1.1.1.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="c62362968b40fc5fdb6715945fc7876a7516a846">
-        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\picasso-1.1.1-d1d64b6b4dd0cbe79ba2793565d3f8a594e42092.jar" />
-    </item>
-    <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.github.kevinsawicki\wishlist\0.9\classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="7c1fee313f20e5f6f32a69a4555a7ae1f9558f35">
         <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-13674e6af7bc22274fd7bf2661e255ed15e2784b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Renaldo\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\1.1.1\c62362968b40fc5fdb6715945fc7876a7516a846\picasso-1.1.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="c62362968b40fc5fdb6715945fc7876a7516a846">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\picasso-1.1.1-d1d64b6b4dd0cbe79ba2793565d3f8a594e42092.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\libs\internal_impl-21.0.0.jar"

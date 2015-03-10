@@ -50,7 +50,7 @@ public class MessageViewActivity extends BootstrapActivity {
         messageConversationID = getIntent().getExtras().getInt("msgConversationID");
         messageTo = getIntent().getExtras().getString("msgTo");
 
-        setTitle("Messages" + messageConversationID);
+        setTitle("Message");
         FetchMessageForConvo(messageConversationID);
     }
 
@@ -77,7 +77,7 @@ public class MessageViewActivity extends BootstrapActivity {
             protected void onSuccess(final MessageWrapper.MessageResult isSuccessful) throws Exception {
                 super.onSuccess(isSuccessful);
 
-                MessageViewAdapter adapter = new MessageViewAdapter(myActivity.getLayoutInflater(), isSuccessful.getMessages());
+                MessageViewAdapter adapter = new MessageViewAdapter(myActivity.getLayoutInflater(), isSuccessful.getMessages(),myActivity);
                 listViewMessages.setAdapter(adapter);
 
                 barProgressDialog.dismiss();
@@ -109,7 +109,7 @@ public class MessageViewActivity extends BootstrapActivity {
             protected void onSuccess(final MessageWrapper.MessageResult isSuccessful) throws Exception {
                 super.onSuccess(isSuccessful);
 
-                MessageViewAdapter adapter = new MessageViewAdapter(myActivity.getLayoutInflater(), isSuccessful.getMessages());
+                MessageViewAdapter adapter = new MessageViewAdapter(myActivity.getLayoutInflater(), isSuccessful.getMessages(),myActivity);
                 listViewMessages.setAdapter(adapter);
                 editTextMessage.setText("");
                 barProgressDialog.dismiss();

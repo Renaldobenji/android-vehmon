@@ -89,6 +89,9 @@ public class MessageConversationDatasource {
         }
         Cursor cursor = database.query(MySQLiteHelper.TABLE_MSGCONVO,allColumns, MySQLiteHelper.TABLE_MSGCONVO_SERVERCONVOID + "= ?",  new String[] {String.valueOf(serverConversationID)}, null, null, MySQLiteHelper.TABLE_MSGCONVO_ID+ " ASC");
 
+        if (cursor.getCount() == 0)
+            return null;
+
         cursor.moveToFirst();
 
         MessageConversation msgConvo = cursorToMsgConvo(cursor);

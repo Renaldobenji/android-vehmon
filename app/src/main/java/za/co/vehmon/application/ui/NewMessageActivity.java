@@ -78,6 +78,26 @@ public class NewMessageActivity extends BootstrapActivity {
             protected void onSuccess(final List<UserDetailContract> response) throws Exception {
                 super.onSuccess(response);
 
+                if (response == null || response.isEmpty())
+                    return;
+
+                BootstrapApplication app = (BootstrapApplication)myActivity.getApplicationContext();
+                String username = app.getUser().getUsername();
+
+                //Remove logged in user from the list
+                int i=-1;
+                int valueToRemove = -1;
+                for (UserDetailContract user:response)
+                {
+                    i++;
+                    if (user.UserName.toUpperCase().equals(username.toUpperCase()))
+                    {
+                        valueToRemove = i;
+                    }
+                }
+                if (valueToRemove != -1)
+                    response.remove(valueToRemove);
+
                 ContactListAdapter adapter = new ContactListAdapter(myActivity.getLayoutInflater(), response);
                 listMessageContacts.setAdapter(adapter);
 

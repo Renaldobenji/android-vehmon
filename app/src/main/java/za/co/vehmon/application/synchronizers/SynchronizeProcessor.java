@@ -11,14 +11,12 @@ import com.squareup.otto.Bus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
 
 import javax.inject.Inject;
 
 import za.co.vehmon.application.Injector;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
-import za.co.vehmon.application.util.Ln;
 
 import static za.co.vehmon.application.core.Constants.Notification.SYNC_NOTIFICATION_ID;
 
@@ -55,10 +53,11 @@ public class SynchronizeProcessor extends Service {
     private void setupSynchronizers()
     {
         this.synchronizers = new ArrayList<ISynchronize>();
-        this.synchronizers.add(new AbsenceRequestSynchronizer());
-        //this.synchronizers.add(new MessageSynchronizer());
-        this.synchronizers.add(new TimeClockInSynchronizer());
-        this.synchronizers.add(new TimeClockOutSynchronizer());
+        //this.synchronizers.add(new AbsenceRequestSynchronizer());
+        //this.synchronizers.add(new SendMessageSynchronizer());
+        this.synchronizers.add(new UnReadMessageSynchronizer());
+        //this.synchronizers.add(new TimeClockInSynchronizer());
+        //this.synchronizers.add(new TimeClockOutSynchronizer());
         //this.synchronizers.add(new GPSSynchronizer());
     }
 
