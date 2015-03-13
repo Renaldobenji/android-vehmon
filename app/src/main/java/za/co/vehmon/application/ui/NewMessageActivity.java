@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.squareup.otto.Bus;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,7 +18,9 @@ import butterknife.InjectView;
 import za.co.vehmon.application.BootstrapApplication;
 import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
+import za.co.vehmon.application.core.MessageListRefreshEvent;
 import za.co.vehmon.application.core.MessageWrapper;
+import za.co.vehmon.application.core.StopTimerEvent;
 import za.co.vehmon.application.services.ConversationResponse;
 import za.co.vehmon.application.services.UserDetailContract;
 import za.co.vehmon.application.util.SafeAsyncTask;
@@ -28,6 +32,7 @@ public class NewMessageActivity extends BootstrapActivity {
 
     @InjectView(R.id.listMessageContacts) protected ListView listMessageContacts;
     @Inject protected VehmonServiceProvider serviceProvider;
+    @Inject Bus eventBus;
     Activity myActivity;
 
     @Override
@@ -49,10 +54,29 @@ public class NewMessageActivity extends BootstrapActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 CreateNewMessage(myActivity,((UserDetailContract)listMessageContacts.getAdapter().getItem(position)).UserName);
-                setResult(2);
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        eventBus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        eventBus.unregister(this);
+    }
+
+    /**
+     * Posts a {@link za.co.vehmon.application.core.StopTimerEvent} message to the {@link com.squareup.otto.Bus}
+     */
+    private void produceMessageListRefresh() {
+        eventBus.post(new MessageListRefreshEvent());
     }
 
     private void FetchContactsFromServer()
@@ -108,7 +132,7 @@ public class NewMessageActivity extends BootstrapActivity {
 
     private void CreateNewMessage(final Activity activity, final String to)
     {
-        final ProgressDialog barProgressDialog = ProgressDialog.show(this,"Please wait...", "Creating Message",true);
+        //final ProgressDialog barProgressDialog = ProgressDialog.show(this,"Please wait...", "Creating Message",true);
         new SafeAsyncTask<MessageWrapper.MessageResult>() {
             @Override
             public MessageWrapper.MessageResult call() throws Exception {
@@ -127,13 +151,13 @@ public class NewMessageActivity extends BootstrapActivity {
                 super.onException(e);
                 if (e instanceof android.accounts.OperationCanceledException) {
                 }
-                barProgressDialog.dismiss();
+                //barProgressDialog.dismiss();
             }
 
             @Override
             protected void onSuccess(final MessageWrapper.MessageResult isSuccessful) throws Exception {
                 super.onSuccess(isSuccessful);
-                barProgressDialog.dismiss();
+                produceMessageListRefresh();
             }
         }.execute();
     }

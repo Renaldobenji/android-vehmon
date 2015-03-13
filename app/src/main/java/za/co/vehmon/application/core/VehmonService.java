@@ -186,7 +186,7 @@ public class VehmonService {
         return response;
     }
 
-    public ShiftResponse SendGPSLogToServer(String shiftID, Coordinate[] coords)
+    public ShiftResponse SendGPSLogToServer(String shiftID, String coords)
     {
         ShiftResponse response;
         try

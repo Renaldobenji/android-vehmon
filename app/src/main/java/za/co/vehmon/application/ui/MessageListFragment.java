@@ -1,5 +1,6 @@
 package za.co.vehmon.application.ui;
 
+import android.accounts.AccountsException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,7 +17,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.github.kevinsawicki.wishlist.SingleTypeAdapter;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,7 +32,9 @@ import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.authenticator.LogoutService;
 import za.co.vehmon.application.core.MessageConversation;
+import za.co.vehmon.application.core.MessageListRefreshEvent;
 import za.co.vehmon.application.core.MessageWrapper;
+import za.co.vehmon.application.core.TimerTickEvent;
 import za.co.vehmon.application.core.User;
 import za.co.vehmon.application.core.VehmonService;
 import za.co.vehmon.application.services.ConversationResponse;
@@ -44,12 +50,26 @@ public class MessageListFragment extends ItemListFragment<MessageConversation>{
 
     @Inject protected VehmonServiceProvider serviceProvider;
     @Inject protected LogoutService logoutService;
+    @Inject Bus eventBus;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Injector.inject(this);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        eventBus.register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //eventBus.unregister(this);
+    }
+
 
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
@@ -61,6 +81,12 @@ public class MessageListFragment extends ItemListFragment<MessageConversation>{
     @Override
     public void onCreateOptionsMenu(final Menu optionsMenu, final MenuInflater inflater) {
         inflater.inflate(R.menu.message_menu, optionsMenu);
+    }
+
+    @Subscribe
+    public void onMessageRefresh(MessageListRefreshEvent messageRefresh) {
+        MessageWrapper.MessageResult result = null;
+        this.refresh();
     }
 
     @Override

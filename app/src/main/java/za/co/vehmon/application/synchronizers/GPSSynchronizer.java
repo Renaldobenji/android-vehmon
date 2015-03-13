@@ -35,8 +35,8 @@ public class GPSSynchronizer implements ISynchronize {
                 new SafeAsyncTask<ShiftResponse>() {
                     @Override
                     public ShiftResponse call() throws Exception {
-                        Coordinate[] coordinates = new Coordinate[1];{new Coordinate(gps.getLat(),gps.getLng(),gps.getDate());};
-                        final ShiftResponse svc = serviceProvider.getService(context).SendGPSLogToServer(String.valueOf(gps.getShiftID()),coordinates);
+                        String coords = new StringBuilder().append(gps.getLat()).append(",").append(gps.getLng()).append(",").append(gps.getDate()).toString();
+                        final ShiftResponse svc = serviceProvider.getService(context).SendGPSLogToServer(String.valueOf(gps.getShiftID()),coords);
                         return svc;
                     }
 
@@ -51,7 +51,7 @@ public class GPSSynchronizer implements ISynchronize {
                     protected void onSuccess(final ShiftResponse response) throws Exception {
                         super.onSuccess(response);
 
-                        if (response.LogState.equals("1"))
+                        if (response.LogState.equals("4"))
                         {
                             gpsDS.UpdateGPSLog(gps.getId());
                         }
