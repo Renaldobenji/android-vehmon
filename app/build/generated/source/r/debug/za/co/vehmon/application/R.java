@@ -1621,8 +1621,8 @@ containing a value of this type.
         public static final int checkbox=0x7f090046;
         public static final int chronometer=0x7f09005e;
         public static final int classic=0x7f09002a;
-        public static final int clockIn=0x7f09007f;
-        public static final int clockout=0x7f090080;
+        public static final int clockIn=0x7f090080;
+        public static final int clockout=0x7f090081;
         public static final int collapseActionView=0x7f090016;
         public static final int container=0x7f09006d;
         public static final int default_activity_button=0x7f090041;
@@ -1653,8 +1653,9 @@ containing a value of this type.
         public static final int imageButtonMessageSubmit=0x7f090075;
         public static final int imageButtonToDate=0x7f09005c;
         public static final int imageViewLogo=0x7f090068;
+        public static final int imgLogo=0x7f09007e;
         public static final int iv_Messageavatar=0x7f09006f;
-        public static final int iv_avatar=0x7f090081;
+        public static final int iv_avatar=0x7f090082;
         public static final int lblContactName=0x7f09007a;
         public static final int listMessageContacts=0x7f090079;
         public static final int listMode=0x7f090001;
@@ -1667,7 +1668,7 @@ containing a value of this type.
         public static final int monochrome=0x7f09002c;
         public static final int navigation_drawer=0x7f09006e;
         public static final int never=0x7f090012;
-        public static final int newMessage=0x7f090082;
+        public static final int newMessage=0x7f090083;
         public static final int none=0x7f090009;
         public static final int normal=0x7f090000;
         public static final int pause=0x7f090061;
@@ -1706,7 +1707,7 @@ containing a value of this type.
         public static final int textViewAbsenceFromDate=0x7f090057;
         public static final int textViewAbsenceToDate=0x7f09005a;
         public static final int textViewAbsenceType=0x7f090055;
-        public static final int timetrackingchronometer=0x7f09007e;
+        public static final int timetrackingchronometer=0x7f09007f;
         public static final int title=0x7f090044;
         public static final int top=0x7f09001c;
         public static final int top_action_bar=0x7f090039;
@@ -1783,11 +1784,12 @@ containing a value of this type.
         public static final int news_list_item=0x7f03002b;
         public static final int news_list_item_labels=0x7f03002c;
         public static final int spinner_item=0x7f03002d;
-        public static final int support_simple_spinner_dropdown_item=0x7f03002e;
-        public static final int time_management=0x7f03002f;
-        public static final int user_list_item=0x7f030030;
-        public static final int user_list_item_labels=0x7f030031;
-        public static final int user_view=0x7f030032;
+        public static final int splash_activity=0x7f03002e;
+        public static final int support_simple_spinner_dropdown_item=0x7f03002f;
+        public static final int time_management=0x7f030030;
+        public static final int user_list_item=0x7f030031;
+        public static final int user_list_item_labels=0x7f030032;
+        public static final int user_view=0x7f030033;
     }
     public static final class menu {
         public static final int bootstrap=0x7f0e0000;

@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.Html;
@@ -48,6 +49,8 @@ import za.co.vehmon.application.core.Constants;
 import za.co.vehmon.application.core.User;
 import za.co.vehmon.application.core.VehmonService;
 import za.co.vehmon.application.events.UnAuthorizedErrorEvent;
+import za.co.vehmon.application.ui.CarouselFragment;
+import za.co.vehmon.application.ui.MainActivity;
 import za.co.vehmon.application.ui.TextWatcherAdapter;
 import za.co.vehmon.application.util.Ln;
 import za.co.vehmon.application.util.SafeAsyncTask;
@@ -299,8 +302,17 @@ public class BootstrapAuthenticatorActivity extends ActionBarActivity {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("AuthToken",token);
         editor.commit();
-
+        initScreen();
         finish();
+    }
+
+    private void initScreen() {
+        navigateToMain();
+    }
+
+    private void navigateToMain() {
+        final Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     private void storeUserInPref(String username)

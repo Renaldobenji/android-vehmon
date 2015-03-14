@@ -27,6 +27,7 @@ import za.co.vehmon.application.ui.MessageListFragment;
 import za.co.vehmon.application.ui.MessageViewActivity;
 import za.co.vehmon.application.ui.NavigationDrawerFragment;
 import za.co.vehmon.application.ui.NewMessageActivity;
+import za.co.vehmon.application.ui.SplashActivity;
 import za.co.vehmon.application.ui.TimeManagementFragment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -65,7 +66,8 @@ import retrofit.converter.GsonConverter;
                 NewMessageActivity.class,
                 UnReadMessageSynchronizer.class,
                 SynchronizeProcessor.class,
-                GPSSynchronizer.class
+                GPSSynchronizer.class,
+                SplashActivity.class
         }
 )
 public class BootstrapModule {

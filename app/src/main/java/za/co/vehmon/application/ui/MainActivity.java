@@ -112,10 +112,8 @@ public class MainActivity extends BootstrapFragmentActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
+        initScreen();
         startSynchronization();
-        checkAuth();
-
     }
 
     private boolean isTablet() {
@@ -141,56 +139,6 @@ public class MainActivity extends BootstrapFragmentActivity {
         }
     }
 
-
-    private void initScreen() {
-        Ln.d("Foo");
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, new CarouselFragment())
-                .commit();
-
-        if (!userHasAuthenticated) {
-            navigateToLogin();
-        }
-    }
-
-    private void checkAuth() {
-        new SafeAsyncTask<UserTokenValidationResponse>() {
-
-            @Override
-            public UserTokenValidationResponse call() throws Exception {
-                UserTokenValidationResponse response = serviceProvider.getService(MainActivity.this).RenewUserToken();
-                return response;
-            }
-
-            @Override
-            protected void onException(final Exception e) throws RuntimeException {
-                super.onException(e);
-                if (e instanceof OperationCanceledException) {
-                    // User cancelled the authentication process (back button, etc).
-                    // Since auth could not take place, lets finish this activity.
-                    finish();
-                }
-            }
-
-            @Override
-            protected void onSuccess(final UserTokenValidationResponse hasAuthenticated) throws Exception {
-                super.onSuccess(hasAuthenticated);
-                userHasAuthenticated = (hasAuthenticated.UserTokenState.equals("Valid"));
-                if (userHasAuthenticated)
-                {
-                    SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(Constants.VehmonSharedPrefs.name, Context.MODE_PRIVATE);
-                    String username = sharedPref.getString("username","");
-                    User user = new User();
-                    user.setUsername(username);
-                    final BootstrapApplication globalApplication = (BootstrapApplication)getApplicationContext();
-                    globalApplication.setUser(user);
-                }
-                initScreen();
-            }
-        }.execute();
-    }
-
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 
@@ -212,10 +160,15 @@ public class MainActivity extends BootstrapFragmentActivity {
         startActivity(i);
     }
 
-    private void navigateToLogin() {
-        final Intent i = new Intent(this, BootstrapAuthenticatorActivity.class);
-        startActivity(i);
+
+    private void initScreen() {
+        Ln.d("Foo");
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, new CarouselFragment())
+                .commit();
     }
+
 
     private void navigateToAbsenceRequest()
     {
