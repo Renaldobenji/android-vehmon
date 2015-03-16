@@ -11,6 +11,8 @@ import com.squareup.otto.Bus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -29,6 +31,8 @@ public class SynchronizeProcessor extends Service {
     @Inject protected Bus eventBus;
     @Inject NotificationManager notificationManager;
     @Inject protected VehmonServiceProvider serviceProvider;
+    private Timer syncTimer;
+    private long minTime = 1000 * 60 * 10; //5 Minute updates
 
     private List<ISynchronize> synchronizers;
 
@@ -46,19 +50,36 @@ public class SynchronizeProcessor extends Service {
         eventBus.register(this);
         // Synchronizers
         setupSynchronizers();
-
         startForeground(SYNC_NOTIFICATION_ID, getNotification(getString(R.string.timer_running)));
+    }
+
+    private void setupSyncTimer()
+    {
+        syncTimer = new Timer("syncTimer", true);
+        syncTimer.scheduleAtFixedRate
+                (
+                        new TimerTask() {
+                            public void run() {
+                                try {
+                                    startSynchronization();
+                                } catch (Exception e) {
+
+                                }
+
+                            }
+                        },0,minTime
+                );
     }
 
     private void setupSynchronizers()
     {
         this.synchronizers = new ArrayList<ISynchronize>();
-        //this.synchronizers.add(new AbsenceRequestSynchronizer());
-        //this.synchronizers.add(new SendMessageSynchronizer());
+        this.synchronizers.add(new AbsenceRequestSynchronizer());
+        this.synchronizers.add(new SendMessageSynchronizer());
         this.synchronizers.add(new UnReadMessageSynchronizer());
-        //this.synchronizers.add(new TimeClockInSynchronizer());
-        //this.synchronizers.add(new TimeClockOutSynchronizer());
-        //this.synchronizers.add(new GPSSynchronizer());
+        this.synchronizers.add(new TimeClockInSynchronizer());
+        this.synchronizers.add(new TimeClockOutSynchronizer());
+        this.synchronizers.add(new GPSSynchronizer());
     }
 
     @Override
@@ -78,12 +99,20 @@ public class SynchronizeProcessor extends Service {
         if (this.synchronizers.isEmpty())
             stopSelf();
 
+        //startSynchronization();
+        setupSyncTimer();
+
+        return START_NOT_STICKY;
+    }
+
+    private void startSynchronization()
+    {
         synchronized(this)
         {
             for(ISynchronize sync : this.synchronizers)
             {
                 try {
-                    updateNotification(String.format("%1s is syncing",sync.toString()));
+                    updateNotification(String.format("vehmon is syncing",sync.toString()));
                     sync.Synchronize(this,serviceProvider);
                 }
                 catch (Exception ex)
@@ -92,9 +121,6 @@ public class SynchronizeProcessor extends Service {
                 }
             }
         }
-        stopSelf();
-
-        return START_NOT_STICKY;
     }
 
     /**
@@ -110,7 +136,7 @@ public class SynchronizeProcessor extends Service {
 
         return new NotificationCompat.Builder(this)
                 .setContentTitle(getString(R.string.app_name))
-                .setSmallIcon(R.drawable.ic_stat_ab_notification)
+                .setSmallIcon(R.drawable.icon)
                 .setContentText(message)
                 .setAutoCancel(false)
                 .setOnlyAlertOnce(true)

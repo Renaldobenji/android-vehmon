@@ -59,6 +59,7 @@ public class GPSLogDatasource {
         values.put(MySQLiteHelper.TABLE_GPSLOG_LNG, lng);
         values.put(MySQLiteHelper.TABLE_GPSLOG_ACCURACY, accuracy);
         values.put(MySQLiteHelper.TABLE_GPSLOG_DATE, date);
+        values.put(MySQLiteHelper.TABLE_GPSLOG_SYNC, 0);
 
         long id = database.insert(MySQLiteHelper.TABLE_GPSLOG, null,values);
 
