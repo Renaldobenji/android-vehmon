@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
-        jumboMode="false"
-        revision="19.1.0"
-        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
-        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-6b12bb7da66f960521c00803c60427207880a085.jar" />
-    </item>
-    <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.0\classes.jar"
         jumboMode="false"
         revision="19.1.0"
         sha1="686344a780033e4ba22b926cd225f8d4941247e6">
         <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-f43f0c03ef33febfb70d50a051dec749d125be34.jar" />
+    </item>
+    <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\19.1.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="3499ceba05ca1f6037c6a2fad73df8f636224a28">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-6b12bb7da66f960521c00803c60427207880a085.jar" />
     </item>
     <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\src\main\libs\butterknife-6.0.0.jar"

@@ -72,9 +72,6 @@ public class VehmonService {
      * @return
      */
     public User Authenticate(String email, String password) {
-
-        email = "Renaldob";
-        password = "Password";
         User user = new User();
 
         TokenGenerationResult result = getAuthService().GetTokenForUser(email,password);

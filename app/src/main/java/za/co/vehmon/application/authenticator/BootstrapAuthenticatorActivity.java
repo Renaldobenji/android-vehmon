@@ -232,14 +232,7 @@ public class BootstrapAuthenticatorActivity extends ActionBarActivity {
      * @param view
      */
     public void handleLogin(final View view) {
-        if (authenticationTask != null) {
-            return;
-        }
-
-        if (requestNewAccount) {
-            email = emailText.getText().toString();
-        }
-
+        email = emailText.getText().toString();
         password = passwordText.getText().toString();
         showProgress();
 
