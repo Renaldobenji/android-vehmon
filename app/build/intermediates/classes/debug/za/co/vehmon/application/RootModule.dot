@@ -22,15 +22,15 @@ digraph G1 {
   MessageListFragment -> Bus;
   MessageListFragment -> VehmonServiceProvider;
   MessageViewActivity -> VehmonServiceProvider;
-  NavigationDrawerFragment -> Bus;
   NavigationDrawerFragment -> SharedPreferences;
+  NavigationDrawerFragment -> Bus;
   NewMessageActivity -> Bus;
   NewMessageActivity -> VehmonServiceProvider;
   NotificationManager -> Context;
   PackageInfo -> Context;
-  RestAdapter -> RestErrorHandler;
   RestAdapter -> Gson;
   RestAdapter -> RestAdapterRequestInterceptor;
+  RestAdapter -> RestErrorHandler;
   RestAdapterRequestInterceptor -> UserAgentProvider;
   RestErrorHandler -> Bus;
   SharedPreferences -> Context;
@@ -44,11 +44,11 @@ digraph G1 {
   TimeManagementFragment -> VehmonServiceProvider;
   TimerService -> NotificationManager;
   TimerService -> Bus;
-  UserAgentProvider -> TelephonyManager;
-  UserAgentProvider -> PackageInfo;
   UserAgentProvider -> ApplicationInfo;
+  UserAgentProvider -> PackageInfo;
   UserAgentProvider -> ClassLoader;
-  VehmonServiceProvider -> RestAdapter;
+  UserAgentProvider -> TelephonyManager;
   VehmonServiceProvider -> ApiKeyProvider;
+  VehmonServiceProvider -> RestAdapter;
   n2 -> RestAdapter;
 }

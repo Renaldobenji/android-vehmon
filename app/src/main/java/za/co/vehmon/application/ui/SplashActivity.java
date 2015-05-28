@@ -36,32 +36,6 @@ public class SplashActivity extends Activity {
 
     @Inject protected VehmonServiceProvider serviceProvider;
 
-    private void registerInBackground() {
-        new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void... params) {
-                String msg = "";
-                try {
-                    serviceProvider.getService(getApplicationContext()).SantechLogin();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (AccountsException e) {
-                    e.printStackTrace();
-
-                }
-                catch(Exception ex)
-                {
-                    ex.printStackTrace();
-                }
-                return msg;
-            }
-
-            @Override
-            protected void onPostExecute(String msg) {
-
-            }
-        }.execute(null, null, null);
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
