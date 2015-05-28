@@ -64,7 +64,6 @@ public class VehmonService {
     private RestAdapter getRestAdapter() {
         return restAdapter;
     }
-
     /**
      * TODO: Need to implement Service that authenticates user
      * @param email

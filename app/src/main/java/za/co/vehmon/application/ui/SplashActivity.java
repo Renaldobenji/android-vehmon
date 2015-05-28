@@ -1,14 +1,20 @@
 package za.co.vehmon.application.ui;
 
+import android.accounts.AccountsException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+
+import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -30,11 +36,40 @@ public class SplashActivity extends Activity {
 
     @Inject protected VehmonServiceProvider serviceProvider;
 
+    private void registerInBackground() {
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                try {
+                    serviceProvider.getService(getApplicationContext()).SantechLogin();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (AccountsException e) {
+                    e.printStackTrace();
+
+                }
+                catch(Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+                return msg;
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+
+            }
+        }.execute(null, null, null);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_activity);
         Injector.inject(this);
+        //I will do all my crap here
+        //registerInBackground();
+        //End
         new SafeAsyncTask<UserTokenValidationResponse>() {
 
             @Override

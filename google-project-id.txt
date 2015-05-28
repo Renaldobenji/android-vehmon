@@ -1,0 +1,5 @@
+ProjectID: 531347791726
+sodium-crane-91911
+Browser API Key: APIAIzaSyBMO_HjQqTmfueW66ENSpEmTVNoWpLnLCA
+Server API Key: AIzaSyDRx4JRcyWgi5-PypzdMutrNh93YWA_T7o
+https://console.developers.google.com

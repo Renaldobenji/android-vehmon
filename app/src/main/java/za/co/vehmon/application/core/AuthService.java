@@ -24,4 +24,7 @@ public interface AuthService {
 
     @GET(Constants.Http.VEHMON_URL_AUTH_GETALLUSERS_FRAG)
     List<UserDetailContract> GetAllUsers(@Path("token") String token);
+
+    @GET("/api/Authz/Login")
+    String Login();
 }

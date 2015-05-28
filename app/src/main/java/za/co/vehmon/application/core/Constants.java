@@ -45,6 +45,7 @@ public final class Constants {
          */
         public static final String URL_BASE = "https://api.parse.com";
         public static final String VEHMON_URL_BASE = "http://vehmonmachine.cloudapp.net";
+        //public static final String VEHMON_URL_BASE = "https://santech-ws-ppe.sanlam.co.za/skymobile";
 
 
         /**
