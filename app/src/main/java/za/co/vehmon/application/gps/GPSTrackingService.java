@@ -17,7 +17,6 @@ import android.os.OperationCanceledException;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 

@@ -7,15 +7,15 @@ import butterknife.ButterKnife.Finder;
 public class BootstrapTimerActivity$$ViewInjector {
   public static void inject(Finder finder, final za.co.vehmon.application.ui.BootstrapTimerActivity target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131296350, "field 'chronometer'");
+    view = finder.findRequiredView(source, 2131230795, "field 'chronometer'");
     target.chronometer = (android.widget.TextView) view;
-    view = finder.findRequiredView(source, 2131296351, "field 'start'");
+    view = finder.findRequiredView(source, 2131230796, "field 'start'");
     target.start = (android.widget.Button) view;
-    view = finder.findRequiredView(source, 2131296352, "field 'stop'");
+    view = finder.findRequiredView(source, 2131230797, "field 'stop'");
     target.stop = (android.widget.Button) view;
-    view = finder.findRequiredView(source, 2131296353, "field 'pause'");
+    view = finder.findRequiredView(source, 2131230798, "field 'pause'");
     target.pause = (android.widget.Button) view;
-    view = finder.findRequiredView(source, 2131296354, "field 'resume'");
+    view = finder.findRequiredView(source, 2131230799, "field 'resume'");
     target.resume = (android.widget.Button) view;
   }
 

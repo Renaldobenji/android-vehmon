@@ -59,6 +59,11 @@ public class MainActivity extends BootstrapFragmentActivity {
 
     @Inject protected VehmonServiceProvider serviceProvider;
 
+    //Server API key:
+    //AIzaSyAj9222KhG5qX667aK7DhLA2bo18-bvPmQ
+    //Sender ID:
+    //531347791726
+
     public static final String EXTRA_MESSAGE = "message";
     public static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "1";
@@ -221,7 +226,7 @@ public class MainActivity extends BootstrapFragmentActivity {
 
                     // You should send the registration ID to your server over HTTP, so it
                     // can use GCM/HTTP or CCS to send messages to your app.
-                    sendRegistrationIdToBackend();
+                    sendRegistrationIdToBackend(context, regid);
 
                     // For this demo: we don't need to send it because the device will send
                     // upstream messages to a server that echo back the message using the
@@ -268,8 +273,14 @@ public class MainActivity extends BootstrapFragmentActivity {
      * device sends upstream messages to a server that echoes back the message
      * using the 'from' address in the message.
      */
-    private void sendRegistrationIdToBackend() {
-        // Your implementation here.
+    private void sendRegistrationIdToBackend(Context context, String regId) {
+        try {
+            serviceProvider.getService(context).SetDeviceID(regId);
+        }
+        catch (Exception ex)
+        {
+            //TODO: Sort out this errors
+        }
     }
 
     /**

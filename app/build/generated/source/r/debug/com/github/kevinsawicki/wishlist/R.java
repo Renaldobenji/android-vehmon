@@ -8,6 +8,6 @@ package com.github.kevinsawicki.wishlist;
 
 public final class R {
 	public static final class string {
-		public static final int lib_name = 0x7f0c003c;
+		public static final int lib_name = 0x7f0b003e;
 	}
 }

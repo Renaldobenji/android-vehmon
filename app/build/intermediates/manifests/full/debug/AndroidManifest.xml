@@ -30,7 +30,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Bootstrap.Dark" >
         <receiver
-            android:name="za.co.vehmon.application.GcmBroadcastReceiver"
+            android:name="com.google.android.gms.gcm.GcmReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -39,7 +39,24 @@
             </intent-filter>
         </receiver>
 
-        <service android:name="za.co.vehmon.application.GcmIntentService" />
+        <service
+            android:name="za.co.vehmon.application.GcmIntentService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="za.co.vehmon.application.MyInstanceIDListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="za.co.vehmon.application.RegistrationIntentService"
+            android:exported="false" >
+        </service>
 
         <activity
             android:name="za.co.vehmon.application.ui.MainActivity"

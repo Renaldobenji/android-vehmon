@@ -55,6 +55,7 @@ public final class Constants {
         public static final String URL_AUTH = URL_BASE + URL_AUTH_FRAG;
 
         public static final String VEHMON_URL_AUTH_FRAG = "/services/Authentication.svc/GetTokenForUser/{userName}/{password}";
+        public static final String VEHMON_URL_AUTH_SETDEVICEID = "/services/Authentication.svc/SetDeviceId/{token}/{deviceID}";
         public static final String VEHMON_URL_AUTH_RENEW_FRAG = "/services/Authentication.svc/RenewToken/{token}";
         public static final String VEHMON_URL_AUTH_GETALLUSERS_FRAG = "/services/Authentication.svc/GetAllUsers/{token}";
         public static final String VEHMON_URL_AUTH_LEAVE_FRAG = "/services/LeaveService.svc/RequestLeave/{token}/{startTime}/{endTime}/{leaveRequestType}";

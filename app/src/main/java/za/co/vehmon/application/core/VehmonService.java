@@ -14,6 +14,7 @@ import za.co.vehmon.application.services.ConversationResponse;
 import za.co.vehmon.application.services.Coordinate;
 import za.co.vehmon.application.services.LeaveRequestResponse;
 import za.co.vehmon.application.services.MessageResponse;
+import za.co.vehmon.application.services.SetDeviceResult;
 import za.co.vehmon.application.services.ShiftResponse;
 import za.co.vehmon.application.services.TokenGenerationResult;
 import za.co.vehmon.application.services.UserDetailContract;
@@ -94,6 +95,13 @@ public class VehmonService {
         user.setSessionToken(result.GeneratedToken);
 
         return user;
+    }
+
+    public boolean SetDeviceID(String deviceID)
+    {
+        SetDeviceResult result = getAuthService().SetDeviceID(this.token,deviceID);
+
+        return result.IsSuccess;
     }
 
     public UserTokenValidationResponse RenewUserToken()
