@@ -4,25 +4,32 @@ package za.co.vehmon.application.ui;
 
 import android.accounts.OperationCanceledException;
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import za.co.vehmon.application.BootstrapApplication;
 import za.co.vehmon.application.R;
+import za.co.vehmon.application.RegistrationIntentService;
+import za.co.vehmon.application.VehmonPreferences;
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity;
 import za.co.vehmon.application.core.Constants;
@@ -82,12 +89,11 @@ public class MainActivity extends BootstrapFragmentActivity {
     private CharSequence drawerTitle;
     private CharSequence title;
     private NavigationDrawerFragment navigationDrawerFragment;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
         super.onCreate(savedInstanceState);
         this.context = this;
         if(isTablet()) {
@@ -136,24 +142,47 @@ public class MainActivity extends BootstrapFragmentActivity {
                     (DrawerLayout) findViewById(R.id.drawer_layout));
         }
 
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                boolean sentToken = sharedPreferences
+                        .getBoolean(VehmonPreferences.SENT_TOKEN_TO_SERVER, false);
+                if (sentToken) {
+                    Toast.makeText(context,"Registration Successful",Toast.LENGTH_SHORT);
+                } else {
+                    Toast.makeText(context, "Registration Failed", Toast.LENGTH_SHORT);
+                }
+            }
+        };
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        if (checkPlayServices()) {
-            gcm = GoogleCloudMessaging.getInstance(this);
-            regid = getRegistrationId(this);
-
-            if (regid.isEmpty()) {
-                registerInBackground();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean sentToken = sharedPreferences.getBoolean(VehmonPreferences.SENT_TOKEN_TO_SERVER, false);
+        if (!sentToken) {
+            if (checkPlayServices()) {
+                // Start IntentService to register this application with GCM.
+                Intent intent = new Intent(this, RegistrationIntentService.class);
+                startService(intent);
             }
-        } else {
-            Log.i(TAG, "No valid Google Play Services APK found.");
         }
-
-
         initScreen();
         startSynchronization();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(VehmonPreferences.REGISTRATION_COMPLETE));
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
     }
 
     /**

@@ -12,6 +12,9 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.google.android.gms.iid.InstanceID;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
+import javax.inject.Inject;
 
 /**
  * Created by Renaldo on 5/30/2015.
@@ -22,6 +25,9 @@ public class RegistrationIntentService extends IntentService {
     private static final String[] TOPICS = {"global"};
     private String SENDER_ID = "531347791726";
 
+    @Inject
+    protected VehmonServiceProvider serviceProvider;
+
     public RegistrationIntentService() {
         super(TAG);
     }
@@ -29,7 +35,7 @@ public class RegistrationIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
+        Injector.inject(this);
         try {
             // In the (unlikely) event that multiple refresh operations occur simultaneously,
             // ensure that they are processed sequentially.
@@ -43,16 +49,16 @@ public class RegistrationIntentService extends IntentService {
                 Log.i(TAG, "GCM Registration Token: " + token);
 
                 // TODO: Implement this method to send any registration to your app's servers.
-                sendRegistrationToServer(token);
+                if (sendRegistrationToServer(token)) {
+                    // Subscribe to topic channels
+                    subscribeTopics(token);
 
-                // Subscribe to topic channels
-                subscribeTopics(token);
-
-                // You should store a boolean that indicates whether the generated token has been
-                // sent to your server. If the boolean is false, send the token to your server,
-                // otherwise your server should have already received the token.
-                sharedPreferences.edit().putBoolean(VehmonPreferences.SENT_TOKEN_TO_SERVER, true).apply();
-                // [END get_token]
+                    // You should store a boolean that indicates whether the generated token has been
+                    // sent to your server. If the boolean is false, send the token to your server,
+                    // otherwise your server should have already received the token.
+                    sharedPreferences.edit().putBoolean(VehmonPreferences.SENT_TOKEN_TO_SERVER, true).apply();
+                    // [END get_token]
+                }
             }
         } catch (Exception e) {
             Log.d(TAG, "Failed to complete token refresh", e);
@@ -73,8 +79,15 @@ public class RegistrationIntentService extends IntentService {
      *
      * @param token The new token.
      */
-    private void sendRegistrationToServer(String token) {
-        // Add custom implementation, as needed.
+    private boolean sendRegistrationToServer(String token) {
+        try {
+            //String encodedValue = URLEncoder.encode(token, "UTF-8");
+            serviceProvider.getService(this).SetDeviceID(token);
+            return true;
+        }catch (Exception e)
+        {
+            return false;//TODO: Sort out errors
+        }
     }
 
     /**

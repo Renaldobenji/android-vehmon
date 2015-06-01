@@ -67,7 +67,8 @@ import retrofit.converter.GsonConverter;
                 UnReadMessageSynchronizer.class,
                 SynchronizeProcessor.class,
                 GPSSynchronizer.class,
-                SplashActivity.class
+                SplashActivity.class,
+                RegistrationIntentService.class
         }
 )
 public class BootstrapModule {
