@@ -33,6 +33,7 @@ public class SynchronizeProcessor extends Service {
     @Inject protected VehmonServiceProvider serviceProvider;
     private Timer syncTimer;
     private long minTime = 1000 * 60 * 10; //5 Minute updates
+    private String syncProcess = "";
 
     private List<ISynchronize> synchronizers;
 
@@ -48,8 +49,7 @@ public class SynchronizeProcessor extends Service {
         Injector.inject(this);
         // Register the bus so we can send notifications.
         eventBus.register(this);
-        // Synchronizers
-        setupSynchronizers();
+
         startForeground(SYNC_NOTIFICATION_ID, getNotification(getString(R.string.timer_running)));
     }
 
@@ -74,12 +74,31 @@ public class SynchronizeProcessor extends Service {
     private void setupSynchronizers()
     {
         this.synchronizers = new ArrayList<ISynchronize>();
-        this.synchronizers.add(new AbsenceRequestSynchronizer());
-        this.synchronizers.add(new SendMessageSynchronizer());
-        this.synchronizers.add(new UnReadMessageSynchronizer());
-        this.synchronizers.add(new TimeClockInSynchronizer());
-        this.synchronizers.add(new TimeClockOutSynchronizer());
-        this.synchronizers.add(new GPSSynchronizer());
+
+        if (syncProcess == null)
+        {
+            this.synchronizers.add(new AbsenceRequestSynchronizer());
+        }
+
+        if (syncProcess == null || syncProcess.equals("MessageReceived")) {
+            this.synchronizers.add(new SendMessageSynchronizer());
+        }
+
+        if (syncProcess == null) {
+            this.synchronizers.add(new UnReadMessageSynchronizer());
+        }
+
+        if (syncProcess == null) {
+            this.synchronizers.add(new TimeClockInSynchronizer());
+        }
+
+        if (syncProcess == null) {
+            this.synchronizers.add(new TimeClockOutSynchronizer());
+        }
+
+        if (syncProcess == null) {
+            this.synchronizers.add(new GPSSynchronizer());
+        }
     }
 
     @Override
@@ -95,6 +114,11 @@ public class SynchronizeProcessor extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        syncProcess = intent.getStringExtra("SyncProcess");
+
+        // Synchronizers
+        setupSynchronizers();
 
         if (this.synchronizers.isEmpty())
             stopSelf();

@@ -1,5 +1,6 @@
 package za.co.vehmon.application;
 
+import android.app.ActivityManager;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,7 +15,13 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import org.json.JSONObject;
+
+import za.co.vehmon.application.notifications.VehmonNotification;
+import za.co.vehmon.application.synchronizers.SynchronizeProcessor;
 import za.co.vehmon.application.ui.MainActivity;
 
 /**
@@ -38,10 +45,24 @@ public class GcmIntentService extends GcmListenerService {
     // [START receive_message]
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("message");
+        String NotificationType = data.getString("NotificationType");
+        String NotificationPayload = data.getString("NotificationPayload");
         Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + message);
+        Log.d(TAG, "NotificationType: " + NotificationType);
+        Log.d(TAG, "NotificationPayload: " + NotificationPayload);
 
+        try
+        {
+            if (NotificationType.equals("MessageReceived"))
+            {
+                sendNotification("Message Received");
+                startSynchronization("MessageReceived");
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         /**
          * Production applications would usually process the message here.
          * Eg: - Syncing with server.
@@ -53,7 +74,7 @@ public class GcmIntentService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+
     }
     // [END receive_message]
 
@@ -70,7 +91,7 @@ public class GcmIntentService extends GcmListenerService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.icon)
-                .setContentTitle("GCM Message")
+                .setContentTitle("Vehmon Notification")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
@@ -80,5 +101,24 @@ public class GcmIntentService extends GcmListenerService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    private void startSynchronization(String syncProcess)
+    {
+        if (!isSynchronizationServiceRunning()) {
+            final Intent i = new Intent(this, SynchronizeProcessor.class);
+            i.putExtra("SyncProcess", syncProcess);
+            startService(i);
+        }
+    }
+
+    private boolean isSynchronizationServiceRunning() {
+        final ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (SynchronizeProcessor.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
