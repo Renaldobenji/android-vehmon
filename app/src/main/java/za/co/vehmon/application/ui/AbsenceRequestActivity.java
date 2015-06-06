@@ -32,7 +32,9 @@ import za.co.vehmon.application.R;
 import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.authenticator.LogoutService;
 import za.co.vehmon.application.core.AbsenceRequestWrapper;
+import za.co.vehmon.application.services.LeaveRequestResponse;
 import za.co.vehmon.application.util.SafeAsyncTask;
+import za.co.vehmon.application.util.VehmonCurrentDate;
 
 /**
  * Created by Renaldo on 1/15/2015.
@@ -144,17 +146,28 @@ public class AbsenceRequestActivity extends BootstrapActivity {
     public void AbsenceRequestSubmit(View view)
     {
         final String absenceRequestTypeID = spinnerAbsenceType.getAdapter().getItem(spinnerAbsenceType.getSelectedItemPosition()).toString();
-        final ProgressDialog barProgressDialog = ProgressDialog.show(AbsenceRequestActivity.this,"Please wait...", "Saving Request",true);
         try {
             final Date fromDate = parseDate(editTextFromDate.getText().toString());
             final Date toDate = parseDate(editTextToDate.getText().toString());
 
-            new SafeAsyncTask<AbsenceRequestWrapper.AbsenceRequestResult>() {
-                @Override
-                public AbsenceRequestWrapper.AbsenceRequestResult call() throws Exception {
+            if (fromDate == null || toDate == null)
+            {
+                Toast.makeText(getApplicationContext(), "FromDate or ToDate is not set",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
 
-                    AbsenceRequestWrapper.AbsenceRequestResult result = serviceProvider.getService(AbsenceRequestActivity.this).SubmitAbsenceRequest(AbsenceRequestActivity.this,absenceRequestTypeID,fromDate,toDate);
-                    return result;
+            if (fromDate.after(toDate)) {
+                Toast.makeText(getApplicationContext(), "FromDate cannot be after ToDate",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
+            final ProgressDialog barProgressDialog = ProgressDialog.show(AbsenceRequestActivity.this,"Please wait...", "Submitting Request",true);
+            new SafeAsyncTask<LeaveRequestResponse>() {
+                @Override
+                public LeaveRequestResponse call() throws Exception {
+                    final LeaveRequestResponse svc = serviceProvider.getService(AbsenceRequestActivity.this).SyncLeaveRequestToServer(VehmonCurrentDate.GetCurrentDate(fromDate),VehmonCurrentDate.GetCurrentDate(toDate), absenceRequestTypeID);
+                    return svc;
                 }
 
                 @Override
@@ -166,10 +179,20 @@ public class AbsenceRequestActivity extends BootstrapActivity {
                 }
 
                 @Override
-                protected void onSuccess(final AbsenceRequestWrapper.AbsenceRequestResult result) throws Exception {
-                    super.onSuccess(result);
-                    editTextFromDate.setText("");
-                    editTextToDate.setText("");
+                protected void onSuccess(final LeaveRequestResponse result) throws Exception {
+                    if (result != null && result.RequestStatus.equals("0"))
+                    {
+                        //Successful
+                        super.onSuccess(result);
+                        editTextFromDate.setText("");
+                        editTextToDate.setText("");
+
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Request Failed, Please try again.",
+                                Toast.LENGTH_LONG).show();
+                    }
                     barProgressDialog.dismiss();
                 }
             }.execute();

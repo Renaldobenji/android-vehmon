@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,7 +22,9 @@ import za.co.vehmon.application.VehmonServiceProvider;
 import za.co.vehmon.application.core.Message;
 import za.co.vehmon.application.core.MessageConversation;
 import za.co.vehmon.application.core.MessageWrapper;
+import za.co.vehmon.application.services.MessageResponse;
 import za.co.vehmon.application.util.SafeAsyncTask;
+import za.co.vehmon.application.util.VehmonCurrentDate;
 
 /**
  * Created by Renaldo on 1/25/2015.
@@ -92,8 +95,14 @@ public class MessageViewActivity extends BootstrapActivity {
         new SafeAsyncTask<MessageWrapper.MessageResult>() {
             @Override
             public MessageWrapper.MessageResult call() throws Exception {
+                //TODO: Test Message Send Activity
                 BootstrapApplication app = (BootstrapApplication)myActivity.getApplicationContext();
-                final MessageWrapper.MessageResult svc = serviceProvider.getService(myActivity).SubmitMessage(myActivity,messageConversationID,app.getUser().getUsername(),messageTo, editTextMessage.getText().toString());
+                MessageWrapper.MessageResult svc = null;
+                final MessageResponse response = serviceProvider.getService(myActivity).SendMessageToServer(messageConversationID.toString(), VehmonCurrentDate.GetCurrentDate().toString(), editTextMessage.getText().toString());
+                if (response != null && response.MessageStatus == "0") {
+                    svc = serviceProvider.getService(myActivity).SubmitMessage(myActivity,messageConversationID,app.getUser().getUsername(),messageTo, editTextMessage.getText().toString());
+                }
+
                 return svc;
             }
 
@@ -108,10 +117,16 @@ public class MessageViewActivity extends BootstrapActivity {
             @Override
             protected void onSuccess(final MessageWrapper.MessageResult isSuccessful) throws Exception {
                 super.onSuccess(isSuccessful);
-
-                MessageViewAdapter adapter = new MessageViewAdapter(myActivity.getLayoutInflater(), isSuccessful.getMessages(),myActivity);
-                listViewMessages.setAdapter(adapter);
-                editTextMessage.setText("");
+                if (isSuccessful == null)
+                {
+                    Toast.makeText(getApplicationContext(), "Message Failed, Please try again.",
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+                    MessageViewAdapter adapter = new MessageViewAdapter(myActivity.getLayoutInflater(), isSuccessful.getMessages(), myActivity);
+                    listViewMessages.setAdapter(adapter);
+                    editTextMessage.setText("");
+                }
                 barProgressDialog.dismiss();
             }
         }.execute();

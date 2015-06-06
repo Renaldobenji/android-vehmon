@@ -75,16 +75,17 @@ public class SynchronizeProcessor extends Service {
     {
         this.synchronizers = new ArrayList<ISynchronize>();
 
-        if (syncProcess == null)
+        /*if (syncProcess == null)
         {
             this.synchronizers.add(new AbsenceRequestSynchronizer());
-        }
+        }*/
+
+        /* Dont need this anymore, im serious, gets send via the front end now: MessageViewActivity
+        if (syncProcess == null) {
+            this.synchronizers.add(new UnReadMessageSynchronizer());
+        }*/
 
         if (syncProcess == null || syncProcess.equals("MessageReceived")) {
-            this.synchronizers.add(new SendMessageSynchronizer());
-        }
-
-        if (syncProcess == null) {
             this.synchronizers.add(new UnReadMessageSynchronizer());
         }
 
