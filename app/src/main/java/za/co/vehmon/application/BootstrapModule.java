@@ -39,6 +39,7 @@ import dagger.Module;
 import dagger.Provides;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
+import za.co.vehmon.application.ui.ViewLeaveActivity;
 
 /**
  * Dagger module for setting up provides statements.
@@ -68,7 +69,8 @@ import retrofit.converter.GsonConverter;
                 SynchronizeProcessor.class,
                 GPSSynchronizer.class,
                 SplashActivity.class,
-                RegistrationIntentService.class
+                RegistrationIntentService.class,
+                ViewLeaveActivity.class
         }
 )
 public class BootstrapModule {

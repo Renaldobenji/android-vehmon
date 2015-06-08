@@ -135,104 +135,110 @@ ADDED from AndroidManifest.xml:61:9
 		ADDED from AndroidManifest.xml:62:13
 	android:name
 		ADDED from AndroidManifest.xml:61:19
-activity#za.co.vehmon.application.ui.NewMessageActivity
+activity#za.co.vehmon.application.ui.ViewLeaveActivity
 ADDED from AndroidManifest.xml:66:9
 	android:label
 		ADDED from AndroidManifest.xml:67:13
 	android:name
 		ADDED from AndroidManifest.xml:66:19
-activity#za.co.vehmon.application.ui.SplashActivity
+activity#za.co.vehmon.application.ui.NewMessageActivity
 ADDED from AndroidManifest.xml:71:9
-	android:screenOrientation
-		ADDED from AndroidManifest.xml:73:13
 	android:label
 		ADDED from AndroidManifest.xml:72:13
-	android:theme
-		ADDED from AndroidManifest.xml:74:13
 	android:name
 		ADDED from AndroidManifest.xml:71:19
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:76:13
-action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:77:17
-	android:name
-		ADDED from AndroidManifest.xml:77:25
-category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:79:17
-	android:name
-		ADDED from AndroidManifest.xml:79:27
-activity#za.co.vehmon.application.ui.MessageViewActivity
-ADDED from AndroidManifest.xml:83:9
+activity#za.co.vehmon.application.ui.SplashActivity
+ADDED from AndroidManifest.xml:76:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:78:13
 	android:label
-		ADDED from AndroidManifest.xml:84:13
+		ADDED from AndroidManifest.xml:77:13
+	android:theme
+		ADDED from AndroidManifest.xml:79:13
 	android:name
-		ADDED from AndroidManifest.xml:83:19
-activity#za.co.vehmon.application.ui.BootstrapTimerActivity
+		ADDED from AndroidManifest.xml:76:19
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:81:13
+action#android.intent.action.MAIN
+ADDED from AndroidManifest.xml:82:17
+	android:name
+		ADDED from AndroidManifest.xml:82:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:84:17
+	android:name
+		ADDED from AndroidManifest.xml:84:27
+activity#za.co.vehmon.application.ui.MessageViewActivity
 ADDED from AndroidManifest.xml:88:9
 	android:label
-		ADDED from AndroidManifest.xml:90:19
-	android:configChanges
-		ADDED from AndroidManifest.xml:89:19
-	android:parentActivityName
-		ADDED from AndroidManifest.xml:92:19
+		ADDED from AndroidManifest.xml:89:13
 	android:name
 		ADDED from AndroidManifest.xml:88:19
+activity#za.co.vehmon.application.ui.BootstrapTimerActivity
+ADDED from AndroidManifest.xml:93:9
+	android:label
+		ADDED from AndroidManifest.xml:95:19
+	android:configChanges
+		ADDED from AndroidManifest.xml:94:19
+	android:parentActivityName
+		ADDED from AndroidManifest.xml:97:19
+	android:name
+		ADDED from AndroidManifest.xml:93:19
 	android:launchMode
-		ADDED from AndroidManifest.xml:91:19
+		ADDED from AndroidManifest.xml:96:19
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:95:13
+ADDED from AndroidManifest.xml:100:13
 	android:name
-		ADDED from AndroidManifest.xml:96:17
+		ADDED from AndroidManifest.xml:101:17
 	android:value
-		ADDED from AndroidManifest.xml:97:17
+		ADDED from AndroidManifest.xml:102:17
 service#za.co.vehmon.application.core.TimerService
-ADDED from AndroidManifest.xml:100:9
+ADDED from AndroidManifest.xml:105:9
 	android:exported
-		ADDED from AndroidManifest.xml:100:75
+		ADDED from AndroidManifest.xml:105:75
 	android:enabled
-		ADDED from AndroidManifest.xml:100:52
+		ADDED from AndroidManifest.xml:105:52
 	android:name
-		ADDED from AndroidManifest.xml:100:18
+		ADDED from AndroidManifest.xml:105:18
 service#za.co.vehmon.application.gps.GPSTrackingService
-ADDED from AndroidManifest.xml:102:9
+ADDED from AndroidManifest.xml:107:9
 	android:exported
-		ADDED from AndroidManifest.xml:102:80
+		ADDED from AndroidManifest.xml:107:80
 	android:enabled
-		ADDED from AndroidManifest.xml:102:57
+		ADDED from AndroidManifest.xml:107:57
 	android:name
-		ADDED from AndroidManifest.xml:102:18
+		ADDED from AndroidManifest.xml:107:18
 service#za.co.vehmon.application.synchronizers.SynchronizeProcessor
-ADDED from AndroidManifest.xml:104:9
+ADDED from AndroidManifest.xml:109:9
 	android:exported
-		ADDED from AndroidManifest.xml:104:92
+		ADDED from AndroidManifest.xml:109:92
 	android:enabled
-		ADDED from AndroidManifest.xml:104:69
+		ADDED from AndroidManifest.xml:109:69
 	android:name
-		ADDED from AndroidManifest.xml:104:18
+		ADDED from AndroidManifest.xml:109:18
 service#za.co.vehmon.application.authenticator.AccountAuthenticatorService
-ADDED from AndroidManifest.xml:106:9
+ADDED from AndroidManifest.xml:111:9
 	android:process
-		ADDED from AndroidManifest.xml:108:13
+		ADDED from AndroidManifest.xml:113:13
 	android:name
-		ADDED from AndroidManifest.xml:107:13
+		ADDED from AndroidManifest.xml:112:13
 intent-filter#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:109:13
+ADDED from AndroidManifest.xml:114:13
 action#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:110:17
+ADDED from AndroidManifest.xml:115:17
 	android:name
-		ADDED from AndroidManifest.xml:110:25
+		ADDED from AndroidManifest.xml:115:25
 meta-data#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:113:13
+ADDED from AndroidManifest.xml:118:13
 	android:resource
-		ADDED from AndroidManifest.xml:115:17
+		ADDED from AndroidManifest.xml:120:17
 	android:name
-		ADDED from AndroidManifest.xml:114:17
+		ADDED from AndroidManifest.xml:119:17
 activity#za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity
-ADDED from AndroidManifest.xml:118:9
+ADDED from AndroidManifest.xml:123:9
 	android:excludeFromRecents
-		ADDED from AndroidManifest.xml:120:13
+		ADDED from AndroidManifest.xml:125:13
 	android:name
-		ADDED from AndroidManifest.xml:119:13
+		ADDED from AndroidManifest.xml:124:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:19.1.0:18:5

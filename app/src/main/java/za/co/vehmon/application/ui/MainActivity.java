@@ -392,6 +392,12 @@ public class MainActivity extends BootstrapFragmentActivity {
         startActivity(i);
     }
 
+    private void navigateToViewLeave()
+    {
+        final Intent i = new Intent(this,ViewLeaveActivity.class);
+        startActivity(i);
+    }
+
     @Subscribe
     public void onNavigationItemSelected(NavItemSelectedEvent event) {
 
@@ -404,6 +410,9 @@ public class MainActivity extends BootstrapFragmentActivity {
                 break;
             case 1:
                 navigateToAbsenceRequest();
+                break;
+            case 2:
+                navigateToViewLeave();
                 break;
         }
     }

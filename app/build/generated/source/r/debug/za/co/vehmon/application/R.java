@@ -1329,6 +1329,7 @@ containing a value of this type.
         public static final int lblContactName=0x7f080067;
         public static final int listMessageContacts=0x7f080066;
         public static final int listMode=0x7f080001;
+        public static final int listViewLeave=0x7f080070;
         public static final int listViewMessages=0x7f08005f;
         public static final int list_item=0x7f08002f;
         public static final int ll_message=0x7f080064;
@@ -1336,7 +1337,7 @@ containing a value of this type.
         public static final int middle=0x7f08000b;
         public static final int navigation_drawer=0x7f08005b;
         public static final int never=0x7f08000f;
-        public static final int newMessage=0x7f080070;
+        public static final int newMessage=0x7f080077;
         public static final int none=0x7f080009;
         public static final int normal=0x7f080000;
         public static final int pause=0x7f08004e;
@@ -1375,14 +1376,20 @@ containing a value of this type.
         public static final int top_action_bar=0x7f080026;
         public static final int tpi_header=0x7f080052;
         public static final int triangle=0x7f080016;
+        public static final int tv_FromDateValue=0x7f080074;
+        public static final int tv_LeaveTypeValue=0x7f080072;
+        public static final int tv_ToDateValue=0x7f080076;
         public static final int tv_content=0x7f080069;
         public static final int tv_date=0x7f080051;
+        public static final int tv_fromdate=0x7f080073;
+        public static final int tv_leaveType=0x7f080071;
         public static final int tv_messageText=0x7f080065;
         public static final int tv_messagedate=0x7f08005e;
         public static final int tv_messageusername=0x7f08005d;
         public static final int tv_name=0x7f080050;
         public static final int tv_summary=0x7f08006a;
         public static final int tv_title=0x7f080068;
+        public static final int tv_toDate=0x7f080075;
         public static final int underline=0x7f080017;
         public static final int up=0x7f080027;
         public static final int useLogo=0x7f080003;
@@ -1451,6 +1458,8 @@ containing a value of this type.
         public static final int user_list_item=0x7f030031;
         public static final int user_list_item_labels=0x7f030032;
         public static final int user_view=0x7f030033;
+        public static final int view_leave=0x7f030034;
+        public static final int view_leave_items=0x7f030035;
     }
     public static final class menu {
         public static final int bootstrap=0x7f0d0000;

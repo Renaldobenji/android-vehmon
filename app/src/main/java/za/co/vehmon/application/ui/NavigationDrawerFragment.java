@@ -109,7 +109,8 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.id.text1,
                 new String[] {
                         getString(R.string.title_home),
-                        "AbsenceRequest"
+                        "Request Leave",
+                        "View Leave"
                 }));
         drawerListView.setItemChecked(currentSelectedPosition, true);
         return drawerListView;

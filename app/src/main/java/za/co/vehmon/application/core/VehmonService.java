@@ -12,6 +12,7 @@ import retrofit.RestAdapter;
 import retrofit.http.Field;
 import za.co.vehmon.application.services.ConversationResponse;
 import za.co.vehmon.application.services.Coordinate;
+import za.co.vehmon.application.services.LeaveRequestContract;
 import za.co.vehmon.application.services.LeaveRequestResponse;
 import za.co.vehmon.application.services.MessageResponse;
 import za.co.vehmon.application.services.SetDeviceResult;
@@ -224,6 +225,20 @@ public class VehmonService {
         try
         {
             response = getAuthService().GetAllUsers(this.token);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
+    public List<LeaveRequestContract> GetAllLeaveRequests() {
+        List<LeaveRequestContract> response;
+        try
+        {
+            response = getLeaveService().GetAllLeaveRequests(this.token);
         }
         catch (Exception ex)
         {
