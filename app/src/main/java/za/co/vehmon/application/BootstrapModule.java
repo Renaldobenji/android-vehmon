@@ -13,6 +13,7 @@ import za.co.vehmon.application.core.RestErrorHandler;
 import za.co.vehmon.application.core.TimerService;
 import za.co.vehmon.application.core.UserAgentProvider;
 import za.co.vehmon.application.core.VehmonService;
+import za.co.vehmon.application.gps.FusionTrackingService;
 import za.co.vehmon.application.gps.GPSTrackingService;
 import za.co.vehmon.application.synchronizers.AbsenceRequestSynchronizer;
 import za.co.vehmon.application.synchronizers.GPSSynchronizer;
@@ -70,7 +71,8 @@ import za.co.vehmon.application.ui.ViewLeaveActivity;
                 GPSSynchronizer.class,
                 SplashActivity.class,
                 RegistrationIntentService.class,
-                ViewLeaveActivity.class
+                ViewLeaveActivity.class,
+                FusionTrackingService.class
         }
 )
 public class BootstrapModule {

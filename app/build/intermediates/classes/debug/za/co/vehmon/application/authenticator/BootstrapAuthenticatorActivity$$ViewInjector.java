@@ -7,11 +7,11 @@ import butterknife.ButterKnife.Finder;
 public class BootstrapAuthenticatorActivity$$ViewInjector {
   public static void inject(Finder finder, final za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity target, Object source) {
     View view;
-    view = finder.findRequiredView(source, 2131230806, "field 'emailText'");
+    view = finder.findRequiredView(source, 2131230809, "field 'emailText'");
     target.emailText = (android.widget.AutoCompleteTextView) view;
-    view = finder.findRequiredView(source, 2131230807, "field 'passwordText'");
+    view = finder.findRequiredView(source, 2131230810, "field 'passwordText'");
     target.passwordText = (android.widget.EditText) view;
-    view = finder.findRequiredView(source, 2131230808, "field 'signInButton'");
+    view = finder.findRequiredView(source, 2131230811, "field 'signInButton'");
     target.signInButton = (android.widget.Button) view;
   }
 

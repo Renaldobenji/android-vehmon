@@ -106,6 +106,8 @@
 
         <service android:name=".gps.GPSTrackingService" android:enabled="true" android:exported="false" />
 
+        <service android:name=".gps.FusionTrackingService" android:enabled="true" android:exported="false" />
+
         <service android:name=".synchronizers.SynchronizeProcessor" android:enabled="true" android:exported="false" />
 
         <service

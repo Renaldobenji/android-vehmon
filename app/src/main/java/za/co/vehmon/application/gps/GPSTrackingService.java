@@ -140,7 +140,7 @@ public class GPSTrackingService extends Service implements LocationListener {
             }
             notifyTimerRunning();
 
-            startForeground(Constants.Notification.GPS_NOTIFICATION_ID, getNotification("Vehicle Tracking"));
+            startForeground(Constants.Notification.GPS_NOTIFICATION_ID, getNotification("Vehmon Service Running"));
             setupGPSTimer();
         }
         catch (Exception e)
@@ -323,12 +323,12 @@ public class GPSTrackingService extends Service implements LocationListener {
                 .setOnlyAlertOnce(true)
                 .setOngoing(true)
                 .setWhen(System.currentTimeMillis())
-                //.setContentIntent(pendingIntent)
+                        //.setContentIntent(pendingIntent)
                 .getNotification();
     }
 
     private void notifyTimerRunning() {
-        updateNotification("Vehicle Tracking Running");
+        updateNotification("Vehmon Service Running");
     }
 
 

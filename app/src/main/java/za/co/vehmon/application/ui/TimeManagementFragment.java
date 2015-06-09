@@ -40,6 +40,7 @@ import za.co.vehmon.application.core.StopTimerEvent;
 import za.co.vehmon.application.core.TimeManagementWrapper;
 import za.co.vehmon.application.core.TimerService;
 import za.co.vehmon.application.core.TimerTickEvent;
+import za.co.vehmon.application.gps.FusionTrackingService;
 import za.co.vehmon.application.gps.GPSTrackingService;
 import za.co.vehmon.application.util.SafeAsyncTask;
 
@@ -237,7 +238,8 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
     private void startTracking(long timeTrackingID)
     {
         if (!isTrackingServiceRunning()) {
-            final Intent i = new Intent(getActivity(), GPSTrackingService.class);
+            //final Intent i = new Intent(getActivity(), GPSTrackingService.class);
+            final Intent i = new Intent(getActivity(), FusionTrackingService.class);
             i.putExtra("TimeTrackingID",timeTrackingID);
             getActivity().startService(i);
         }

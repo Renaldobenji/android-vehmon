@@ -17,6 +17,7 @@ ADDED from AndroidManifest.xml:3:1
 		INJECTED from AndroidManifest.xml:0:0
 uses-permission#android.permission.INTERNET
 ADDED from AndroidManifest.xml:8:5
+MERGED from com.google.android.gms:play-services-maps:7.5.0:21:5
 	android:name
 		ADDED from AndroidManifest.xml:8:22
 uses-permission#android.permission.GET_ACCOUNTS
@@ -41,6 +42,7 @@ ADDED from AndroidManifest.xml:13:5
 		ADDED from AndroidManifest.xml:13:22
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from AndroidManifest.xml:14:5
+MERGED from com.google.android.gms:play-services-maps:7.5.0:22:5
 	android:name
 		ADDED from AndroidManifest.xml:14:22
 uses-permission#android.permission.WAKE_LOCK
@@ -69,6 +71,12 @@ MERGED from com.actionbarsherlock:viewpagerindicator:2.4.1:4:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 MERGED from com.google.android.gms:play-services-gcm:7.5.0:19:5
+MERGED from com.google.android.gms:play-services-base:7.5.0:20:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from com.google.android.gms:play-services-location:7.5.0:19:5
+MERGED from com.google.android.gms:play-services-base:7.5.0:20:5
+MERGED from com.android.support:support-v4:22.0.0:22:5
+MERGED from com.google.android.gms:play-services-maps:7.5.0:29:5
 MERGED from com.google.android.gms:play-services-base:7.5.0:20:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 	android:label
@@ -207,38 +215,46 @@ ADDED from AndroidManifest.xml:107:9
 		ADDED from AndroidManifest.xml:107:57
 	android:name
 		ADDED from AndroidManifest.xml:107:18
-service#za.co.vehmon.application.synchronizers.SynchronizeProcessor
+service#za.co.vehmon.application.gps.FusionTrackingService
 ADDED from AndroidManifest.xml:109:9
 	android:exported
-		ADDED from AndroidManifest.xml:109:92
+		ADDED from AndroidManifest.xml:109:83
 	android:enabled
-		ADDED from AndroidManifest.xml:109:69
+		ADDED from AndroidManifest.xml:109:60
 	android:name
 		ADDED from AndroidManifest.xml:109:18
-service#za.co.vehmon.application.authenticator.AccountAuthenticatorService
+service#za.co.vehmon.application.synchronizers.SynchronizeProcessor
 ADDED from AndroidManifest.xml:111:9
+	android:exported
+		ADDED from AndroidManifest.xml:111:92
+	android:enabled
+		ADDED from AndroidManifest.xml:111:69
+	android:name
+		ADDED from AndroidManifest.xml:111:18
+service#za.co.vehmon.application.authenticator.AccountAuthenticatorService
+ADDED from AndroidManifest.xml:113:9
 	android:process
-		ADDED from AndroidManifest.xml:113:13
+		ADDED from AndroidManifest.xml:115:13
 	android:name
-		ADDED from AndroidManifest.xml:112:13
+		ADDED from AndroidManifest.xml:114:13
 intent-filter#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:114:13
+ADDED from AndroidManifest.xml:116:13
 action#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:115:17
+ADDED from AndroidManifest.xml:117:17
 	android:name
-		ADDED from AndroidManifest.xml:115:25
+		ADDED from AndroidManifest.xml:117:25
 meta-data#android.accounts.AccountAuthenticator
-ADDED from AndroidManifest.xml:118:13
+ADDED from AndroidManifest.xml:120:13
 	android:resource
-		ADDED from AndroidManifest.xml:120:17
+		ADDED from AndroidManifest.xml:122:17
 	android:name
-		ADDED from AndroidManifest.xml:119:17
+		ADDED from AndroidManifest.xml:121:17
 activity#za.co.vehmon.application.authenticator.BootstrapAuthenticatorActivity
-ADDED from AndroidManifest.xml:123:9
+ADDED from AndroidManifest.xml:125:9
 	android:excludeFromRecents
-		ADDED from AndroidManifest.xml:125:13
+		ADDED from AndroidManifest.xml:127:13
 	android:name
-		ADDED from AndroidManifest.xml:124:13
+		ADDED from AndroidManifest.xml:126:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:19.1.0:18:5
@@ -250,6 +266,12 @@ MERGED from com.android.support:support-v4:22.0.0:20:5
 MERGED from com.google.android.gms:play-services-gcm:7.5.0:18:5
 MERGED from com.google.android.gms:play-services-base:7.5.0:18:5
 MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from com.google.android.gms:play-services-location:7.5.0:18:5
+MERGED from com.google.android.gms:play-services-base:7.5.0:18:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
+MERGED from com.google.android.gms:play-services-maps:7.5.0:28:5
+MERGED from com.google.android.gms:play-services-base:7.5.0:18:5
+MERGED from com.android.support:support-v4:22.0.0:20:5
 	android:targetSdkVersion
 		INJECTED from AndroidManifest.xml:0:0
 		INJECTED from AndroidManifest.xml:0:0
@@ -258,7 +280,25 @@ MERGED from com.android.support:support-v4:22.0.0:20:5
 		INJECTED from AndroidManifest.xml:0:0
 meta-data#com.google.android.gms.version
 ADDED from com.google.android.gms:play-services-base:7.5.0:21:9
+MERGED from com.google.android.gms:play-services-base:7.5.0:21:9
+MERGED from com.google.android.gms:play-services-base:7.5.0:21:9
 	android:name
 		ADDED from com.google.android.gms:play-services-base:7.5.0:22:13
 	android:value
 		ADDED from com.google.android.gms:play-services-base:7.5.0:23:13
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from com.google.android.gms:play-services-maps:7.5.0:20:5
+	android:name
+		ADDED from com.google.android.gms:play-services-maps:7.5.0:20:22
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from com.google.android.gms:play-services-maps:7.5.0:23:5
+	android:name
+		ADDED from com.google.android.gms:play-services-maps:7.5.0:23:22
+uses-feature#0x00020000
+ADDED from com.google.android.gms:play-services-maps:7.5.0:24:5
+	android:required
+		ADDED from com.google.android.gms:play-services-maps:7.5.0:26:8
+	android:glEsVersion
+		ADDED from com.google.android.gms:play-services-maps:7.5.0:25:8
+android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from AndroidManifest.xml:3:1 reason: com.google.android.gms.maps requested WRITE_EXTERNAL_STORAGE

@@ -37,6 +37,20 @@
         <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\gson-2.2.4-780e722dbf198bbd1932b8f7df61872202accb9a.jar" />
     </item>
     <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-6c01a22b3b4eacceb209592024bec900927ae12d.jar" />
+    </item>
+    <item
+        jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.5.0\classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
+        <dex dex="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\pre-dexed\debug\classes-cf4d03097f60154b0d1400d1ef0de67dc578e6d9.jar" />
+    </item>
+    <item
         jar="C:\Users\Renaldo\Documents\GitHub\android-vehmon\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="19.1.0"
