@@ -522,7 +522,7 @@ int id ll_messageIndicator 0x7f080066
 int id middle 0x7f08000b
 int id navigation_drawer 0x7f08005e
 int id never 0x7f080012
-int id newMessage 0x7f08007a
+int id newMessage 0x7f08007b
 int id none 0x7f080009
 int id normal 0x7f080000
 int id pause 0x7f080051
@@ -565,6 +565,7 @@ int id tpi_header 0x7f080055
 int id triangle 0x7f080019
 int id tv_FromDateValue 0x7f080077
 int id tv_LeaveTypeValue 0x7f080075
+int id tv_Status 0x7f08007a
 int id tv_ToDateValue 0x7f080079
 int id tv_content 0x7f08006c
 int id tv_date 0x7f080054

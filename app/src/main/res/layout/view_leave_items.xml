@@ -71,5 +71,18 @@
         android:layout_below="@+id/tv_toDate"/>
 
 
+    <TextView
+        android:id="@+id/tv_Status"
+        android:layout_width="fill_parent"
+        android:textSize="30dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/table_text_selector"
+        android:text="Status"
+        android:layout_below="@+id/tv_FromDateValue"
+        android:paddingTop="11dp"
+        />
+
+
 
 </RelativeLayout>

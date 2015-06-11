@@ -8,4 +8,5 @@ public class LeaveRequestContract {
     public String LeaveRequestType;
     public String StartDateTime;
     public String EndDateTime;
+    public String Status;
 }

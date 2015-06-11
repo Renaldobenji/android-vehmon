@@ -62,12 +62,12 @@ public class TimeManagementWrapper {
         return result;
     }
 
-    public TimeManagementResult ClockOut(Context context, Date clockOutDateTime)
+    public TimeManagementResult ClockOut(Context context, Date clockOutDateTime, int timeTrackingID)
     {
         TimeManagementResult result = new TimeManagementResult();
         TimeManagementDatasource ds = new TimeManagementDatasource(context);
 
-        long id = ds.clockout(VehmonCurrentDate.GetCurrentDate(), "Renaldo");
+        long id = ds.clockout(VehmonCurrentDate.GetCurrentDate(), "Renaldo",timeTrackingID);
         if (id == -1)
         {
             result.setErrorMessage("Unable to clock out");

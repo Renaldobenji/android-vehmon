@@ -61,7 +61,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
     @InjectView(R.id.timetrackingchronometer) protected TextView timetrackingchronometer;
 
     private static final String FORCE_REFRESH = "forceRefresh";
-    private static long TIMETRACKINGID = 1;
+    private static int TIMETRACKINGID = 0;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -194,6 +194,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
 
                     buttonClockIn.setVisibility(View.GONE);
                     buttonClockOut.setVisibility(View.VISIBLE);
+                    TIMETRACKINGID = (int)response.getTimeTrackingID();
                     startTracking(response.getTimeTrackingID());
                     startTimer();
                 }
@@ -323,7 +324,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
             new SafeAsyncTask<TimeManagementWrapper.TimeManagementResult>() {
                 @Override
                 public TimeManagementWrapper.TimeManagementResult call() throws Exception {
-                    final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockOut(getActivity(),new Date());
+                    final TimeManagementWrapper.TimeManagementResult svc = serviceProvider.getService(getActivity()).ClockOut(getActivity(),new Date(),TIMETRACKINGID);
                     return null;
                 }
 

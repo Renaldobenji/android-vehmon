@@ -253,9 +253,9 @@ public class VehmonService {
         return new TimeManagementWrapper().ClockIn(context, date);
     }
 
-    public TimeManagementWrapper.TimeManagementResult ClockOut(Context context, Date date)
+    public TimeManagementWrapper.TimeManagementResult ClockOut(Context context, Date date, int timeTrackingID)
     {
-        return new TimeManagementWrapper().ClockOut(context, date);
+        return new TimeManagementWrapper().ClockOut(context, date,timeTrackingID);
     }
 
     public String[] FetchAbsenceTypes()

@@ -1474,7 +1474,7 @@ containing a value of this type.
         public static final int middle=0x7f08000b;
         public static final int navigation_drawer=0x7f08005e;
         public static final int never=0x7f080012;
-        public static final int newMessage=0x7f08007a;
+        public static final int newMessage=0x7f08007b;
         public static final int none=0x7f080009;
         public static final int normal=0x7f080000;
         public static final int pause=0x7f080051;
@@ -1517,6 +1517,7 @@ containing a value of this type.
         public static final int triangle=0x7f080019;
         public static final int tv_FromDateValue=0x7f080077;
         public static final int tv_LeaveTypeValue=0x7f080075;
+        public static final int tv_Status=0x7f08007a;
         public static final int tv_ToDateValue=0x7f080079;
         public static final int tv_content=0x7f08006c;
         public static final int tv_date=0x7f080054;

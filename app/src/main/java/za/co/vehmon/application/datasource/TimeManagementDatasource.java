@@ -67,7 +67,7 @@ public class TimeManagementDatasource {
         return id;
     }
 
-    public long clockout(String clockoutTime, String userID)
+    public long clockout(String clockoutTime, String userID, int timeTrackingID)
     {
         try {
             open();
@@ -75,12 +75,7 @@ public class TimeManagementDatasource {
             e.printStackTrace();
         }
 
-        String query = "SELECT " + MySQLiteHelper.TABLE_TIMEMNG_ID + " FROM " + MySQLiteHelper.TABLE_TIMEMNG + " ORDER BY " + MySQLiteHelper.TABLE_TIMEMNG_ID + " DESC LIMIT 1;";
-
-        Cursor cursor = database.rawQuery(query, null);
-        cursor.moveToFirst();
-
-        int timeManagementID = cursor.getInt(0);
+        int timeManagementID = timeTrackingID;
 
         ContentValues args = new ContentValues();
         args.put(MySQLiteHelper.TABLE_TIMEMNG_CLOCKOUTTIME, clockoutTime);
