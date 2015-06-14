@@ -234,8 +234,8 @@ public class VehmonService {
         return response;
     }
 
-    public List<LeaveRequestContract> GetAllLeaveRequests() {
-        List<LeaveRequestContract> response;
+    public LeaveRequestResponse GetAllLeaveRequests() {
+        LeaveRequestResponse response;
         try
         {
             response = getLeaveService().GetAllLeaveRequests(this.token);

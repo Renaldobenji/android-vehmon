@@ -99,7 +99,7 @@ public class MessageViewActivity extends BootstrapActivity {
                 BootstrapApplication app = (BootstrapApplication)myActivity.getApplicationContext();
                 MessageWrapper.MessageResult svc = null;
                 final MessageResponse response = serviceProvider.getService(myActivity).SendMessageToServer(messageConversationID.toString(), VehmonCurrentDate.GetCurrentDate().toString(), editTextMessage.getText().toString());
-                if (response != null && response.MessageStatus == "0") {
+                if (response != null && response.MessageStatus.equals("0")) {
                     svc = serviceProvider.getService(myActivity).SubmitMessage(myActivity,messageConversationID,app.getUser().getUsername(),messageTo, editTextMessage.getText().toString());
                 }
 

@@ -142,7 +142,7 @@ public class MessageListFragment extends ItemListFragment<MessageConversation>{
     public void onListItemClick(final ListView l, final View v, final int position, final long id) {
         final MessageConversation msgConversation = ((MessageConversation) l.getItemAtPosition(position));
 
-        startActivity(new Intent(getActivity(), MessageViewActivity.class).putExtra("msgConversationID",msgConversation.getMessageConversationID()).putExtra("msgTo",msgConversation.getTo()));
+        startActivity(new Intent(getActivity(), MessageViewActivity.class).putExtra("msgConversationID",msgConversation.getMessageServerConversationID()).putExtra("msgTo",msgConversation.getTo()));
     }
 
     @Override

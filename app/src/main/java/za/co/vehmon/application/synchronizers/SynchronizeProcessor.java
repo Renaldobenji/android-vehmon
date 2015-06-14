@@ -53,24 +53,6 @@ public class SynchronizeProcessor extends Service {
         startForeground(SYNC_NOTIFICATION_ID, getNotification(getString(R.string.timer_running)));
     }
 
-    private void setupSyncTimer()
-    {
-        syncTimer = new Timer("syncTimer", true);
-        syncTimer.scheduleAtFixedRate
-                (
-                        new TimerTask() {
-                            public void run() {
-                                try {
-                                    startSynchronization();
-                                } catch (Exception e) {
-
-                                }
-
-                            }
-                        },0,minTime
-                );
-    }
-
     private void setupSynchronizers()
     {
         this.synchronizers = new ArrayList<ISynchronize>();
@@ -125,7 +107,7 @@ public class SynchronizeProcessor extends Service {
             stopSelf();
 
         //startSynchronization();
-        setupSyncTimer();
+        startSynchronization();
 
         return START_NOT_STICKY;
     }
@@ -146,6 +128,7 @@ public class SynchronizeProcessor extends Service {
                 }
             }
         }
+        stopSelf();
     }
 
     /**

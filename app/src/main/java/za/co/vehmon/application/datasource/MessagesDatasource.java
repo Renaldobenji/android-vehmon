@@ -4,12 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.Telephony;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import za.co.vehmon.application.core.Message;
+import za.co.vehmon.application.core.MessageConversation;
 
 /**
  * Created by Renaldo on 2/8/2015.
@@ -18,6 +20,7 @@ public class MessagesDatasource {
 
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
+    private Context context;
 
     private String[] allColumns =
             {
@@ -32,6 +35,7 @@ public class MessagesDatasource {
 
     public MessagesDatasource(Context context)
     {
+        this.context = context;
         dbHelper = new MySQLiteHelper(context);
     }
 
@@ -45,6 +49,9 @@ public class MessagesDatasource {
 
     public long InsertMessage(Integer messageConvoID, String message, String from ,String to, String date)
     {
+        MessageConversationDatasource ds = new MessageConversationDatasource(context);
+        MessageConversation convo = ds.GetConversation((int)messageConvoID);
+
         try {
             open();
         } catch (SQLException e) {
@@ -52,7 +59,7 @@ public class MessagesDatasource {
         }
         ContentValues values = new ContentValues();
 
-        values.put(MySQLiteHelper.TABLE_MSG_CONVOID, messageConvoID);
+        values.put(MySQLiteHelper.TABLE_MSG_CONVOID, convo.getMessageConversationID());
         values.put(MySQLiteHelper.TABLE_MSG_MSG, message);
         values.put(MySQLiteHelper.TABLE_MSG_TO, to);
         values.put(MySQLiteHelper.TABLE_MSG_FROM, from);
@@ -88,12 +95,15 @@ public class MessagesDatasource {
     public List<Message> GetMessagesForConversation(long conversationID)
     {
         List<Message> messages = new ArrayList<Message>();
+
+        MessageConversationDatasource ds = new MessageConversationDatasource(context);
+        MessageConversation convo = ds.GetConversation((int)conversationID);
         try {
             open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_MSG,allColumns, MySQLiteHelper.TABLE_MSG_CONVOID + "= ?", new String[] {String.valueOf(conversationID)}, null, null, MySQLiteHelper.TABLE_MSG_ID+ " ASC");
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_MSG,allColumns, MySQLiteHelper.TABLE_MSG_CONVOID + "= ?", new String[] {String.valueOf(convo.getMessageConversationID())}, null, null, MySQLiteHelper.TABLE_MSG_ID+ " ASC");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {

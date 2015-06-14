@@ -3,6 +3,31 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:id="@+id/LinearLayoutBalance"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_layout_blue"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available Balance: "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textViewAvailableBalance" />
+
+        <TextView
+            android:id="@+id/tvAvailableBalanceValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold"
+             />
+    </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,5 +35,6 @@
         android:divider="#000000"
         android:dividerHeight="1px"
         style="@style/ListItem"
+        android:paddingTop="20dp"
         />
 </LinearLayout>

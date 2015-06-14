@@ -1411,6 +1411,7 @@ containing a value of this type.
         public static final int vpi__tab_unselected_pressed_holo=0x7f0200a8;
     }
     public static final class id {
+        public static final int LinearLayoutBalance=0x7f080073;
         public static final int action_bar=0x7f080025;
         public static final int action_bar_activity_content=0x7f08001d;
         public static final int action_bar_container=0x7f080024;
@@ -1466,7 +1467,7 @@ containing a value of this type.
         public static final int lblContactName=0x7f08006a;
         public static final int listMessageContacts=0x7f080069;
         public static final int listMode=0x7f080001;
-        public static final int listViewLeave=0x7f080073;
+        public static final int listViewLeave=0x7f080076;
         public static final int listViewMessages=0x7f080062;
         public static final int list_item=0x7f080032;
         public static final int ll_message=0x7f080067;
@@ -1474,7 +1475,7 @@ containing a value of this type.
         public static final int middle=0x7f08000b;
         public static final int navigation_drawer=0x7f08005e;
         public static final int never=0x7f080012;
-        public static final int newMessage=0x7f08007b;
+        public static final int newMessage=0x7f08007e;
         public static final int none=0x7f080009;
         public static final int normal=0x7f080000;
         public static final int pause=0x7f080051;
@@ -1509,27 +1510,29 @@ containing a value of this type.
         public static final int textViewAbsenceFromDate=0x7f080047;
         public static final int textViewAbsenceToDate=0x7f08004a;
         public static final int textViewAbsenceType=0x7f080045;
+        public static final int textViewAvailableBalance=0x7f080074;
         public static final int timetrackingchronometer=0x7f08006f;
         public static final int title=0x7f080034;
         public static final int top=0x7f08001c;
         public static final int top_action_bar=0x7f080029;
         public static final int tpi_header=0x7f080055;
         public static final int triangle=0x7f080019;
-        public static final int tv_FromDateValue=0x7f080077;
-        public static final int tv_LeaveTypeValue=0x7f080075;
-        public static final int tv_Status=0x7f08007a;
-        public static final int tv_ToDateValue=0x7f080079;
+        public static final int tvAvailableBalanceValue=0x7f080075;
+        public static final int tv_FromDateValue=0x7f08007a;
+        public static final int tv_LeaveTypeValue=0x7f080078;
+        public static final int tv_Status=0x7f08007d;
+        public static final int tv_ToDateValue=0x7f08007c;
         public static final int tv_content=0x7f08006c;
         public static final int tv_date=0x7f080054;
-        public static final int tv_fromdate=0x7f080076;
-        public static final int tv_leaveType=0x7f080074;
+        public static final int tv_fromdate=0x7f080079;
+        public static final int tv_leaveType=0x7f080077;
         public static final int tv_messageText=0x7f080068;
         public static final int tv_messagedate=0x7f080061;
         public static final int tv_messageusername=0x7f080060;
         public static final int tv_name=0x7f080053;
         public static final int tv_summary=0x7f08006d;
         public static final int tv_title=0x7f08006b;
-        public static final int tv_toDate=0x7f080078;
+        public static final int tv_toDate=0x7f08007b;
         public static final int underline=0x7f08001a;
         public static final int up=0x7f08002a;
         public static final int useLogo=0x7f080003;

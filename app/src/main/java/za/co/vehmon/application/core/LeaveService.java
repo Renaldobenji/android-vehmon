@@ -18,5 +18,5 @@ public interface LeaveService {
     LeaveRequestResponse RequestLeave(@Path("token") String token, @Path("startTime") String startTime,@Path("endTime") String endTime,@Path("leaveRequestType") String leaveRequestType);
 
     @GET(Constants.Http.VEHMON_URL_AUTH_GETALLLEAVE_FRAG)
-    List<LeaveRequestContract> GetAllLeaveRequests(@Path("token") String token);
+    LeaveRequestResponse GetAllLeaveRequests(@Path("token") String token);
 }
