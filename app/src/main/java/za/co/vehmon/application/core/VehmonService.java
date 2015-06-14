@@ -154,7 +154,7 @@ public class VehmonService {
 
         try
         {
-            response = getTimeTrackingService().EndShift(token,shiftID);
+            response = getTimeTrackingService().EndShift(token,shiftID,endTime);
         }
         catch (Exception ex)
         {

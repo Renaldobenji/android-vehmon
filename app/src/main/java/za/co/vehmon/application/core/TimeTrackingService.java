@@ -18,7 +18,7 @@ public interface TimeTrackingService {
     //ShiftResponse EndShift(@Path("userToken") String userToken,@Path("shiftId") String shiftId, @Path("endTime") String endTime);
 
     @POST(Constants.Http.VEHMON_URL_AUTH_ENDSHIFT_FRAG)
-    ShiftResponse EndShift(@Path("userToken") String userToken,@Path("shiftId") String shiftId);
+    ShiftResponse EndShift(@Path("userToken") String userToken,@Path("shiftId") String shiftId, @Path("endTime") String endTime);
 
     @POST(Constants.Http.VEHMON_URL_AUTH_LOGGPS_FRAG)
     ShiftResponse LogCoordinatesToShift(@Path("token")String userToken,@Path("shiftId") String shiftId,@Path("csvCoords") String coords);
