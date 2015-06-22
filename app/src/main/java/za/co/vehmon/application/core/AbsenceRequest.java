@@ -17,10 +17,14 @@ public class AbsenceRequest {
 
     public AbsenceRequest()
     {
-        String[] absenceTypes = new String[2];
+        String[] absenceTypes = new String[6];
 
         absenceTypes[0] = "Sick";
         absenceTypes[1] = "Annual";
+        absenceTypes[2] = "Family Responsibility";
+        absenceTypes[3] = "Study";
+        absenceTypes[4] = "Maternity";
+        absenceTypes[5] = "Casual";
 
         this.setAbsenceRequestTypes(absenceTypes);
     }

@@ -84,6 +84,14 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name="za.co.vehmon.application.ui.ViewShiftsActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="za.co.vehmon.application.ui.ViewShiftsDetail"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name="za.co.vehmon.application.ui.NewMessageActivity"
             android:label="@string/app_name" >
         </activity>

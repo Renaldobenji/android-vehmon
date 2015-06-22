@@ -1,5 +1,7 @@
 package za.co.vehmon.application.core;
 
+import java.util.List;
+
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
@@ -22,4 +24,7 @@ public interface TimeTrackingService {
 
     @POST(Constants.Http.VEHMON_URL_AUTH_LOGGPS_FRAG)
     ShiftResponse LogCoordinatesToShift(@Path("token")String userToken,@Path("shiftId") String shiftId,@Path("csvCoords") String coords);
+
+    @GET(Constants.Http.VEHMON_URL_AUTH_GETSHIFTS_FRAG)
+    List<ShiftReportContract> GetUserShifts(@Path("token")String userToken,@Path("startDate") String startDate,@Path("endDate") String endDate);
 }

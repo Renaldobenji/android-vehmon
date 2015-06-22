@@ -398,6 +398,12 @@ public class MainActivity extends BootstrapFragmentActivity {
         startActivity(i);
     }
 
+    private void navigateToViewShifts()
+    {
+        final Intent i = new Intent(this,ViewShiftsActivity.class);
+        startActivity(i);
+    }
+
     @Subscribe
     public void onNavigationItemSelected(NavItemSelectedEvent event) {
 
@@ -413,6 +419,9 @@ public class MainActivity extends BootstrapFragmentActivity {
                 break;
             case 2:
                 navigateToViewLeave();
+                break;
+            case 3:
+                navigateToViewShifts(); //function in Navigation Drawer Fragment
                 break;
         }
     }

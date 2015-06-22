@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Shifts"
+        android:id="@+id/textViewAbsenceType"
+        android:paddingTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/table_text_selector"
+        android:layout_gravity="center"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From Date"
+        android:id="@+id/textViewShiftFromDate"
+        android:paddingTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/table_text_selector"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:id="@+id/editTextShiftFromDate"
+            android:layout_weight=".8"
+            style="@style/SignInEditText"
+            android:inputType="date"
+            android:clickable="false"
+            />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageButtonShiftFromDate"
+            android:background="@drawable/calendar_icon"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To Date"
+        android:id="@+id/textViewShiftToDate"
+        android:paddingTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/table_text_selector"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:id="@+id/editTextShiftToDate"
+            android:layout_weight=".8"
+            style="@style/SignInEditText"
+            android:inputType="date"
+            android:editable="false"
+            android:clickable="false"
+            />
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/imageButtonShiftToDate"
+            android:background="@drawable/calendar_icon"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonShiftSubmit"
+        style="@style/ShadowText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button_background_states"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Submit"
+        android:textColor="@color/text"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
+

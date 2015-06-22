@@ -248,6 +248,20 @@ public class VehmonService {
         return response;
     }
 
+    public List<ShiftReportContract> GetUserShifts(String startDate, String endDate) {
+        List<ShiftReportContract> response;
+        try
+        {
+            response = getTimeTrackingService().GetUserShifts(this.token,startDate,endDate);
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
     public TimeManagementWrapper.TimeManagementResult ClockIn(Context context, Date date)
     {
         return new TimeManagementWrapper().ClockIn(context, date);

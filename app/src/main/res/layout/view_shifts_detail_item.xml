@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    style="@style/ListItem">
+
+    <TextView
+        android:id="@+id/tv_fromdate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="From Date"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/table_text_header"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_FromDateValue"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/table_text_selector"
+        android:text="From Date"
+        android:layout_below="@+id/tv_fromdate"
+        />
+
+    <TextView
+        android:id="@+id/tv_toDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="To Date"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/table_text_header"
+        android:layout_below="@+id/tv_FromDateValue"
+        android:paddingTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_ToDateValue"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/table_text_selector"
+        android:text="To Date"
+        android:layout_below="@+id/tv_toDate"/>
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayoutBalance"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/rounded_layout_blue"
+        android:layout_below="@+id/tv_ToDateValue">
+
+    <TextView
+        android:id="@+id/tv_Hours"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Hours"
+        android:background="@drawable/rounded_layout_blue"
+        android:gravity="center"
+        />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

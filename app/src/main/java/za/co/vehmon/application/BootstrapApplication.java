@@ -6,6 +6,9 @@ import android.app.Application;
 import android.app.Instrumentation;
 import android.content.Context;
 
+import java.util.List;
+
+import za.co.vehmon.application.core.ShiftReportContract;
 import za.co.vehmon.application.core.User;
 
 /**
@@ -70,4 +73,6 @@ public class BootstrapApplication extends Application {
     }
 
     private static User user;
+
+    public static List<ShiftReportContract> ShiftReport;
 }

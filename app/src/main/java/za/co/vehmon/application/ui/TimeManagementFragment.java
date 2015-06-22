@@ -42,6 +42,7 @@ import za.co.vehmon.application.core.TimerService;
 import za.co.vehmon.application.core.TimerTickEvent;
 import za.co.vehmon.application.gps.FusionTrackingService;
 import za.co.vehmon.application.gps.GPSTrackingService;
+import za.co.vehmon.application.synchronizers.SynchronizeProcessor;
 import za.co.vehmon.application.util.SafeAsyncTask;
 
 import static android.view.View.GONE;
@@ -197,6 +198,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
                     TIMETRACKINGID = (int)response.getTimeTrackingID();
                     startTracking(response.getTimeTrackingID());
                     startTimer();
+                    startSynchronization();
                 }
             }.execute();
 
@@ -342,6 +344,7 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
                     buttonClockIn.setVisibility(View.VISIBLE);
                     buttonClockOut.setVisibility(View.GONE);
                     produceStopEvent();
+                    startSynchronization();
                 }
             }.execute();
 
@@ -350,5 +353,23 @@ public class TimeManagementFragment extends android.support.v4.app.Fragment{
         {
             e.printStackTrace();
         }
+    }
+
+    private void startSynchronization()
+    {
+        if (!isSynchronizationServiceRunning()) {
+            final Intent i = new Intent(getActivity(), SynchronizeProcessor.class);
+            getActivity().startService(i);
+        }
+    }
+
+    private boolean isSynchronizationServiceRunning() {
+        final ActivityManager manager = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (SynchronizeProcessor.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

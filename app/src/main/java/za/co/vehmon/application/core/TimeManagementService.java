@@ -10,4 +10,6 @@ public interface TimeManagementService {
     TimeManagementWrapper ClockOut(Date date);
 
     TimeManagementWrapper ClockIn(Date date);
+
+    ShiftReportContract GetUserShifts(String token, String startDate, String endDate);
 }

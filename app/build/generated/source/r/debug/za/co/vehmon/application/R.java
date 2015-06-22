@@ -1431,6 +1431,7 @@ containing a value of this type.
         public static final int beginning=0x7f08000a;
         public static final int bottom=0x7f08001b;
         public static final int buttonAbsenceSubmit=0x7f08004d;
+        public static final int buttonShiftSubmit=0x7f080084;
         public static final int checkbox=0x7f080036;
         public static final int chronometer=0x7f08004e;
         public static final int clockIn=0x7f080070;
@@ -1444,6 +1445,8 @@ containing a value of this type.
         public static final int dropdown=0x7f080018;
         public static final int editTextFromDate=0x7f080048;
         public static final int editTextMessage=0x7f080064;
+        public static final int editTextShiftFromDate=0x7f08007f;
+        public static final int editTextShiftToDate=0x7f080082;
         public static final int editTextToDate=0x7f08004b;
         public static final int edit_query=0x7f080039;
         public static final int end=0x7f08000c;
@@ -1459,6 +1462,8 @@ containing a value of this type.
         public static final int image=0x7f080030;
         public static final int imageButtonFromDate=0x7f080049;
         public static final int imageButtonMessageSubmit=0x7f080065;
+        public static final int imageButtonShiftFromDate=0x7f080080;
+        public static final int imageButtonShiftToDate=0x7f080083;
         public static final int imageButtonToDate=0x7f08004c;
         public static final int imageViewLogo=0x7f080058;
         public static final int imgLogo=0x7f08006e;
@@ -1469,13 +1474,14 @@ containing a value of this type.
         public static final int listMode=0x7f080001;
         public static final int listViewLeave=0x7f080076;
         public static final int listViewMessages=0x7f080062;
+        public static final int listViewShifts=0x7f080088;
         public static final int list_item=0x7f080032;
         public static final int ll_message=0x7f080067;
         public static final int ll_messageIndicator=0x7f080066;
         public static final int middle=0x7f08000b;
         public static final int navigation_drawer=0x7f08005e;
         public static final int never=0x7f080012;
-        public static final int newMessage=0x7f08007e;
+        public static final int newMessage=0x7f080089;
         public static final int none=0x7f080009;
         public static final int normal=0x7f080000;
         public static final int pause=0x7f080051;
@@ -1511,6 +1517,9 @@ containing a value of this type.
         public static final int textViewAbsenceToDate=0x7f08004a;
         public static final int textViewAbsenceType=0x7f080045;
         public static final int textViewAvailableBalance=0x7f080074;
+        public static final int textViewShiftFromDate=0x7f08007e;
+        public static final int textViewShiftToDate=0x7f080081;
+        public static final int textViewTotalHours=0x7f080086;
         public static final int timetrackingchronometer=0x7f08006f;
         public static final int title=0x7f080034;
         public static final int top=0x7f08001c;
@@ -1518,7 +1527,9 @@ containing a value of this type.
         public static final int tpi_header=0x7f080055;
         public static final int triangle=0x7f080019;
         public static final int tvAvailableBalanceValue=0x7f080075;
+        public static final int tvTotalHoursValue=0x7f080087;
         public static final int tv_FromDateValue=0x7f08007a;
+        public static final int tv_Hours=0x7f080085;
         public static final int tv_LeaveTypeValue=0x7f080078;
         public static final int tv_Status=0x7f08007d;
         public static final int tv_ToDateValue=0x7f08007c;
@@ -1603,6 +1614,9 @@ containing a value of this type.
         public static final int user_view=0x7f030033;
         public static final int view_leave=0x7f030034;
         public static final int view_leave_items=0x7f030035;
+        public static final int view_shifts=0x7f030036;
+        public static final int view_shifts_detail_item=0x7f030037;
+        public static final int view_shifts_details=0x7f030038;
     }
     public static final class menu {
         public static final int bootstrap=0x7f0d0000;

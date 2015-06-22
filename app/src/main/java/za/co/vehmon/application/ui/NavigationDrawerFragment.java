@@ -110,7 +110,8 @@ public class NavigationDrawerFragment extends Fragment {
                 new String[] {
                         getString(R.string.title_home),
                         "Request Leave",
-                        "View Leave"
+                        "View Leave",
+                        "View Shifts" //Function in Main Activity
                 }));
         drawerListView.setItemChecked(currentSelectedPosition, true);
         return drawerListView;
