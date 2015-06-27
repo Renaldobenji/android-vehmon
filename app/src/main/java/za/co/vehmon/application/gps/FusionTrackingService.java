@@ -190,7 +190,7 @@ public class FusionTrackingService extends Service implements
                 .append(location.getProvider() + ",")
                 .append(location.getSpeed());
 
-        Logger.addRecordToLog(currentLocationString.toString());
+        //Logger.addRecordToLog(currentLocationString.toString());
 
         //Save to DB
         new SafeAsyncTask<GPSLogWrapper.GPSLogResult>() {

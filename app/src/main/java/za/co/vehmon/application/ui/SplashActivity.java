@@ -65,7 +65,7 @@ public class SplashActivity extends Activity {
             @Override
             protected void onSuccess(final UserTokenValidationResponse hasAuthenticated) throws Exception {
                 super.onSuccess(hasAuthenticated);
-                boolean userHasAuthenticated = (hasAuthenticated.UserTokenState.equals("Valid"));
+                boolean userHasAuthenticated = (hasAuthenticated.UserTokenState.equals("Valid") || hasAuthenticated.UserTokenState.equals("1"));
                 if (userHasAuthenticated)
                 {
                     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(Constants.VehmonSharedPrefs.name, Context.MODE_PRIVATE);

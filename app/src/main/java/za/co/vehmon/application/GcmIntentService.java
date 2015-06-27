@@ -57,7 +57,7 @@ public class GcmIntentService extends GcmListenerService {
             {
                 startSynchronization("MessageReceived");
             }
-            sendNotification(NotificationType);
+            sendNotification(NotificationPayload);
         }
         catch(Exception e)
         {
