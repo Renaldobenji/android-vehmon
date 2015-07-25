@@ -59,7 +59,7 @@ public class GPSSynchronizer implements ISynchronize {
 
                         if (response.LogState.equals("4"))
                         {
-                            gpsDS.UpdateGPSLog(gps.getId());
+                            gpsDS.DeleteGPSLog(gps.getId());
                         }
                     }
                 }.execute();

@@ -108,6 +108,20 @@ public class GPSLogDatasource {
         return true;
     }
 
+    public Boolean DeleteGPSLog(long id)
+    {
+        try {
+            open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //This is set when the file has been successfully uploaded to server.
+        long success = database.delete(MySQLiteHelper.TABLE_GPSLOG, MySQLiteHelper.TABLE_GPSLOG_ID + "=" + id,null);
+
+        close();
+        return true;
+    }
+
     private GPSLog cursorToObject(Cursor cursor)
     {
         GPSLog obj = new GPSLog();
