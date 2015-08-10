@@ -113,7 +113,7 @@ public class VehmonService {
         }
         catch (Exception ex)
         {
-            response.UserTokenState = "1";
+            response.UserTokenState = "-1";
         }
         //Fetch token from shared preferences
         return response;

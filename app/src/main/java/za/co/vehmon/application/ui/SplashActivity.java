@@ -70,6 +70,12 @@ public class SplashActivity extends Activity {
                 {
                     SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(Constants.VehmonSharedPrefs.name, Context.MODE_PRIVATE);
                     String username = sharedPref.getString("username","");
+                    String token = sharedPref.getString("AuthToken","");
+                    if (username.equals("") || token.equals(""))
+                    {
+                        navigateToLogin();
+                        finish();
+                    }
                     User user = new User();
                     user.setUsername(username);
                     final BootstrapApplication globalApplication = (BootstrapApplication)getApplicationContext();
