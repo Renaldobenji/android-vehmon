@@ -111,7 +111,8 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_home),
                         "Request Leave",
                         "View Leave",
-                        "View Shifts" //Function in Main Activity
+                        "View Shifts", //Function in Main Activity,
+                        "Update App"
                 }));
         drawerListView.setItemChecked(currentSelectedPosition, true);
         return drawerListView;

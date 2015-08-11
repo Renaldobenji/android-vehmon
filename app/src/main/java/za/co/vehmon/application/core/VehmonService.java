@@ -246,6 +246,8 @@ public class VehmonService {
         }
 
         return response;
+
+
     }
 
     public List<ShiftReportContract> GetUserShifts(String startDate, String endDate) {

@@ -4,6 +4,7 @@ package za.co.vehmon.application.ui;
 
 import android.accounts.OperationCanceledException;
 import android.app.ActivityManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +13,10 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
@@ -48,7 +51,12 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.squareup.otto.Subscribe;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
@@ -81,6 +89,9 @@ public class MainActivity extends BootstrapFragmentActivity {
     static final String TAG = "Vehmon App";
     String regid;
     Context context;
+    private static final String url = "http://vehmonmachine.cloudapp.net/";
+    private static final String apkName = "Vehmon.apk";
+    public ProgressDialog pd;
 
     private boolean userHasAuthenticated = false;
 
@@ -404,6 +415,10 @@ public class MainActivity extends BootstrapFragmentActivity {
         startActivity(i);
     }
 
+    /*
+    This is where you find this option list
+    NavigationDrawerFragment
+     */
     @Subscribe
     public void onNavigationItemSelected(NavItemSelectedEvent event) {
 
@@ -422,6 +437,10 @@ public class MainActivity extends BootstrapFragmentActivity {
                 break;
             case 3:
                 navigateToViewShifts(); //function in Navigation Drawer Fragment
+                break;
+            case 4:
+                pd = ProgressDialog.show(MainActivity.this,"Update","Downloading Application",true);
+                new AppdateApplicationAsync().execute();
                 break;
         }
     }
@@ -442,5 +461,123 @@ public class MainActivity extends BootstrapFragmentActivity {
             }
         }
         return false;
+    }
+
+    private class AppdateApplicationAsync extends AsyncTask<Void, String, String>
+    {
+        protected String doInBackground(Void... params) {
+
+            //Get Agents in background
+            String errorMessage = "";
+            try
+            {
+                if (!DownloadOnSDcard())
+                {
+                    errorMessage = "Error downloading application.";
+                }
+            }
+            catch(Exception e)
+            {
+                errorMessage = e.getMessage();
+            }
+            return errorMessage;
+        }
+
+        public boolean DownloadOnSDcard()
+        {
+            FileOutputStream fos = null;
+            InputStream is = null;
+            HttpURLConnection c = null;
+            try{
+                URL urls = new URL(url+apkName); // My URL
+
+                c = (HttpURLConnection) urls.openConnection();
+                c.setRequestMethod("GET");
+                c.setDoOutput(false);
+                c.connect(); // Connection Complete here.!
+
+                String PATH = Environment.getExternalStorageDirectory() + "/download/";
+                File file = new File(PATH); // PATH = /mnt/sdcard/download/
+                if (!file.exists()) {
+                    file.mkdirs();
+                }
+
+                //If file exists delete it, previously downloaded
+                File f = new File(Environment.getExternalStorageDirectory() + "/download/" + apkName);
+                if (f.exists()) {
+                    f.delete();
+                }
+
+                File outputFile = new File(file,apkName);
+                fos = new FileOutputStream(outputFile);
+
+                is = c.getInputStream(); // Get from Server and Catch In Input Stream Object.
+
+                byte[] buffer = new byte[1024];
+                int len1 = 0;
+                while ((len1 = is.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len1); // Write In FileOutputStream.
+                }
+
+                return true;
+            }
+            catch (IOException e)
+            {
+                return false;
+            }
+            finally
+            {
+                try
+                {
+                    if (fos != null)
+                        fos.close();
+
+                    if (is != null)
+                        is.close();
+
+                    if (c != null)
+                        c.disconnect();
+                }catch(Exception ex)
+                {
+                    return false;
+                }
+
+            }
+        }
+
+        protected void onProgressUpdate(String... progress) {
+            //pd = ProgressDialog.show(BootstrapAuthenticatorActivity.this,"Update",progress[0],true);
+        }
+
+        protected void onPreExecute() {
+            //pd = ProgressDialog.show(BootstrapAuthenticatorActivity.this,"Update","Confirming Update...",true);
+        }
+
+        protected void onPostExecute(String result) {
+            pd.dismiss();
+            if (!result.equals(""))
+            {
+                Toast.makeText(getBaseContext(), "Update Info: " + result, Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                //This is where i need to kick off install of application
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/download/" + apkName)), "application/vnd.android.package-archive");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //also try this
+                startActivityForResult(intent, 1001);
+            }
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case(1001):{
+                pd.dismiss();
+                finish();
+                break;
+            }
+        }
     }
 }

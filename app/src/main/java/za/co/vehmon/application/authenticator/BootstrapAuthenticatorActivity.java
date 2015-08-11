@@ -21,7 +21,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -29,6 +32,9 @@ import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.ArrayAdapter;
@@ -37,6 +43,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import za.co.vehmon.application.BootstrapApplication;
@@ -60,7 +67,12 @@ import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,6 +104,10 @@ public class BootstrapAuthenticatorActivity extends ActionBarActivity {
      * PARAM_AUTHTOKEN_TYPE
      */
     public static final String PARAM_AUTHTOKEN_TYPE = "authtokenType";
+
+    private static final String url = "http://vehmonmachine.cloudapp.net/";
+    private static final String apkName = "Vehmon.apk";
+    public ProgressDialog pd;
 
 
     private AccountManager accountManager;
@@ -348,6 +364,145 @@ public class BootstrapAuthenticatorActivity extends ActionBarActivity {
             } else {
                 Toaster.showLong(BootstrapAuthenticatorActivity.this,
                         string.message_auth_failed);
+            }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.login_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.update_application:
+                pd = ProgressDialog.show(BootstrapAuthenticatorActivity.this,"Update","Downloading Application",true);
+                new AppdateApplicationAsync().execute();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    private class AppdateApplicationAsync extends AsyncTask<Void, String, String>
+    {
+        protected String doInBackground(Void... params) {
+
+            //Get Agents in background
+            String errorMessage = "";
+            try
+            {
+                if (!DownloadOnSDcard())
+                {
+                    errorMessage = "Error downloading application.";
+                }
+            }
+            catch(Exception e)
+            {
+                errorMessage = e.getMessage();
+            }
+            return errorMessage;
+        }
+
+        public boolean DownloadOnSDcard()
+        {
+            FileOutputStream fos = null;
+            InputStream is = null;
+            HttpURLConnection c = null;
+            try{
+                URL urls = new URL(url+apkName); // My URL
+
+                c = (HttpURLConnection) urls.openConnection();
+                c.setRequestMethod("GET");
+                c.setDoOutput(false);
+                c.connect(); // Connection Complete here.!
+
+                String PATH = Environment.getExternalStorageDirectory() + "/download/";
+                File file = new File(PATH); // PATH = /mnt/sdcard/download/
+                if (!file.exists()) {
+                    file.mkdirs();
+                }
+
+                //If file exists delete it, previously downloaded
+                File f = new File(Environment.getExternalStorageDirectory() + "/download/" + apkName);
+                if (f.exists()) {
+                    f.delete();
+                }
+
+                File outputFile = new File(file,apkName);
+                fos = new FileOutputStream(outputFile);
+
+                is = c.getInputStream(); // Get from Server and Catch In Input Stream Object.
+
+                byte[] buffer = new byte[1024];
+                int len1 = 0;
+                while ((len1 = is.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len1); // Write In FileOutputStream.
+                }
+
+                return true;
+            }
+            catch (IOException e)
+            {
+                return false;
+            }
+            finally
+            {
+                try
+                {
+                    if (fos != null)
+                        fos.close();
+
+                    if (is != null)
+                        is.close();
+
+                    if (c != null)
+                        c.disconnect();
+                }catch(Exception ex)
+                {
+                    return false;
+                }
+
+            }
+        }
+
+        protected void onProgressUpdate(String... progress) {
+            //pd = ProgressDialog.show(BootstrapAuthenticatorActivity.this,"Update",progress[0],true);
+        }
+
+        protected void onPreExecute() {
+            //pd = ProgressDialog.show(BootstrapAuthenticatorActivity.this,"Update","Confirming Update...",true);
+        }
+
+        protected void onPostExecute(String result) {
+            pd.dismiss();
+            if (!result.equals(""))
+            {
+                Toast.makeText(getBaseContext(), "Update Info: " + result, Toast.LENGTH_LONG).show();
+            }
+            else
+            {
+                //This is where i need to kick off install of application
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/download/" + apkName)), "application/vnd.android.package-archive");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //also try this
+                startActivityForResult(intent, 1001);
+            }
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case(1001):{
+                pd.dismiss();
+                finish();
+                break;
             }
         }
     }

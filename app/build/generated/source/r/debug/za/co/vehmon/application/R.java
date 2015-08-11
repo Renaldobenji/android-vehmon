@@ -1481,7 +1481,7 @@ containing a value of this type.
         public static final int middle=0x7f08000b;
         public static final int navigation_drawer=0x7f08005e;
         public static final int never=0x7f080012;
-        public static final int newMessage=0x7f080089;
+        public static final int newMessage=0x7f08008a;
         public static final int none=0x7f080009;
         public static final int normal=0x7f080000;
         public static final int pause=0x7f080051;
@@ -1546,6 +1546,7 @@ containing a value of this type.
         public static final int tv_toDate=0x7f08007b;
         public static final int underline=0x7f08001a;
         public static final int up=0x7f08002a;
+        public static final int update_application=0x7f080089;
         public static final int useLogo=0x7f080003;
         public static final int vp_pages=0x7f080056;
         public static final int withText=0x7f080015;
@@ -1621,7 +1622,8 @@ containing a value of this type.
     public static final class menu {
         public static final int bootstrap=0x7f0d0000;
         public static final int global=0x7f0d0001;
-        public static final int message_menu=0x7f0d0002;
+        public static final int login_menu=0x7f0d0002;
+        public static final int message_menu=0x7f0d0003;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f0b0000;
